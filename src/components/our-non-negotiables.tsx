@@ -113,7 +113,7 @@ export default function OurNonNegotiables() {
                       <div
                         className={`p-3 rounded-lg bg-gradient-to-br ${item.gradient} bg-opacity-10`}
                       >
-                        <Icon className="w-6 h-6 text-charcoal" />
+                        <Icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
                         <h3 className="font-bold text-lg text-charcoal mb-2">
@@ -149,10 +149,10 @@ export default function OurNonNegotiables() {
               {/* Tim's Badge */}
               <div className="flex-shrink-0">
                 <div className="relative">
-                  <div className="w-32 h-32 bg-gradient-to-br from-primaryBlue to-accentOrange rounded-full flex items-center justify-center text-white">
+                  <div className="w-32 h-32 bg-gradient-to-br from-primaryBlue to-accentBlue rounded-full flex items-center justify-center text-white">
                     <span className="text-3xl font-bold">TM</span>
                   </div>
-                  <div className="absolute -bottom-2 -right-2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  <div className="absolute -bottom-2 -right-2  bg-gradient-to-br from-primaryBlue to-accentBlue text-white text-xs font-bold px-3 py-1 rounded-full">
                     OWNER
                   </div>
                 </div>

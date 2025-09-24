@@ -4,8 +4,14 @@
  * reducing client anxiety and setting professional expectations per Phase 2.1 of the checklist.
  */
 
-import { Calendar, Home, FileText, HeartHandshake, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
+import {
+  Calendar,
+  Home,
+  FileText,
+  HeartHandshake,
+  CheckCircle,
+} from "lucide-react";
+import Link from "next/link";
 
 /**
  * Process step component for the visual timeline
@@ -22,7 +28,7 @@ const ProcessStep = ({
   title,
   description,
   icon,
-  details
+  details,
 }: {
   step: number;
   title: string;
@@ -50,7 +56,7 @@ const ProcessStep = ({
         <ul className="space-y-2">
           {details.map((detail, index) => (
             <li key={index} className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-accentBlue mt-0.5 flex-shrink-0" />
               <span className="text-charcoal">{detail}</span>
             </li>
           ))}
@@ -66,12 +72,13 @@ export default function ProcessPage() {
       <div className="container mx-auto px-4">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">
+          <h1 className="gradient-text font-serif text-4xl md:text-5xl text-charcoal mb-4">
             The Bluebonnet Process
           </h1>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            From your first call to post-inspection support, we're with you every step of the way.
-            Here's exactly what to expect when you choose Bluebonnet Home Inspections.
+            From your first call to post-inspection support, we're with you
+            every step of the way. Here's exactly what to expect when you choose
+            Bluebonnet Home Inspections.
           </p>
         </div>
 
@@ -86,7 +93,7 @@ export default function ProcessPage() {
               "Book online 24/7 or call us directly at 512-560-5670",
               "Confirmation within 1 hour during business hours",
               "Receive pre-inspection agreement and preparation checklist",
-              "Choose from flexible scheduling including weekends"
+              "Choose from flexible scheduling including weekends",
             ]}
           />
 
@@ -99,7 +106,7 @@ export default function ProcessPage() {
               "2-3 hours thorough examination of all accessible areas",
               "You're welcome to attend and ask questions throughout",
               "On-site summary of major findings at completion",
-              "Tim personally performs every inspection - no junior inspectors"
+              "Tim personally performs every inspection - no junior inspectors",
             ]}
           />
 
@@ -112,7 +119,7 @@ export default function ProcessPage() {
               "Detailed digital report within 24 hours of inspection",
               "100+ photos documenting all findings",
               "Clear, actionable recommendations for each issue",
-              "Easy-to-read format accessible on any device"
+              "Easy-to-read format accessible on any device",
             ]}
           />
 
@@ -125,7 +132,7 @@ export default function ProcessPage() {
               "Questions? Call Tim directly anytime",
               "Repair vendor recommendations available",
               "Re-inspection services for completed repairs",
-              "Support through negotiations and closing"
+              "Support through negotiations and closing",
             ]}
           />
         </div>
@@ -136,13 +143,14 @@ export default function ProcessPage() {
             Ready to Get Started?
           </h2>
           <p className="text-mediumGray mb-6">
-            Experience the Bluebonnet difference. Schedule your inspection today and move forward
-            with confidence knowing your investment is protected.
+            Experience the Bluebonnet difference. Schedule your inspection today
+            and move forward with confidence knowing your investment is
+            protected.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/schedule"
-              className="bg-accentOrange text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors inline-block text-center"
+              className="bg-accentOrange text-white px-8 py-3 rounded-full font-semibold hover:bg-primaryBlue transition-colors inline-block text-center"
             >
               Schedule Your Inspection
             </Link>

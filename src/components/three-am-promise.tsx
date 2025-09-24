@@ -24,7 +24,7 @@ export default function ThreeAMPromise() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
-              opacity: Math.random() * 0.8 + 0.2
+              opacity: Math.random() * 0.8 + 0.2,
             }}
           />
         ))}
@@ -34,33 +34,42 @@ export default function ThreeAMPromise() {
         <div className="max-w-5xl mx-auto text-center">
           {/* Moon Icon */}
           <div className="mb-8 animate-float">
-            <div className="inline-block p-6 bg-gradient-to-br from-blue-900 to-purple-900 rounded-full">
-              <Moon className="w-16 h-16 text-yellow-300" />
+            <div className="inline-block p-6 bg-gradient-to-r from-primaryBlue to-accentBlue rounded-full">
+              <Moon className="w-16 h-16 text-white" />
             </div>
           </div>
 
           {/* Main Promise */}
           <h2 className="font-serif text-5xl lg:text-7xl font-bold mb-8 animate-fadeInUp">
-            The <span className="text-yellow-300">3AM</span> Promise
+            The <span className="text-accentBlue">3AM</span> Promise
           </h2>
 
-          <div className="max-w-3xl mx-auto mb-12 animate-fadeInUp" style={{ animationDelay: '200ms' }}>
+          <div
+            className="max-w-3xl mx-auto mb-12 animate-fadeInUp"
+            style={{ animationDelay: "200ms" }}
+          >
             <p className="text-2xl lg:text-3xl leading-relaxed font-light mb-8">
-              "If you wake up at 3am worried about something in your inspection report,
-              you won't reach a call center.{" "}
-              <span className="font-bold text-yellow-300">You'll reach me - Tim.</span>
+              "If you wake up at 3am worried about something in your inspection
+              report, you won't reach a call center.{" "}
+              <span className="font-bold text-accentBlue">
+                You'll reach me - Tim.
+              </span>
             </p>
 
             <p className="text-xl opacity-90">
-              Because when you trust someone with your family's biggest investment,
-              that relationship doesn't end when the inspection does."
+              Because when you trust someone with your family's biggest
+              investment, that relationship doesn't end when the inspection
+              does."
             </p>
           </div>
 
           {/* Support Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fadeInUp" style={{ animationDelay: '400ms' }}>
+          <div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fadeInUp"
+            style={{ animationDelay: "400ms" }}
+          >
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Phone className="w-10 h-10 text-yellow-300 mx-auto mb-4" />
+              <Phone className="w-10 h-10 text-accentBlue mx-auto mb-4" />
               <h3 className="font-bold text-lg mb-2">Direct Cell Access</h3>
               <p className="text-sm opacity-80">
                 My personal number, not a corporate hotline
@@ -68,7 +77,7 @@ export default function ThreeAMPromise() {
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Clock className="w-10 h-10 text-yellow-300 mx-auto mb-4" />
+              <Clock className="w-10 h-10 text-accentBlue mx-auto mb-4" />
               <h3 className="font-bold text-lg mb-2">Lifetime Support</h3>
               <p className="text-sm opacity-80">
                 Questions answered for as long as you own the home
@@ -76,7 +85,7 @@ export default function ThreeAMPromise() {
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Heart className="w-10 h-10 text-yellow-300 mx-auto mb-4" />
+              <Heart className="w-10 h-10 text-accentBlue mx-auto mb-4" />
               <h3 className="font-bold text-lg mb-2">Real Relationship</h3>
               <p className="text-sm opacity-80">
                 I remember your home and your family's needs
@@ -85,13 +94,17 @@ export default function ThreeAMPromise() {
           </div>
 
           {/* Comparison Statement */}
-          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-2xl p-8 border border-yellow-300/20 mb-12 animate-fadeInUp" style={{ animationDelay: '600ms' }}>
+          <div
+            className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-2xl p-8 border border-yellow-300/20 mb-12 animate-fadeInUp"
+            style={{ animationDelay: "600ms" }}
+          >
             <h3 className="font-serif text-2xl font-bold mb-4">
               The Corporate Alternative?
             </h3>
             <p className="text-lg opacity-90 mb-4">
-              "Your call is important to us. Please leave a message and an available representative
-              will return your call within 2-3 business days..."
+              "Your call is important to us. Please leave a message and an
+              available representative will return your call within 2-3 business
+              days..."
             </p>
             <p className="text-sm opacity-70 italic">
               - Every franchise inspection company ever
@@ -99,28 +112,36 @@ export default function ThreeAMPromise() {
           </div>
 
           {/* Personal Statement */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 animate-fadeInUp" style={{ animationDelay: '800ms' }}>
+          <div
+            className="flex flex-col md:flex-row items-center justify-center gap-8 animate-fadeInUp"
+            style={{ animationDelay: "800ms" }}
+          >
             <div className="w-32 h-32 bg-gradient-to-br from-primaryBlue to-accentBlue rounded-full flex items-center justify-center">
               <span className="text-4xl font-bold">TM</span>
             </div>
             <div className="text-left max-w-xl">
               <p className="text-lg mb-2 font-light italic">
-                "My wife knows that when a client calls, I answer. My kids know that helping
-                families make safe decisions about their homes is what Dad does. This isn't
-                just a business - it's my family's contribution to our Cedar Park community."
+                "My wife knows that when a client calls, I answer. My kids know
+                that helping families make safe decisions about their homes is
+                what Dad does. This isn't just a business - it's my family's
+                contribution to our Cedar Park community."
               </p>
-              <p className="font-bold text-yellow-300">- Tim McCoy, Owner</p>
+              <p className="font-bold text-accentBlue">- Tim McCoy, Owner</p>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="mt-12 animate-fadeInUp" style={{ animationDelay: '1000ms' }}>
+          <div
+            className="mt-12 animate-fadeInUp"
+            style={{ animationDelay: "1000ms" }}
+          >
             <p className="text-lg mb-6 opacity-90">
-              Don't settle for a corporate checklist when you can have a lifetime advocate
+              Don't settle for a corporate checklist when you can have a
+              lifetime advocate
             </p>
             <a
               href="tel:512-560-5670"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-charcoal font-bold rounded-full shadow-2xl hover:shadow-yellow-500/30 transform hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br  from-primaryBlue to-accentBlue text-white font-bold rounded-full shadow-2xl hover:shadow-yellow-500/30 transform hover:-translate-y-1 transition-all duration-300"
             >
               <Phone className="w-5 h-5" />
               Save Tim's Direct Number: 512-560-5670

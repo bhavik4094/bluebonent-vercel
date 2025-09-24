@@ -271,7 +271,7 @@ export const SocialProof = () => {
                     ))}
                   </div>
                   {review.verified && (
-                    <div className="flex items-center gap-1 text-xs text-green-600 font-medium">
+                    <div className="flex items-center gap-1 text-xs text-accentBlue font-medium">
                       <svg
                         className="w-4 h-4"
                         fill="currentColor"
@@ -333,7 +333,7 @@ export const SocialProof = () => {
           <div className="flex flex-wrap items-center justify-center gap-8">
             <div className="flex items-center gap-2 text-mediumGray">
               <svg
-                className="w-6 h-6 text-primaryBlue"
+                className="w-6 h-6 text-accentBlue"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -347,7 +347,7 @@ export const SocialProof = () => {
             </div>
             <div className="flex items-center gap-2 text-mediumGray">
               <svg
-                className="w-6 h-6 text-primaryBlue"
+                className="w-6 h-6 text-accentBlue"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -361,7 +361,7 @@ export const SocialProof = () => {
             </div>
             <div className="flex items-center gap-2 text-mediumGray">
               <svg
-                className="w-6 h-6 text-primaryBlue"
+                className="w-6 h-6 text-accentBlue"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >

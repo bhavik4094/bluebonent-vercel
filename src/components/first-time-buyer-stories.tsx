@@ -117,7 +117,7 @@ export default function FirstTimeBuyerStories() {
 
                       {/* Highlight Badge */}
                       <div className="mt-4">
-                        <span className="inline-block px-3 py-1 bg-green-100 text-green-800 text-sm font-bold rounded-full">
+                        <span className="inline-block px-3 py-1 bg-blue-100 text-accentBlue text-sm font-bold rounded-full">
                           ✓ {story.highlight}
                         </span>
                       </div>

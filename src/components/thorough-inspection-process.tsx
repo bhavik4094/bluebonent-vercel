@@ -126,7 +126,7 @@ export default function ThoroughInspectionProcess() {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeInUp">
-          <div className="inline-block px-4 py-2 bg-green-100 text-green-800 font-bold text-sm rounded-full mb-4">
+          <div className="inline-block px-4 py-2 bg-blue-100 text-accentBlue font-bold text-sm rounded-full mb-4">
             3-4 Hour Comprehensive Inspection
           </div>
           <h2 className="gradient-text font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
@@ -209,7 +209,7 @@ export default function ThoroughInspectionProcess() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                             {step.details.map((detail, i) => (
                               <div key={i} className="flex items-start gap-2">
-                                <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                <CheckCircle2 className="w-5 h-5 text-accentBlue flex-shrink-0 mt-0.5" />
                                 <span className="text-sm text-charcoal">
                                   {detail}
                                 </span>

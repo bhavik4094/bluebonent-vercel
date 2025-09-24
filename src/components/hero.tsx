@@ -147,9 +147,9 @@ export const Hero = () => {
             {/* Floating badge */}
             <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                   <svg
-                    className="w-6 h-6 text-green-600"
+                    className="w-6 h-6 text-blue-600"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >

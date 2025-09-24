@@ -168,7 +168,7 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section with Trust Signals */}
-      <section className="relative bg-gradient-to-br from-primaryBlue via-blue-600 to-blue-800 text-white py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-r from-primaryBlue to-accentBlue text-white py-24 overflow-hidden">
         {/* Subtle pattern overlay */}
         <div className="absolute inset-0 opacity-10">
           <div
@@ -192,20 +192,19 @@ export default function ServicesPage() {
             {/* Enhanced Trust Bar */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 inline-flex flex-wrap justify-center gap-8 text-sm md:text-base">
               <span className="flex items-center gap-2">
-                <CheckIcon className="text-green-300" size={20} /> TREC Licensed
+                <CheckIcon className="text-white" size={20} /> TREC Licensed
                 #23059
               </span>
               <span className="flex items-center gap-2">
-                <CheckIcon className="text-green-300" size={20} /> InterNACHI
+                <CheckIcon className="text-white" size={20} /> InterNACHI
                 Certified
               </span>
               <span className="flex items-center gap-2">
-                <CheckIcon className="text-green-300" size={20} /> 1,500+
+                <CheckIcon className="text-white" size={20} /> 1,500+
                 Inspections
               </span>
               <span className="flex items-center gap-2">
-                <CheckIcon className="text-green-300" size={20} /> 200%
-                Guarantee
+                <CheckIcon className="text-white" size={20} /> 200% Guarantee
               </span>
             </div>
           </div>
@@ -237,7 +236,7 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center text-primaryBlue">
                   <ClipboardIcon size={40} />
                 </div>
                 <h3 className="font-bold text-xl mb-3 text-charcoal">
@@ -248,7 +247,7 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-20 h-20 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
+                <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center text-primaryBlue">
                   <PhoneIcon size={40} />
                 </div>
                 <h3 className="font-bold text-xl mb-3 text-charcoal">
@@ -301,7 +300,7 @@ export default function ServicesPage() {
                         <h3 className="font-serif text-2xl lg:text-3xl font-bold text-charcoal mb-1">
                           {service.name}
                         </h3>
-                        <span className="inline-block text-xs bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-3 py-1 rounded-full font-medium">
+                        <span className="inline-block text-xs  bg-gradient-to-r from-primaryBlue to-accentBlue text-white px-3 py-1 rounded-full font-medium">
                           {service.urgency}
                         </span>
                       </div>
@@ -316,12 +315,12 @@ export default function ServicesPage() {
                     {service.description}
                   </p>
 
-                  <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-4 mb-6">
+                  <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl p-4 mb-6">
                     <ul className="space-y-3">
                       {service.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start">
                           <CheckIcon
-                            className="text-green-500 mr-3 mt-0.5 flex-shrink-0"
+                            className="text-accentBlue mr-3 mt-0.5 flex-shrink-0"
                             size={18}
                           />
                           <span className="text-sm text-charcoal leading-relaxed">
@@ -389,8 +388,8 @@ export default function ServicesPage() {
                 <p className="text-sm text-mediumGray mb-4 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="bg-green-50 rounded-lg px-3 py-2 mb-4">
-                  <p className="text-xs text-green-700 font-medium">
+                <div className="bg-blue-50 rounded-lg px-3 py-2 mb-4">
+                  <p className="text-xs text-accentBlue font-medium">
                     {service.value}
                   </p>
                 </div>
@@ -509,7 +508,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 bg-gradient-to-br from-primaryBlue via-blue-600 to-blue-800 text-white overflow-hidden">
+      <section className="relative py-24 bg-gradient-to-r from-primaryBlue to-accentBlue text-white overflow-hidden">
         {/* Animated background effect */}
         <div className="absolute inset-0 opacity-20">
           <div

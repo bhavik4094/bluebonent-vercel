@@ -20,7 +20,7 @@ const pathwayData = [
     href: "/services/buyers-inspection",
     gradient: "from-primaryBlue to-accentBlue",
     iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-600",
+    iconColor: "text-accentBlue",
     icon: (
       <svg
         className="w-8 h-8"
@@ -51,7 +51,7 @@ const pathwayData = [
     href: "/services/sellers-inspection",
     gradient: "from-primaryBlue to-accentBlue",
     iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-600",
+    iconColor: "text-accentBlue",
     featured: true,
     icon: (
       <svg
@@ -83,7 +83,7 @@ const pathwayData = [
     href: "/for-agents",
     gradient: "from-primaryBlue to-accentBlue",
     iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-600",
+    iconColor: "text-accentBlue",
     icon: (
       <svg
         className="w-8 h-8"

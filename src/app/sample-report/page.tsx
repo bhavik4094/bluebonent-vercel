@@ -4,8 +4,17 @@
  * serving as a key product differentiator per Phase 2.2 of the checklist.
  */
 
-import { FileText, Camera, CheckCircle, Share2, Clock, AlertCircle, Smartphone, Download } from 'lucide-react';
-import Link from 'next/link';
+import {
+  FileText,
+  Camera,
+  CheckCircle,
+  Share2,
+  Clock,
+  AlertCircle,
+  Smartphone,
+  Download,
+} from "lucide-react";
+import Link from "next/link";
 
 /**
  * Report feature card component
@@ -18,7 +27,7 @@ import Link from 'next/link';
 const ReportFeature = ({
   icon,
   title,
-  description
+  description,
 }: {
   icon: React.ReactNode;
   title: string;
@@ -28,7 +37,9 @@ const ReportFeature = ({
     <div className="flex items-start gap-4">
       <div className="text-primaryBlue flex-shrink-0">{icon}</div>
       <div>
-        <h3 className="font-serif text-xl font-bold text-charcoal mb-2">{title}</h3>
+        <h3 className="font-serif text-xl font-bold text-charcoal mb-2">
+          {title}
+        </h3>
         <p className="text-mediumGray">{description}</p>
       </div>
     </div>
@@ -46,7 +57,7 @@ const ReportFeature = ({
 const ReportSection = ({
   title,
   description,
-  imageAlt
+  imageAlt,
 }: {
   title: string;
   description: string;
@@ -69,12 +80,13 @@ export default function SampleReportPage() {
       {/* Hero Section */}
       <section className="bg-lightGray py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-charcoal mb-4">
+          <h1 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-charcoal mb-4">
             Our Inspection Reports
           </h1>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            Clarity, Not Confusion: The Bluebonnet Inspection Report delivers comprehensive findings
-            in an easy-to-understand format that empowers you to make confident decisions.
+            Clarity, Not Confusion: The Bluebonnet Inspection Report delivers
+            comprehensive findings in an easy-to-understand format that empowers
+            you to make confident decisions.
           </p>
         </div>
       </section>
@@ -83,11 +95,12 @@ export default function SampleReportPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-charcoal mb-4">
+            <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-4">
               Interactive Report Demo
             </h2>
             <p className="text-lg text-mediumGray mb-8">
-              Click through a real (anonymized) inspection report to see the depth and quality firsthand
+              Click through a real (anonymized) inspection report to see the
+              depth and quality firsthand
             </p>
 
             {/* Sample Report Viewer */}
@@ -96,9 +109,13 @@ export default function SampleReportPage() {
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                   {/* Report Header */}
                   <div className="bg-primaryBlue text-white p-6">
-                    <h3 className="text-2xl font-bold mb-2">Sample Inspection Report</h3>
+                    <h3 className="text-2xl font-bold mb-2">
+                      Sample Inspection Report
+                    </h3>
                     <p>123 Example Street, Cedar Park, TX 78613</p>
-                    <p className="text-sm opacity-90">Inspection Date: January 15, 2024</p>
+                    <p className="text-sm opacity-90">
+                      Inspection Date: January 15, 2024
+                    </p>
                   </div>
 
                   {/* Report Sections Preview */}
@@ -142,7 +159,7 @@ export default function SampleReportPage() {
       {/* Key Features Grid */}
       <section className="py-16 bg-lightGray">
         <div className="container mx-auto px-4">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">
+          <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">
             Report Features That Make a Difference
           </h2>
 
@@ -190,59 +207,63 @@ export default function SampleReportPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-charcoal mb-8 text-center">
+            <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-8 text-center">
               Why Our Reports Stand Out
             </h2>
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-xl text-charcoal mb-2">
                     Written for Homeowners, Not Engineers
                   </h3>
                   <p className="text-mediumGray">
-                    Our reports use clear, everyday language. We explain not just what we found,
-                    but what it means for you and what you should do about it.
+                    Our reports use clear, everyday language. We explain not
+                    just what we found, but what it means for you and what you
+                    should do about it.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-xl text-charcoal mb-2">
                     Organized for Easy Navigation
                   </h3>
                   <p className="text-mediumGray">
-                    Interactive table of contents, bookmarked sections, and a logical flow make
-                    it simple to find exactly what you're looking for.
+                    Interactive table of contents, bookmarked sections, and a
+                    logical flow make it simple to find exactly what you're
+                    looking for.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-xl text-charcoal mb-2">
                     Repair Cost Guidance
                   </h3>
                   <p className="text-mediumGray">
-                    While we don't quote exact prices, we help you understand whether an issue
-                    is a $100 fix or a $10,000 project, helping you budget and negotiate effectively.
+                    While we don't quote exact prices, we help you understand
+                    whether an issue is a $100 fix or a $10,000 project, helping
+                    you budget and negotiate effectively.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                <CheckCircle className="w-6 h-6 text-blue-500 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-bold text-xl text-charcoal mb-2">
                     Maintenance Recommendations
                   </h3>
                   <p className="text-mediumGray">
-                    Beyond just problems, we provide a roadmap for maintaining your home,
-                    helping you protect your investment for years to come.
+                    Beyond just problems, we provide a roadmap for maintaining
+                    your home, helping you protect your investment for years to
+                    come.
                   </p>
                 </div>
               </div>
@@ -258,8 +279,9 @@ export default function SampleReportPage() {
             See the Difference for Yourself
           </h2>
           <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
-            Don't just take our word for it. Schedule your inspection today and receive a report
-            that truly empowers you to make the best decision for your family.
+            Don't just take our word for it. Schedule your inspection today and
+            receive a report that truly empowers you to make the best decision
+            for your family.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

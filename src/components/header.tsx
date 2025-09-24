@@ -4,11 +4,11 @@
  * following the implementation checklist requirements for trust building and conversion optimization.
  */
 
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Phone, Star, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import Link from "next/link";
+import { Phone, Star, Menu, X } from "lucide-react";
+import { useState } from "react";
 
 /**
  * Header component with navigation and trust signals
@@ -31,7 +31,9 @@ export const Header = () => {
       <div className="bg-lightGray py-2">
         <div className="container mx-auto px-4 flex flex-wrap justify-between items-center text-sm">
           <div className="flex items-center gap-4 text-mediumGray">
-            <span className="font-semibold text-charcoal">TREC License #23059</span>
+            <span className="font-semibold text-charcoal">
+              TREC License #23059
+            </span>
             <span className="hidden sm:inline">Fully Insured & Bonded</span>
             <span className="hidden md:inline">InterNACHI Certified</span>
           </div>
@@ -70,28 +72,52 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            <Link href="/services" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/services"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               Services
             </Link>
-            <Link href="/about" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/about"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               About
             </Link>
-            <Link href="/process" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/process"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               Our Process
             </Link>
-            <Link href="/sample-report" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/sample-report"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               Sample Report
             </Link>
-            <Link href="/blog" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/blog"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               Blog
             </Link>
-            <Link href="/for-agents" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/for-agents"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               For Agents
             </Link>
-            <Link href="/reviews" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/reviews"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               Reviews
             </Link>
-            <Link href="/faq" className="text-charcoal hover:text-primaryBlue transition-colors">
+            <Link
+              href="/faq"
+              className="text-charcoal hover:text-primaryBlue transition-colors"
+            >
               FAQ
             </Link>
           </div>
@@ -107,7 +133,7 @@ export const Header = () => {
             </a>
             <Link
               href="/schedule"
-              className="bg-accentBlue text-white px-6 py-2.5 rounded-full font-semibold hover:bg-primaryBlue transition-colors"
+              className=" bg-gradient-to-r from-primaryBlue to-accentBlue text-white px-6 py-2.5 rounded-full font-semibold hover:bg-primaryBlue transition-colors"
             >
               Schedule Now
             </Link>
@@ -118,7 +144,11 @@ export const Header = () => {
               className="lg:hidden p-2 text-charcoal hover:text-primaryBlue transition-colors"
               aria-label="Toggle mobile menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>

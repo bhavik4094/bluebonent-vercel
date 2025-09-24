@@ -52,7 +52,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Credentials Badge */}
-                  <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-2xl p-4 border-4 border-blue-500">
+                  <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-2xl p-4 border-4 border-accentBlue">
                     <div className="text-center">
                       <Award className="w-10 h-10 text-primaryBlue mx-auto mb-2" />
                       <p className="font-bold text-charcoal">TREC #23059</p>
@@ -126,27 +126,27 @@ export default function AboutPage() {
                   </h3>
                   <ul className="space-y-2 text-sm text-mediumGray">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
                       <span>
                         Cedar Park resident since 2008 - I know our soil,
                         weather, and builders
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
                       <span>
                         My kids attend local schools - I have skin in the game
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
                       <span>
                         Active in YMCA and local church - you'll see me around
                         town
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
                       <span>
                         I inspect for your neighbors - ask around about
                         Bluebonnet
@@ -176,7 +176,7 @@ export default function AboutPage() {
       <ThreeAMPromise />
 
       {/* Final CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-primaryBlue  text-white">
+      <section className="py-24  bg-gradient-to-r from-primaryBlue to-accentBlue  text-white">
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <h2 className="font-serif text-5xl font-bold mb-6">
             Ready to Experience the Difference?
@@ -190,15 +190,15 @@ export default function AboutPage() {
           {/* Trust Points */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-400" />
+              <Star className="w-5 h-5 text-white" />
               <span className="font-bold">5.0 Google Rating</span>
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-yellow-400" />
+              <Clock className="w-5 h-5 text-white" />
               <span className="font-bold">24hr Reports</span>
             </div>
             <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-yellow-400" />
+              <Shield className="w-5 h-5 text-white" />
               <span className="font-bold">200% Guarantee</span>
             </div>
           </div>
