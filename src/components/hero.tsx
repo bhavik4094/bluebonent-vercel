@@ -13,7 +13,7 @@ import { TrustBar } from "./trust-bar";
  */
 export const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-white via-primaryBlue/5 to-white overflow-hidden">
+    <section className="relative  flex items-center bg-gradient-to-br from-white via-primaryBlue/5 to-white overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primaryBlue/10 rounded-full blur-3xl" />
