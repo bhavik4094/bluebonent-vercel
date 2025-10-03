@@ -5,6 +5,11 @@ import { WhatWeInspect } from "@/components/what-we-inspect";
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
 
+type PathwayCard = {
+  iconsvg?: string;
+  [key: string]: unknown; // keep flexibility for extra fields
+};
+
 export default async function HomePage() {
   const data = await fetchAPI("pages?slug=home-page");
   const page = data?.[0];
@@ -14,12 +19,20 @@ export default async function HomePage() {
   const services = page?.acf || {};
 
   const enhancedIconUrl = await normalizeImage(hero.enhanced_icon);
+  // const pathwayss = await Promise.all(
+  //   (about.audience_pathways_cards || []).map(async (p: any) => ({
+  //     ...p,
+  //     iconUrl: (await normalizeImage(p.iconsvg)) || "",
+  //   }))
+  // );
+
   const pathwayss = await Promise.all(
-    (about.audience_pathways_cards || []).map(async (p: any) => ({
+    (about.audience_pathways_cards || []).map(async (p: PathwayCard) => ({
       ...p,
       iconUrl: (await normalizeImage(p.iconsvg)) || "",
     }))
   );
+
   return (
     <main>
       <Hero
