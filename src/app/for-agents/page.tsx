@@ -7,12 +7,12 @@
 import {
   Shield,
   Clock,
-  Phone,
+  // Phone,
   Key,
   FileCheck,
   Users,
-  TrendingUp,
-  Award,
+  // TrendingUp,
+  // Award,
   Download,
   Handshake,
 } from "lucide-react";

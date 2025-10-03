@@ -174,7 +174,6 @@ export const SocialProof = ({
   subtitle,
   pointtext,
   reviewbtntext,
-  reviewbtnurl,
 }: SocialProofProps) => {
   return (
     <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-radial">

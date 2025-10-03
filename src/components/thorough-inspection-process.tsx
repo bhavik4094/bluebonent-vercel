@@ -7,12 +7,8 @@
 import {
   Home,
   Search,
-  Camera,
-  ClipboardCheck,
   Wrench,
   Droplets,
-  Zap,
-  Wind,
   Eye,
   FileText,
   Users,

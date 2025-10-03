@@ -9,6 +9,7 @@
 import Link from "next/link";
 import { Phone, Star, Menu, X } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 /**
  * Header component with navigation and trust signals
@@ -41,7 +42,8 @@ export const Header = () => {
             <div className="flex text-yellow-500">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-current" />
-              ))}``
+              ))}
+              ``
             </div>
             <span className="text-charcoal font-medium">5.0 Google Rating</span>
           </div>
@@ -63,7 +65,12 @@ export const Header = () => {
               <h1 className="font-serif text-xl font-bold text-charcoal">Bluebonnet</h1>
               <p className="text-xs text-mediumGray">Home Inspections</p>
             </div> */}
-            <img src="/logo2.png" alt="Bluebonnet Home Inspections" />
+            <Image
+              src="/logo2.png"
+              alt="Bluebonnet Home Inspections"
+              width={200}
+              height={80}
+            />
             {/* <div>
               <h1 className="font-serif text-xl font-bold text-charcoal">Bluebonnet</h1>
               <p className="text-xs text-mediumGray">Home Inspections</p>

@@ -8,16 +8,16 @@ import Image from "next/image";
 import {
   Shield,
   Award,
-  Users,
-  Home,
-  Heart,
+  // Users,
+  // Home,
+  // Heart,
   Phone,
   CheckCircle,
   Star,
   Clock,
   MapPin,
 } from "lucide-react";
-import { TrustBar } from "@/components/trust-bar";
+// import { TrustBar } from "@/components/trust-bar";
 import OwnerOperatorComparison from "@/components/owner-operator-comparison";
 import FirstTimeBuyerStories from "@/components/first-time-buyer-stories";
 import ThreeAMPromise from "@/components/three-am-promise";

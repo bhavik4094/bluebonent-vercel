@@ -3,16 +3,7 @@
  * into quality guarantees, providing concrete promises that address buyer anxieties.
  */
 
-import {
-  Shield,
-  CheckCircle,
-  XCircle,
-  Zap,
-  Home,
-  Clock,
-  FileText,
-  Users,
-} from "lucide-react";
+import { Shield, XCircle, Zap, Home, Clock, Users } from "lucide-react";
 
 interface NonNegotiable {
   promise: string;

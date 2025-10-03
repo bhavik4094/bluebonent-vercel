@@ -4,7 +4,7 @@
  * being ghosted after the inspection.
  */
 
-import { Moon, Phone, MessageCircle, Clock, Heart, Shield } from "lucide-react";
+import { Moon, Phone, Clock, Heart } from "lucide-react";
 
 /**
  * Renders the 3AM Promise - a memorable emotional anchor that promises
