@@ -7,6 +7,14 @@
  * Star icon component for ratings
  * @returns {JSX.Element} Star icon
  */
+
+type SocialProofProps = {
+  title: string;
+  subtitle: string;
+  pointtext: string;
+  reviewbtntext: string;
+  reviewbtnurl: string;
+};
 const StarIcon = ({ filled = true }: { filled?: boolean }) => (
   <svg
     className={`w-5 h-5 ${filled ? "text-yellow-400 fill-current" : "text-gray-300 fill-current"}`}
@@ -161,7 +169,13 @@ const metrics = [
  * Social proof section with testimonials and metrics
  * @returns {JSX.Element} The social proof component
  */
-export const SocialProof = () => {
+export const SocialProof = ({
+  title,
+  subtitle,
+  pointtext,
+  reviewbtntext,
+  reviewbtnurl,
+}: SocialProofProps) => {
   return (
     <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-radial">
       {/* Enhanced background with mesh gradient */}
@@ -187,17 +201,16 @@ export const SocialProof = () => {
               ))}
             </span>
             <span className="text-sm font-medium text-charcoal">
-              5.0 Google Rating
+              {pointtext}
             </span>
           </div>
 
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6">
-            Trusted by <span className="gradient-text">1,500+ Families</span>
+          <h2 className="gradient-text font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6">
+            {title}
           </h2>
 
           <p className="text-lg md:text-xl text-mediumGray max-w-3xl mx-auto leading-relaxed">
-            Cedar Park's most recommended home inspector. See why homeowners and
-            agents choose us.
+            {subtitle}
           </p>
         </div>
 
@@ -312,7 +325,7 @@ export const SocialProof = () => {
           {/* View all reviews button */}
           <div className="text-center mt-12">
             <a
-              href="https://www.google.com/search?q=bluebonnet+home+inspections+reviews"
+              href="{reviewbtnurl}"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-primaryBlue text-primaryBlue font-semibold rounded-full hover:bg-primaryBlue hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
@@ -323,7 +336,7 @@ export const SocialProof = () => {
                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
-              Read All 152 Google Reviews
+              {reviewbtntext}
             </a>
           </div>
         </div>

@@ -2,6 +2,8 @@
  * @fileoverview Services page showcasing all inspection services with trust signals and conversion optimization
  */
 
+import { fetchAPI } from "@/lib/api";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -164,6 +166,10 @@ const serviceTestimonials = [
   },
 ];
 
+const data = await fetchAPI("pages?slug=about-us");
+const page = data?.[0];
+const serviceshero = page?.acf || {};
+
 export default function ServicesPage() {
   return (
     <main className="min-h-screen">
@@ -182,11 +188,10 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
-              Every Inspection, Every Detail, Every Time
+              {serviceshero?.services_hero_title}
             </h1>
             <p className="text-xl md:text-2xl mb-10 text-blue-50 max-w-3xl mx-auto leading-relaxed">
-              Tim McCoy personally conducts every inspection—protecting your
-              investment like it's his own family's
+              {serviceshero?.services_hero_description}
             </p>
 
             {/* Enhanced Trust Bar */}

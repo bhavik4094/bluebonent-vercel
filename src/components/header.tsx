@@ -41,7 +41,7 @@ export const Header = () => {
             <div className="flex text-yellow-500">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
+              ))}``
             </div>
             <span className="text-charcoal font-medium">5.0 Google Rating</span>
           </div>

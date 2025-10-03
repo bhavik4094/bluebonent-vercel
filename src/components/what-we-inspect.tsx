@@ -5,6 +5,14 @@
 
 import Link from "next/link";
 
+type WhatWeInspectProps = {
+  title: string;
+  subtitle: string;
+  pointtext: string;
+  checklistbtntext: string;
+  checklistbtnurl: string;
+};
+
 const inspectionItems = [
   {
     name: "Roof & Attic",
@@ -179,7 +187,13 @@ const inspectionItems = [
  * What We Inspect section with professional grid design
  * @returns {JSX.Element} The what we inspect component
  */
-export const WhatWeInspect = () => {
+export const WhatWeInspect = ({
+  title,
+  subtitle,
+  pointtext,
+  checklistbtntext,
+  checklistbtnurl,
+}: WhatWeInspectProps) => {
   return (
     <section className="py-20 md:py-32 relative overflow-hidden">
       {/* Background gradient */}
@@ -201,18 +215,16 @@ export const WhatWeInspect = () => {
               />
             </svg>
             <span className="text-sm font-medium text-accentBlue">
-              400+ Point Inspection
+              {pointtext}
             </span>
           </div>
 
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6">
-            Everything We <span className="gradient-text">Inspect</span>
+          <h2 className="gradient-text font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6">
+            {title}
           </h2>
 
           <p className="text-lg md:text-xl text-mediumGray max-w-3xl mx-auto leading-relaxed">
-            Our thorough inspection process covers every accessible system and
-            component, ensuring nothing important is missed in your home
-            evaluation.
+            {subtitle}
           </p>
         </div>
 
@@ -377,10 +389,10 @@ export const WhatWeInspect = () => {
         {/* CTA */}
         <div className="text-center mt-16">
           <Link
-            href="/services"
+            href={checklistbtnurl}
             className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl"
           >
-            <span>View Complete Inspection Checklist</span>
+            <span>{checklistbtntext}</span>
             <svg
               className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"
               fill="none"
