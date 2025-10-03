@@ -1,9 +1,11 @@
 // src/lib/utils.ts
+type ImageField = string | number | { url?: string } | null | undefined;
+
 const baseUrl =
   process.env.WORDPRESS_API_URL ||
   "https://home-inspections.codersh.com/wp-json/wp/v2/";
 
-export async function normalizeImage(imageField: any): Promise<string> {
+export async function normalizeImage(imageField: ImageField): Promise<string> {
   if (!imageField) {
     return "/placeholder.jpg"; // fallback image
   }
