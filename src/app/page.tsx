@@ -55,5 +55,6 @@ export default async function HomePage() {
         checklistbtnurl={services.inspection_checklist_btn_url}
       />
     </main>
+    // CHECKING EVERYTHING IS WORKING FINE
   );
 }
