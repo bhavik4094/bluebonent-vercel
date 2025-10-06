@@ -5,6 +5,7 @@
  */
 
 import Image from "next/image";
+
 import {
   Shield,
   Award,
@@ -23,12 +24,23 @@ import FirstTimeBuyerStories from "@/components/first-time-buyer-stories";
 import ThreeAMPromise from "@/components/three-am-promise";
 import ThoroughInspectionProcess from "@/components/thorough-inspection-process";
 import OurNonNegotiables from "@/components/our-non-negotiables";
+import { fetchAPI } from "@/lib/api";
+import { normalizeImage } from "@/lib/utils";
+
 
 /**
  * Renders the About page with powerful psychological anchors and trust-building elements
  * that address core buyer anxieties and position Bluebonnet as the premium choice.
  * @returns Complete About page with hero, story, comparisons, and promises
  */
+
+const data = await fetchAPI("pages?slug=about-us");
+const page = data?.[0];
+const about  = page?.acf || {};
+
+const aboutstoryimg = await normalizeImage(about?.story_section_image);
+
+
 export default function AboutPage() {
   return (
     <main>
@@ -43,7 +55,7 @@ export default function AboutPage() {
                 <div className="relative">
                   <div className="relative aspect-[4/5] rounded-2xl shadow-2xl overflow-hidden">
                     <Image
-                      src="/fml.png"
+                      src={aboutstoryimg}
                       alt="Tim McCoy and family in Cedar Park"
                       fill
                       priority
@@ -55,7 +67,7 @@ export default function AboutPage() {
                   <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-2xl p-4 border-4 border-accentBlue">
                     <div className="text-center">
                       <Award className="w-10 h-10 text-primaryBlue mx-auto mb-2" />
-                      <p className="font-bold text-charcoal">TREC #23059</p>
+                      <p className="font-bold text-charcoal">{about?.credentials_badge?.badge_id}</p>
                       <p className="text-xs text-mediumGray">
                         Licensed Professional
                       </p>
@@ -63,7 +75,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Years Badge */}
-                  <div className="absolute -top-6 -left-6 bg-accentOrange text-white rounded-full w-24 h-24 flex flex-col items-center justify-center shadow-2xl">
+                  <div className="absolute -top-6 -left-6 bg-accentBlue text-white rounded-full w-24 h-24 flex flex-col items-center justify-center shadow-2xl">
                     <span className="text-2xl font-bold">10+</span>
                     <span className="text-xs">Years</span>
                   </div>
@@ -76,7 +88,7 @@ export default function AboutPage() {
                 style={{ animationDelay: "200ms" }}
               >
                 <h2 className="gradient-text font-serif text-4xl lg:text-5xl font-bold text-charcoal mb-6">
-                  Why Your Home Matters to Me
+                 {about?.story_section_heading}
                   <span className="text-primaryBlue">.</span>
                 </h2>
 
