@@ -18,6 +18,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import Link from "next/link";
+import { fetchAPI } from "@/lib/api";
 
 /**
  * Accordion component for FAQ items
@@ -87,6 +88,10 @@ const ResourceCard = ({
     </button>
   </div>
 );
+
+const data = await fetchAPI("pages?slug=faq");
+const page = data?.[0];
+const faq = page?.acf || {};
 
 export default function FaqPage() {
   // FAQ data organized by category
@@ -160,12 +165,10 @@ export default function FaqPage() {
       <section className="bg-lightGray py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Frequently Asked Questions & Resources
+            {faq?.frequently_asked_questions_title}
           </h1>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            Get answers to common questions about home inspections and download
-            helpful resources to prepare for your inspection or understand your
-            report.
+            {faq?.frequently_asked_questions_description}
           </p>
         </div>
       </section>
@@ -239,11 +242,10 @@ export default function FaqPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Downloadable Resources
+              {faq?.downloadable_resources_title}
             </h2>
             <p className="text-lg text-mediumGray max-w-3xl mx-auto">
-              Free guides and checklists to help you prepare for your inspection
-              and understand the process better.
+              {faq?.downloadable_resources_description}
             </p>
           </div>
 
@@ -283,24 +285,23 @@ export default function FaqPage() {
       <section className="py-16 bg-primaryBlue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-            Still Have Questions?
+            {faq?.still_have_questions_title}
           </h2>
           <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
-            We're here to help! Contact us directly for personalized answers
-            about your specific situation or property.
+            {faq?.still_have_questions_description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:512-560-5670"
+              href={faq?.still_have_questions_call_btn_url}
               className="bg-white text-primaryBlue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block"
             >
-              Call 512-560-5670
+              {faq?.still_have_questions_call_btn_title}
             </a>
             <Link
               href="/schedule"
               className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primaryBlue transition-colors inline-block"
             >
-              Schedule Your Inspection
+              {faq?.schedule_your_inspection_btn_title}
             </Link>
           </div>
         </div>
