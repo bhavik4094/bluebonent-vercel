@@ -165,7 +165,7 @@ const serviceTestimonials = [
   },
 ];
 
-const data = await fetchAPI("pages?slug=about-us");
+const data = await fetchAPI("pages?slug=services");
 const page = data?.[0];
 const serviceshero = page?.acf || {};
 
