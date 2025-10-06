@@ -220,11 +220,10 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4">
-              Why Families Trust Bluebonnet
+              {serviceshero?.families_trust_title}
             </h2>
             <p className="text-lg text-mediumGray mb-12 max-w-2xl mx-auto">
-              Three promises that set us apart from every other inspection
-              company
+              {serviceshero?.families_trust_description}
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
