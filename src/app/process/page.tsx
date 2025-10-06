@@ -4,6 +4,7 @@
  * reducing client anxiety and setting professional expectations per Phase 2.1 of the checklist.
  */
 
+import { fetchAPI } from "@/lib/api";
 import {
   Calendar,
   Home,
@@ -23,6 +24,7 @@ import Link from "next/link";
  * @param {string[]} props.details - Array of detail points
  * @returns {JSX.Element} Process step component
  */
+
 const ProcessStep = ({
   step,
   title,
@@ -65,6 +67,9 @@ const ProcessStep = ({
     </div>
   </div>
 );
+const data = await fetchAPI("pages?slug=process");
+const page = data?.[0];
+const ourprocess = page?.acf || {};
 
 export default function ProcessPage() {
   return (
@@ -73,12 +78,10 @@ export default function ProcessPage() {
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="gradient-text font-serif text-4xl md:text-5xl text-charcoal mb-4">
-            The Bluebonnet Process
+            {ourprocess?.bluebonnet_process_title}
           </h1>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            From your first call to post-inspection support, we're with you
-            every step of the way. Here's exactly what to expect when you choose
-            Bluebonnet Home Inspections.
+            {ourprocess?.bluebonnet_process_description}
           </p>
         </div>
 
@@ -140,25 +143,23 @@ export default function ProcessPage() {
         {/* CTA Section */}
         <div className="text-center mt-16 bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
           <h2 className="font-serif text-3xl text-charcoal mb-4">
-            Ready to Get Started?
+            {ourprocess?.ready_to_get_started_title}
           </h2>
           <p className="text-mediumGray mb-6">
-            Experience the Bluebonnet difference. Schedule your inspection today
-            and move forward with confidence knowing your investment is
-            protected.
+            {ourprocess?.ready_to_get_started_description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/schedule"
+              href={ourprocess?.schedule_your_inspection_button_url}
               className="bg-accentOrange text-white px-8 py-3 rounded-full font-semibold hover:bg-primaryBlue transition-colors inline-block text-center"
             >
-              Schedule Your Inspection
+              {ourprocess?.schedule_your_inspection_button_text}
             </Link>
             <a
-              href="tel:512-560-5670"
+              href={ourprocess?.ready_to_button_call_url}
               className="bg-transparent border-2 border-primaryBlue text-primaryBlue px-8 py-3 rounded-full font-semibold hover:bg-primaryBlue hover:text-white transition-colors inline-block text-center"
             >
-              Call 512-560-5670
+              {ourprocess?.ready_to_button_call_text}
             </a>
           </div>
         </div>
