@@ -167,7 +167,7 @@ const serviceTestimonials = [
 
 const data = await fetchAPI("pages?slug=services");
 const page = data?.[0];
-const serviceshero = page?.acf || {};
+const services = page?.acf || {};
 
 export default function ServicesPage() {
   return (
@@ -187,10 +187,10 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
-              {serviceshero?.services_hero_title}
+              {services?.services_hero_title}
             </h1>
             <p className="text-xl md:text-2xl mb-10 text-blue-50 max-w-3xl mx-auto leading-relaxed">
-              {serviceshero?.services_hero_description}
+              {services?.services_hero_description}
             </p>
 
             {/* Enhanced Trust Bar */}
@@ -220,10 +220,10 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4">
-              {serviceshero?.families_trust_title}
+              {services?.families_trust_title}
             </h2>
             <p className="text-lg text-mediumGray mb-12 max-w-2xl mx-auto">
-              {serviceshero?.families_trust_description}
+              {services?.families_trust_description}
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
@@ -280,11 +280,10 @@ export default function ServicesPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-center text-charcoal mb-4">
-            Choose Your Inspection Service
+            {services?.choose_inspection_text}
           </h2>
           <p className="text-center text-mediumGray text-lg mb-16 max-w-2xl mx-auto">
-            Every inspection includes thermal imaging, detailed photos, and
-            Tim's personal guarantee
+            {services?.choose_inspection_description}
           </p>
 
           <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
@@ -369,11 +368,10 @@ export default function ServicesPage() {
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-center text-charcoal mb-4">
-            Add-On Services for Complete Peace of Mind
+            {services?.add_on_services_text}
           </h2>
           <p className="text-center text-mediumGray text-lg mb-16 max-w-2xl mx-auto">
-            Protect against every possible issue with these specialized
-            inspections
+            {services?.add_on_services_description}
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -418,11 +416,10 @@ export default function ServicesPage() {
       <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-center text-charcoal mb-4">
-            What Cedar Park Families Say
+            {services?.cedar_park_families_text}
           </h2>
           <p className="text-center text-mediumGray text-lg mb-16 max-w-2xl mx-auto">
-            Real stories from homeowners who trusted Tim with their biggest
-            investment
+            {services?.cedar_park_families_description}
           </p>
 
           <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
@@ -457,7 +454,7 @@ export default function ServicesPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="gradient-text font-serif text-4xl font-bold text-center text-charcoal mb-12">
-            Common Service Questions
+            {services?.common_service_questions_text}
           </h2>
 
           <div className="space-y-6">
@@ -526,29 +523,28 @@ export default function ServicesPage() {
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Ready to Protect Your Investment?
+            {services?.ready_to_protect_title}
           </h2>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-blue-50 leading-relaxed">
-            Don't risk missing costly problems. Schedule your inspection with
-            Tim today and move forward with confidence.
+            {services?.ready_to_protect_description}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
-              href="/schedule"
+              href={services?.schedule_your_inspection_button_url}
               className="group bg-white text-primaryBlue px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105"
             >
-              Schedule Your Inspection
+              {services?.schedule_your_inspection_button_title}
               <ArrowRightIcon
                 className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
                 size={20}
               />
             </Link>
             <a
-              href="tel:512-560-5670"
+              href={services?.call_tim_url}
               className="group bg-transparent border-2 border-white text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white hover:text-primaryBlue transition-all hover:scale-105 flex items-center justify-center"
             >
               <PhoneIcon className="mr-2" size={20} />
-              Call Tim: 512-560-5670
+              {services?.call_tim_title}
             </a>
           </div>
         </div>
