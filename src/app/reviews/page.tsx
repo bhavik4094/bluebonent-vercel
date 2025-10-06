@@ -1,3 +1,5 @@
+import { fetchAPI } from "@/lib/api";
+
 // TODO: Replace with actual icons
 const StarIcon = () => (
   <svg
@@ -30,16 +32,20 @@ const featuredReviews = [
   },
 ];
 
+const data = await fetchAPI("pages?reviews");
+const page = data?.[0];
+const reviews = page?.acf || {};
+
 export default function ReviewsPage() {
   return (
     <main>
       <section className="bg-lightGray py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="gradient-text font-serif text-5xl font-bold text-charcoal mb-4">
-            Hear From Our Happy Clients
+            {reviews?.happy_clients_title}
           </h1>
           <p className="font-sans text-lg text-mediumGray">
-            We're proud of our 5-star reputation.
+            {reviews?.happy_clients_description}
           </p>
         </div>
       </section>

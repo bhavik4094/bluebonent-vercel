@@ -151,7 +151,7 @@ export default function ProcessPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={ourprocess?.schedule_your_inspection_button_url}
-              className="bg-accentOrange text-white px-8 py-3 rounded-full font-semibold hover:bg-primaryBlue transition-colors inline-block text-center"
+              className="bg-accentOrange text-primaryBlue border-2 border-primaryBlue px-8 py-3 rounded-full font-semibold hover:bg-primaryBlue hover:text-white transition-colors inline-block text-center"
             >
               {ourprocess?.schedule_your_inspection_button_text}
             </Link>

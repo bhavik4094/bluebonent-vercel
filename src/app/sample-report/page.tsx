@@ -4,6 +4,7 @@
  * serving as a key product differentiator per Phase 2.2 of the checklist.
  */
 
+import { fetchAPI } from "@/lib/api";
 import {
   FileText,
   Camera,
@@ -74,6 +75,10 @@ const ReportSection = ({
   </div>
 );
 
+const data = await fetchAPI("pages?slug=sample-report");
+const page = data?.[0];
+const samplereport = page?.acf || {};
+
 export default function SampleReportPage() {
   return (
     <div className="min-h-screen">
@@ -81,12 +86,10 @@ export default function SampleReportPage() {
       <section className="bg-lightGray py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-charcoal mb-4">
-            Our Inspection Reports
+            {samplereport?.inspection_reports_title}
           </h1>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            Clarity, Not Confusion: The Bluebonnet Inspection Report delivers
-            comprehensive findings in an easy-to-understand format that empowers
-            you to make confident decisions.
+            {samplereport?.inspection_reports_description}
           </p>
         </div>
       </section>
@@ -96,11 +99,10 @@ export default function SampleReportPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Interactive Report Demo
+              {samplereport?.report_demo_title}
             </h2>
             <p className="text-lg text-mediumGray mb-8">
-              Click through a real (anonymized) inspection report to see the
-              depth and quality firsthand
+              {samplereport?.report_demo_description}
             </p>
 
             {/* Sample Report Viewer */}
@@ -110,7 +112,7 @@ export default function SampleReportPage() {
                   {/* Report Header */}
                   <div className="bg-primaryBlue text-white p-6">
                     <h3 className="text-2xl font-bold mb-2">
-                      Sample Inspection Report
+                      report_features_title
                     </h3>
                     <p>123 Example Street, Cedar Park, TX 78613</p>
                     <p className="text-sm opacity-90">
@@ -160,7 +162,7 @@ export default function SampleReportPage() {
       <section className="py-16 bg-lightGray">
         <div className="container mx-auto px-4">
           <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">
-            Report Features That Make a Difference
+            {samplereport?.report_features_title}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -208,7 +210,7 @@ export default function SampleReportPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-8 text-center">
-              Why Our Reports Stand Out
+              {samplereport?.reports_stand_out_title}
             </h2>
 
             <div className="space-y-6">
@@ -276,22 +278,20 @@ export default function SampleReportPage() {
       <section className="py-16 bg-primaryBlue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-            See the Difference for Yourself
+            {samplereport?.difference_for_yourself_title}
           </h2>
           <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
-            Don't just take our word for it. Schedule your inspection today and
-            receive a report that truly empowers you to make the best decision
-            for your family.
+            {samplereport?.difference_for_yourself_description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/schedule"
               className="bg-white text-primaryBlue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block"
             >
-              Schedule Your Inspection
+              {samplereport?.your_inspection_btn_title}
             </Link>
             <button className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primaryBlue transition-colors">
-              Download Sample Report PDF
+              {samplereport?.download_sample_report_pdf_btn_title}
             </button>
           </div>
         </div>
