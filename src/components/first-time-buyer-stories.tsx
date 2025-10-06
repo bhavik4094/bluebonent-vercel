@@ -49,9 +49,12 @@ type thoroughInspectionProps = {
   testimonialSecHeading: string;
   testimonialSecSubHeading: string;
   testimonialSectxt: string;
-  // ownerOptbtn1url: string;
-  // ownerOptbtn2txt: string;
-  // ownerOptbtn2url: string;
+  testimonialSecCtaHeading: string;
+  testimonialSecCtaTxt: string;
+  testimonialSecCtaBtn1Txt: string;
+  testimonialSecCtaBtn1Url: string;
+  testimonialSecCtaBtn2Txt: string;
+  testimonialSecCtaBtn2Url: string;
 };
 
 /**
@@ -63,6 +66,12 @@ export const FirstTimeBuyerStories = ({
   testimonialSecHeading,
   testimonialSecSubHeading,
   testimonialSectxt,
+  testimonialSecCtaHeading,
+  testimonialSecCtaTxt,
+  testimonialSecCtaBtn1Txt,
+  testimonialSecCtaBtn1Url,
+  testimonialSecCtaBtn2Txt,
+  testimonialSecCtaBtn2Url,
   }: thoroughInspectionProps) => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -156,26 +165,23 @@ export const FirstTimeBuyerStories = ({
           <div className="bg-gradient-to-r from-primaryBlue to-accentBlue rounded-2xl p-8 lg:p-12 text-white text-center">
             <MessageCircle className="w-12 h-12 mx-auto mb-6 opacity-80" />
             <h3 className="font-serif text-3xl font-bold mb-4">
-              Join 500+ Cedar Park Families Who Chose Personal Over Corporate
+              {testimonialSecCtaHeading}
             </h3>
             <p className="text-lg opacity-90 mb-8">
-              When you're making the biggest purchase of your life, you deserve
-              more than a rushed checklist from whoever's available. You deserve
-              an inspector who treats your home like his family's future depends
-              on it.
+              {testimonialSecCtaTxt}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/reviews"
+                href={testimonialSecCtaBtn1Url}
                 className="px-6 py-3 bg-white text-primaryBlue font-bold rounded-full hover:bg-lightGray transition-all duration-300"
               >
-                Read More Reviews
+                {testimonialSecCtaBtn1Txt}
               </a>
               <a
-                href="/schedule"
-                className="px-6 py-3 bg-accentOrange text-white font-bold rounded-full hover:bg-orange-600 transition-all duration-300"
+                href={testimonialSecCtaBtn2Url}
+                className="px-6 py-3 bg-accentBlue text-white font-bold rounded-full hover:bg-accentBlue transition-all duration-300"
               >
-                Schedule Your Inspection
+                {testimonialSecCtaBtn2Txt}  
               </a>
             </div>
           </div>

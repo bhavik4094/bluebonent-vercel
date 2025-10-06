@@ -200,6 +200,12 @@ export default function AboutPage() {
         testimonialSecHeading={firstTimeBuyerStories?.first_time_buyer_stories_heading}
         testimonialSecSubHeading={firstTimeBuyerStories?.first_time_buyer_stories_sub_heading}
         testimonialSectxt={firstTimeBuyerStories?.first_time_buyer_stories_text}
+        testimonialSecCtaHeading={firstTimeBuyerStories?.first_time_buyer_stories_cta_heading}
+        testimonialSecCtaTxt={firstTimeBuyerStories?.first_time_buyer_stories_cta_text}
+        testimonialSecCtaBtn1Txt={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn1_text}
+        testimonialSecCtaBtn1Url={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn1_url}
+        testimonialSecCtaBtn2Txt={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn2_text}
+        testimonialSecCtaBtn2Url={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn2_url}
       />
 
       {/* Our Non-Negotiables - Quality Promises */}
