@@ -105,12 +105,35 @@ const inspectionSteps: InspectionStep[] = [
   },
 ];
 
+type thoroughInspectionProps = {
+  tipHeading: string;
+  tipSubHeading: string;
+  tiptxt: string;
+  tipCtaHeading: string;
+  tipCtaTxt: string;
+  tipCtaBtn1Txt: string;
+  tipCtaBtn1Url: string;
+  tipCtaBtn2Txt: string;
+  tipCtaBtn2Url: string;
+  
+};
+
 /**
  * Renders a detailed inspection process that translates "thorough" into
  * specific, observable behaviors that buyers can visualize and verify.
  * @returns Inspection process timeline component
  */
-export default function ThoroughInspectionProcess() {
+export const ThoroughInspectionProcess = ({
+  tipHeading,
+  tipSubHeading,
+  tiptxt,
+  tipCtaHeading,
+  tipCtaTxt,
+  tipCtaBtn1Txt,
+  tipCtaBtn1Url,
+  tipCtaBtn2Txt,
+  tipCtaBtn2Url,
+}: thoroughInspectionProps) => {
   return (
     <section className="py-24 bg-gradient-to-b from-lightGray to-white relative overflow-hidden">
       {/* Background decoration */}
@@ -123,17 +146,13 @@ export default function ThoroughInspectionProcess() {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeInUp">
           <div className="inline-block px-4 py-2 bg-blue-100 text-accentBlue font-bold text-sm rounded-full mb-4">
-            3-4 Hour Comprehensive Inspection
+            {tipSubHeading}
           </div>
           <h2 className="gradient-text font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
-            What "Thorough" Actually{" "}
-            <span className="bg-gradient-to-r from-primaryBlue to-accentOrange bg-clip-text text-transparent">
-              Means Here
-            </span>
+            {tipHeading}
           </h2>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            No "representative sample" shortcuts. If we can reach it, we test
-            it. Here's exactly what I do that big companies skip to save time.
+            {tiptxt}
           </p>
         </div>
 
@@ -237,26 +256,24 @@ export default function ThoroughInspectionProcess() {
           <div className=" bg-gradient-to-r from-primaryBlue to-accentBlue rounded-2xl p-8 lg:p-12 text-white text-center shadow-2xl">
             <CheckCircle2 className="w-16 h-16 mx-auto mb-6" />
             <h3 className="font-serif text-3xl font-bold mb-4">
-              400+ Points. Zero Shortcuts. Every Time.
+              {tipCtaHeading}
             </h3>
             <p className="text-lg mb-8 opacity-95">
-              This isn't about finding problems - it's about giving you the
-              complete truth about your investment so you can make confident
-              decisions.
+              {tipCtaTxt}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/sample-report"
+                href={tipCtaBtn1Url}
                 className="px-6 py-3 bg-white text-primaryBlue font-bold rounded-full hover:bg-lightGray transition-all duration-300"
               >
                 <FileText className="w-5 h-5 inline mr-2" />
-                See Sample Report
+                {tipCtaBtn1Txt}
               </a>
               <a
-                href="/schedule"
+                href={tipCtaBtn2Url}
                 className="px-6 py-3 bg-charcoal text-white font-bold rounded-full hover:bg-black transition-all duration-300"
               >
-                Schedule This Level of Care
+                {tipCtaBtn2Txt}
               </a>
             </div>
           </div>
@@ -264,4 +281,4 @@ export default function ThoroughInspectionProcess() {
       </div>
     </section>
   );
-}
+};

@@ -45,12 +45,25 @@ const stories: BuyerStory[] = [
   },
 ];
 
+type thoroughInspectionProps = {
+  testimonialSecHeading: string;
+  testimonialSecSubHeading: string;
+  testimonialSectxt: string;
+  // ownerOptbtn1url: string;
+  // ownerOptbtn2txt: string;
+  // ownerOptbtn2url: string;
+};
+
 /**
  * Renders powerful first-time buyer testimonials using real customer language
  * that creates immediate recognition and trust through shared experience.
  * @returns First-time buyer stories component
  */
-export default function FirstTimeBuyerStories() {
+export const FirstTimeBuyerStories = ({
+  testimonialSecHeading,
+  testimonialSecSubHeading,
+  testimonialSectxt,
+  }: thoroughInspectionProps) => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       {/* Decorative elements */}
@@ -61,14 +74,13 @@ export default function FirstTimeBuyerStories() {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeInUp">
           <div className="inline-block px-4 py-2 bg-primaryBlue/10 rounded-full text-primaryBlue font-bold text-sm mb-4">
-            45% of Our Clients Are First-Time Buyers
+            {testimonialSecSubHeading}
           </div>
           <h2 className="gradient-text font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
-            What First-Time Buyers Tell Us
+            {testimonialSecHeading}
           </h2>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            Real stories from Cedar Park families who chose personal service
-            over corporate inspection mills
+            {testimonialSectxt}
           </p>
         </div>
 
@@ -171,4 +183,4 @@ export default function FirstTimeBuyerStories() {
       </div>
     </section>
   );
-}
+};

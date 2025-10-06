@@ -62,12 +62,28 @@ const comparisonData: ComparisonRow[] = [
   },
 ];
 
+type ownerOptProps = {
+  badgeHeading: string;
+  badgeSubHeading: string;
+  ownerOptbtn1txt: string;
+  ownerOptbtn1url: string;
+  ownerOptbtn2txt: string;
+  ownerOptbtn2url: string;
+};
+
 /**
  * Renders a powerful comparison table showing the stark difference between
  * corporate inspection companies and Bluebonnet's owner-operated model.
  * @returns Comparison component with emotional triggers and clear value props
  */
-export default function OwnerOperatorComparison() {
+export const OwnerOperatorComparison = ({
+  badgeHeading,
+  badgeSubHeading,
+  ownerOptbtn1txt,
+  ownerOptbtn1url,
+  ownerOptbtn2txt,
+  ownerOptbtn2url,
+}: ownerOptProps) => {
   return (
     <section className="py-24 bg-gradient-to-b from-white to-lightGray relative overflow-hidden">
       {/* Background accent */}
@@ -77,16 +93,14 @@ export default function OwnerOperatorComparison() {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeInUp">
           <h2 className="font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
-            Your Home Isn't Just
+            {badgeHeading}
             <span className="bg-gradient-to-r from-primaryBlue to-accentOrange bg-clip-text text-transparent">
               {" "}
               House #847
             </span>
           </h2>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            With big box inspection companies, you're just another number in the
-            daily quota. With Bluebonnet, you're a neighbor whose family's
-            future matters.
+           {badgeSubHeading}
           </p>
         </div>
 
@@ -164,21 +178,21 @@ export default function OwnerOperatorComparison() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/schedule"
+              href={ownerOptbtn1url}
               className="px-8 py-4  bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
             >
-              Schedule with Tim Personally
+              {ownerOptbtn1txt}
             </a>
             <a
-              href="tel:512-560-5670"
+              href={ownerOptbtn2url}
               className="px-8 py-4 bg-white hover:bg-lightGray text-charcoal font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border-2 border-charcoal/10"
             >
               <Phone className="w-5 h-5 inline mr-2" />
-              Call Tim Direct: 512-560-5670
+              {ownerOptbtn2txt}
             </a>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};

@@ -19,10 +19,10 @@ import {
   MapPin,
 } from "lucide-react";
 // import { TrustBar } from "@/components/trust-bar";
-import OwnerOperatorComparison from "@/components/owner-operator-comparison";
-import FirstTimeBuyerStories from "@/components/first-time-buyer-stories";
+import {OwnerOperatorComparison} from "@/components/owner-operator-comparison";
+import {FirstTimeBuyerStories} from "@/components/first-time-buyer-stories";
 import ThreeAMPromise from "@/components/three-am-promise";
-import ThoroughInspectionProcess from "@/components/thorough-inspection-process";
+import {ThoroughInspectionProcess} from "@/components/thorough-inspection-process";
 import OurNonNegotiables from "@/components/our-non-negotiables";
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
@@ -37,6 +37,9 @@ import { normalizeImage } from "@/lib/utils";
 const data = await fetchAPI("pages?slug=about-us");
 const page = data?.[0];
 const about  = page?.acf || {};
+const ownerOperator = page?.acf || {};
+const thoroughInspection = page?.acf || {};
+const firstTimeBuyerStories = page?.acf || {};
 
 const aboutstoryimg = await normalizeImage(about?.story_section_image);
 
@@ -69,7 +72,7 @@ export default function AboutPage() {
                       <Award className="w-10 h-10 text-primaryBlue mx-auto mb-2" />
                       <p className="font-bold text-charcoal">{about?.credentials_badge?.badge_id}</p>
                       <p className="text-xs text-mediumGray">
-                        Licensed Professional
+                        {about?.credentials_badge?.badge_text}
                       </p>
                     </div>
                   </div>
@@ -123,10 +126,7 @@ export default function AboutPage() {
                   </p>
 
                   <p className="italic text-primaryBlue font-semibold">
-                    "My wife knows that when a client calls, I answer. My kids
-                    know that helping families make safe decisions about their
-                    homes is what Dad does. This isn't just a business—it's my
-                    family's contribution to our Cedar Park community."
+                    "{about?.story_section_quote_text}"
                   </p>
                 </div>
 
@@ -173,13 +173,34 @@ export default function AboutPage() {
       </section>
 
       {/* Owner-Operator Comparison - The Big Differentiator */}
-      <OwnerOperatorComparison />
+      <OwnerOperatorComparison 
+        badgeHeading={ownerOperator?.operator_comparison_heading}
+        badgeSubHeading={ownerOperator?.operator_comparison_sub_heading}
+        ownerOptbtn1txt={ownerOperator?.operator_comparison_btn1_text}
+        ownerOptbtn1url={ownerOperator?.operator_comparison_btn1_url}
+        ownerOptbtn2txt={ownerOperator?.operator_comparison_btn2_text}
+        ownerOptbtn2url={ownerOperator?.operator_comparison_btn2_url}
+      />
 
       {/* Thorough Inspection Process - What We Actually Do */}
-      <ThoroughInspectionProcess />
+      <ThoroughInspectionProcess 
+        tipHeading={thoroughInspection?.thorough_inspection_heading}
+        tipSubHeading={thoroughInspection?.thorough_inspection_sub_heading}
+        tiptxt={thoroughInspection?.thorough_inspection_text}
+        tipCtaHeading={thoroughInspection?.thorough_inspection_cta_heading}
+        tipCtaTxt={thoroughInspection?.thorough_inspection_cta_text}
+        tipCtaBtn1Txt={thoroughInspection?.thorough_inspection_cta_btn1_text}
+        tipCtaBtn1Url={thoroughInspection?.thorough_inspection_cta_btn1_url}
+        tipCtaBtn2Txt={thoroughInspection?.thorough_inspection_cta_btn2_text}
+        tipCtaBtn2Url={thoroughInspection?.thorough_inspection_cta_btn2_url}
+      />
 
       {/* First-Time Buyer Stories - Social Proof */}
-      <FirstTimeBuyerStories />
+      <FirstTimeBuyerStories 
+        testimonialSecHeading={firstTimeBuyerStories?.first_time_buyer_stories_heading}
+        testimonialSecSubHeading={firstTimeBuyerStories?.first_time_buyer_stories_sub_heading}
+        testimonialSectxt={firstTimeBuyerStories?.first_time_buyer_stories_text}
+      />
 
       {/* Our Non-Negotiables - Quality Promises */}
       <OurNonNegotiables />
