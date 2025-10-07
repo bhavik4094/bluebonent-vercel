@@ -135,13 +135,15 @@ export default function BlogPage() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl">
             <div className="inline-block px-4 py-2 bg-accentBlue text-white font-bold text-sm rounded-full mb-6">
-              {blog.hero_point_title}
+              {blog.blog_hero_point_title}
             </div>
             <h1 className="font-serif text-5xl lg:text-7xl font-bold mb-6">
-              {blog.hero_title}
-              <span className="text-accentBlue">{blog.hero_sub_title}</span>
+              {blog.blog_hero_title}
+              <span className="text-accentBlue">{blog.blog_hero_subtitle}</span>
             </h1>
-            <p className="text-xl opacity-90 mb-8">{blog.hero_description}</p>
+            <p className="text-xl opacity-90 mb-8">
+              {blog.blog_hero_description}
+            </p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 <Shield className="w-5 h-5 text-blue-400" />
