@@ -32,7 +32,7 @@ const featuredReviews = [
   },
 ];
 
-const data = await fetchAPI("pages?reviews");
+const data = await fetchAPI("pages?slug=reviews");
 const page = data?.[0];
 const reviews = page?.acf || {};
 
