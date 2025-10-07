@@ -4,6 +4,7 @@
  * addressing their specific needs and pain points per Phase 2.3 of the checklist.
  */
 
+import { fetchAPI } from "@/lib/api";
 import {
   Shield,
   Clock,
@@ -85,6 +86,10 @@ const AgentTestimonial = ({
   </div>
 );
 
+const data = await fetchAPI("pages?slug=for-agents");
+const page = data?.[0];
+const forAgents = page?.acf || {};
+
 export default function ForAgentsPage() {
   return (
     <div className="min-h-screen">
@@ -93,25 +98,23 @@ export default function ForAgentsPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-              Your Partner in Smooth Transactions
+              {forAgents.smooth_transactions_title}
             </h1>
             <p className="text-xl mb-8 opacity-95">
-              We protect your clients (and your reputation) with thorough,
-              balanced inspections that inform without alarming. Fast reports,
-              clear communication, smooth closings.
+              {forAgents.smooth_transactions_description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/schedule"
+                href={forAgents.schedule_for_your_client_btn_url}
                 className="bg-white text-primaryBlue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block"
               >
-                Schedule for Your Client
+                {forAgents.schedule_for_your_client_btn_title}
               </Link>
               <a
-                href="tel:512-560-5670"
+                href={forAgents.direct_line_btn_url}
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primaryBlue transition-colors inline-block"
               >
-                Direct Line: 512-560-5670
+                {forAgents.direct_line_btn_title}
               </a>
             </div>
           </div>
@@ -123,12 +126,10 @@ export default function ForAgentsPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Why Agents Choose Bluebonnet
+              {forAgents.agents_choose_title}
             </h2>
             <p className="text-lg text-mediumGray max-w-3xl mx-auto">
-              We understand that your reputation is on the line with every
-              referral. That's why we treat every inspection as an opportunity
-              to strengthen your client relationships.
+              {forAgents.agents_choose_description}
             </p>
           </div>
 
@@ -165,7 +166,7 @@ export default function ForAgentsPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-8 text-center">
-              Our Promise to You and Your Clients
+              {forAgents.our_promise_title}
             </h2>
 
             <div className="bg-white rounded-lg shadow-lg p-8">
@@ -228,10 +229,10 @@ export default function ForAgentsPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Agent Resources
+              {forAgents.agent_resources_title}
             </h2>
             <p className="text-lg text-mediumGray">
-              Tools and materials to help you serve your clients better
+              {forAgents.agent_resources_description}
             </p>
           </div>
 
@@ -282,7 +283,7 @@ export default function ForAgentsPage() {
       <section className="py-16 bg-lightGray">
         <div className="container mx-auto px-4">
           <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">
-            What Agents Are Saying
+            {forAgents.agents_are_saying_title}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -312,28 +313,27 @@ export default function ForAgentsPage() {
         <div className="container mx-auto px-4 text-center">
           <Handshake className="w-16 h-16 mx-auto mb-4 opacity-90" />
           <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-            Let's Build a Partnership
+            {forAgents.build_a_partnership_title}
           </h2>
           <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
-            Add us to your preferred inspector list and experience the
-            difference a true partner makes. Your success is our success.
+            {forAgents.build_a_partnership_description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/schedule"
+              href={forAgents.schedule_an_inspection_btn_url}
               className="bg-white text-primaryBlue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block"
             >
-              Schedule an Inspection
+              {forAgents.schedule_an_inspection_btn_title}
             </Link>
             <a
-              href="mailto:tim@bluebonnetinspections.com"
+              href={forAgents.partner_with_us_btn_url}
               className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primaryBlue transition-colors inline-block"
             >
-              Partner With Us
+              {forAgents.partner_with_us_btn_title}
             </a>
           </div>
           <p className="mt-6 text-sm opacity-90">
-            Direct Inspector Line: 512-560-5670 • Available 7 Days a Week
+            {forAgents.direct_inspector_line_title}
           </p>
         </div>
       </section>

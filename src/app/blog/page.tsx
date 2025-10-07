@@ -4,6 +4,7 @@
  * about common inspection industry problems.
  */
 
+import { fetchAPI } from "@/lib/api";
 import {
   Calendar,
   Clock,
@@ -118,6 +119,11 @@ const blogPosts: BlogPost[] = [
  * consumer education content that builds trust through transparency.
  * @returns Blog listing page component
  */
+
+const data = await fetchAPI("pages?slug=blog");
+const page = data?.[0];
+const blog = page?.acf || {};
+
 export default function BlogPage() {
   const featuredPost = blogPosts.find((post) => post.featured);
   const otherPosts = blogPosts.filter((post) => !post.featured);
@@ -129,17 +135,13 @@ export default function BlogPage() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl">
             <div className="inline-block px-4 py-2 bg-accentBlue text-white font-bold text-sm rounded-full mb-6">
-              INDUSTRY TRUTH-TELLER
+              {blog.hero_point_title}
             </div>
             <h1 className="font-serif text-5xl lg:text-7xl font-bold mb-6">
-              The Blog Big Inspection
-              <span className="text-accentBlue"> Doesn't Want You to Read</span>
+              {blog.hero_title}
+              <span className="text-accentBlue">{blog.hero_sub_title}</span>
             </h1>
-            <p className="text-xl opacity-90 mb-8">
-              Exposing industry secrets, protecting Cedar Park families, and
-              teaching you what corporate inspectors hope you never learn about
-              your biggest investment.
-            </p>
+            <p className="text-xl opacity-90 mb-8">{blog.hero_description}</p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 <Shield className="w-5 h-5 text-blue-400" />
@@ -164,7 +166,7 @@ export default function BlogPage() {
           <div className="container mx-auto px-6 lg:px-12">
             <div className="mb-8">
               <h2 className="font-serif text-3xl font-bold text-charcoal">
-                Featured Investigation
+                {blog.featured_investigation_title}
               </h2>
             </div>
             <a
@@ -237,12 +239,10 @@ export default function BlogPage() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="mb-12 text-center">
             <h2 className="gradient-text font-serif text-4xl font-bold text-charcoal mb-4">
-              More Industry Exposés & Buyer Guides
+              {blog.buyer_guides_title}
             </h2>
             <p className="text-lg text-mediumGray max-w-3xl mx-auto">
-              Every article arms you with knowledge the inspection industry
-              doesn't want you to have. Because an educated buyer is a protected
-              buyer.
+              {blog.buyer_guides_description}
             </p>
           </div>
 
@@ -320,12 +320,10 @@ export default function BlogPage() {
           <div className="max-w-4xl mx-auto text-center text-white">
             <Shield className="w-16 h-16 mx-auto mb-6 text-accentBlue" />
             <h2 className="font-serif text-4xl font-bold mb-4">
-              Don't Let Big Inspection Fool You
+              {blog.big_inspection_fool_title}
             </h2>
             <p className="text-xl opacity-90 mb-8">
-              Get industry exposés, buyer protection tips, and inspection
-              insights delivered to your inbox. Knowledge is your best defense
-              against a bad inspection.
+              {blog.big_inspection_fool_description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               {/* <input
@@ -338,11 +336,11 @@ export default function BlogPage() {
                 className="px-8 py-3  bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold rounded-full hover:bg-blue-500 transition-colors"
                 disabled
               >
-                Coming Soon
+                {blog.coming_soon_btn_title}
               </button>
             </div>
             <p className="text-sm opacity-75 mt-4">
-              No spam. Just truth. Unsubscribe anytime.
+              {blog.big_inspection_fool_footer_title}
             </p>
           </div>
         </div>
