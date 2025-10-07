@@ -54,12 +54,39 @@ const nonNegotiables: NonNegotiable[] = [
   },
 ];
 
+type nonNegotiablesProps = {
+  nHeading: string;
+  nSubHeading: string;
+  ntxt: string;
+  npcHeading: string;
+  npcTxt: string;
+  npcAuthorName: string;
+  nCtaTxt: string;
+  nCtaBtn1Txt: string;
+  nCtaBtn1Url: string;
+  nCtaBtn2Txt: string;
+  nCtaBtn2Url: string;
+  
+};
+
 /**
  * Renders the Non-Negotiables section that reframes industry complaints
  * into concrete quality guarantees, building trust through specificity.
  * @returns Non-negotiables promise component
  */
-export default function OurNonNegotiables() {
+export const OurNonNegotiables = ({
+  nHeading,
+  nSubHeading,
+  ntxt,
+  npcHeading,
+  npcTxt,
+  npcAuthorName,
+  nCtaTxt,
+  nCtaBtn1Txt,
+  nCtaBtn1Url,
+  nCtaBtn2Txt,
+  nCtaBtn2Url,
+}: nonNegotiablesProps) => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       {/* Background pattern */}
@@ -73,14 +100,13 @@ export default function OurNonNegotiables() {
         <div className="text-center mb-16 animate-fadeInUp">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-charcoal text-white font-bold text-sm rounded-full mb-4">
             <Shield className="w-4 h-4" />
-            BLUEBONNET GUARANTEE
+            {nSubHeading}
           </div>
           <h2 className="gradient-text font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
-            Our Non-Negotiables
+            {nHeading}
           </h2>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            These aren't marketing promises. These are the standards that make
-            us different. Every inspection. Every time. No exceptions.
+            {ntxt}
           </p>
         </div>
 
@@ -152,16 +178,13 @@ export default function OurNonNegotiables() {
               {/* Promise Text */}
               <div className="flex-1 text-center lg:text-left">
                 <h3 className="font-serif text-3xl font-bold text-charcoal mb-4">
-                  My Personal Commitment to You
+                  {npcHeading}
                 </h3>
                 <p className="text-lg text-charcoal mb-4">
-                  "These aren't just company policies - they're personal
-                  promises from me to your family. When I say 'no shortcuts,' I
-                  mean it. When I promise to answer your calls, I will. Your
-                  home deserves nothing less than my absolute best effort."
+                  "{npcTxt}"
                 </p>
                 <p className="font-bold text-primaryBlue">
-                  - Tim McCoy, TREC #23059
+                  - {npcAuthorName}
                 </p>
               </div>
             </div>
@@ -171,20 +194,20 @@ export default function OurNonNegotiables() {
         {/* Bottom CTA */}
         <div className="text-center mt-12">
           <p className="text-lg text-charcoal mb-6">
-            Experience the difference when quality isn't negotiable
+            {nCtaTxt}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/schedule"
+              href={nCtaBtn1Url}
               className="px-8 py-4 bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
             >
-              Schedule Your Non-Negotiable Inspection
+              {nCtaBtn1Txt}
             </a>
             <a
-              href="/services"
+              href={nCtaBtn2Url}
               className="px-8 py-4 bg-white text-charcoal font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border-2 border-charcoal/10"
             >
-              View All Services
+              {nCtaBtn2Txt}
             </a>
           </div>
         </div>

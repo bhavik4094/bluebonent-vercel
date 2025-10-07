@@ -21,9 +21,9 @@ import {
 // import { TrustBar } from "@/components/trust-bar";
 import {OwnerOperatorComparison} from "@/components/owner-operator-comparison";
 import {FirstTimeBuyerStories} from "@/components/first-time-buyer-stories";
-import ThreeAMPromise from "@/components/three-am-promise";
+import {ThreeAMPromise} from "@/components/three-am-promise";
 import {ThoroughInspectionProcess} from "@/components/thorough-inspection-process";
-import OurNonNegotiables from "@/components/our-non-negotiables";
+import {OurNonNegotiables} from "@/components/our-non-negotiables";
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
 
@@ -40,6 +40,8 @@ const about  = page?.acf || {};
 const ownerOperator = page?.acf || {};
 const thoroughInspection = page?.acf || {};
 const firstTimeBuyerStories = page?.acf || {};
+const nonNegotiables = page?.acf || {};
+const threeAMPromise = page?.acf || {};
 
 const aboutstoryimg = await normalizeImage(about?.story_section_image);
 
@@ -209,21 +211,43 @@ export default function AboutPage() {
       />
 
       {/* Our Non-Negotiables - Quality Promises */}
-      <OurNonNegotiables />
+      <OurNonNegotiables 
+        nHeading={nonNegotiables?.non_negotiables_heading}
+        nSubHeading={nonNegotiables?.non_negotiables_sub_heading}
+        ntxt={nonNegotiables?.non_negotiables_text}
+        npcHeading={nonNegotiables?.personal_commit_heading}
+        npcTxt={nonNegotiables?.personal_commit_text}
+        npcAuthorName={nonNegotiables?.personal_commit_author_name}
+        nCtaTxt={nonNegotiables?.non_negotiables_cta_text}
+        nCtaBtn1Txt={nonNegotiables?.non_negotiables_cta_btn1_text}
+        nCtaBtn1Url={nonNegotiables?.non_negotiables_cta_btn1_url}
+        nCtaBtn2Txt={nonNegotiables?.non_negotiables_cta_btn2_text}
+        nCtaBtn2Url={nonNegotiables?.non_negotiables_cta_btn2_url}
+      />
 
       {/* The 3AM Promise - Memorable Emotional Anchor */}
-      <ThreeAMPromise />
+      <ThreeAMPromise 
+        tapHeading={threeAMPromise?.three_am_promise_heading}
+        tapSubHeading={threeAMPromise?.three_am_promise_sub_heading}
+        tapTxt={threeAMPromise?.three_am_promise_text}
+        csHeading={threeAMPromise?.comparison_statement_section_heading}
+        csTxt={threeAMPromise?.comparison_statement_section_text}
+        csAuthorName={threeAMPromise?.comparison_statement_section_author_name}
+        psTxt={threeAMPromise?.personal_statement_section_text}
+        psAuthorName={threeAMPromise?.personal_statement_section_author_name}
+        tapCtaTxt={threeAMPromise?.three_am_promise_cta_text}
+        tapCtaBtn1Txt={threeAMPromise?.three_am_promise_cta_btn_text}
+        tapCtaBtn1Url={threeAMPromise?.three_am_promise_cta_btn_url}
+      />
 
       {/* Final CTA Section */}
       <section className="py-24  bg-gradient-to-r from-primaryBlue to-accentBlue  text-white">
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <h2 className="font-serif text-5xl font-bold mb-6">
-            Ready to Experience the Difference?
+            {about?.cta_heading}
           </h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto opacity-95">
-            Don't settle for a corporate checklist when you can have a lifetime
-            advocate who treats your home like his family's future depends on
-            it.
+            {about?.cta_text}
           </p>
 
           {/* Trust Points */}
@@ -245,17 +269,17 @@ export default function AboutPage() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/schedule"
+              href={about?.cta_btn1_url}
               className="px-8 py-4 bg-white text-primaryBlue font-bold rounded-full shadow-2xl hover:bg-lightGray transform hover:-translate-y-1 transition-all duration-300"
             >
-              Schedule Your Inspection with Tim
+              {about?.cta_btn1_text}
             </a>
             <a
-              href="tel:512-560-5670"
+              href={about?.cta_btn2_url}
               className="px-8 py-4 bg-transparent text-white font-bold rounded-full border-2 border-white hover:bg-white/10 transform hover:-translate-y-1 transition-all duration-300"
             >
               <Phone className="w-5 h-5 inline mr-2" />
-              Call Now: 512-560-5670
+              {about?.cta_btn2_text}
             </a>
           </div>
         </div>

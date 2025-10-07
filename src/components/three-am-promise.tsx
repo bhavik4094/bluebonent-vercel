@@ -6,12 +6,38 @@
 
 import { Moon, Phone, Clock, Heart } from "lucide-react";
 
+type ThreeAMPromiseProps = {
+  tapHeading?: string;
+  tapSubHeading?: string;
+  tapTxt?: string;
+  csHeading?: string;
+  csTxt?: string;
+  csAuthorName?: string;
+  psTxt?: string;
+  psAuthorName?: string;
+  tapCtaTxt?: string;
+  tapCtaBtn1Txt?: string;
+  tapCtaBtn1Url?: string;
+};
+
 /**
  * Renders the 3AM Promise - a memorable emotional anchor that promises
  * lifetime support and direct access, differentiating from corporate call centers.
  * @returns 3AM Promise component with strong psychological impact
  */
-export default function ThreeAMPromise() {
+export const ThreeAMPromise = ({
+  tapHeading,
+  tapSubHeading,
+  tapTxt,
+  csHeading,
+  csTxt,
+  csAuthorName,
+  psTxt,
+  psAuthorName,
+  tapCtaTxt,
+  tapCtaBtn1Txt,
+  tapCtaBtn1Url,
+}: ThreeAMPromiseProps) => {
   return (
     <section className="py-24 bg-gradient-to-b from-charcoal to-black text-white relative overflow-hidden">
       {/* Starry night effect */}
@@ -41,7 +67,7 @@ export default function ThreeAMPromise() {
 
           {/* Main Promise */}
           <h2 className="font-serif text-5xl lg:text-7xl font-bold mb-8 animate-fadeInUp">
-            The <span className="text-accentBlue">3AM</span> Promise
+            {tapHeading}
           </h2>
 
           <div
@@ -49,17 +75,11 @@ export default function ThreeAMPromise() {
             style={{ animationDelay: "200ms" }}
           >
             <p className="text-2xl lg:text-3xl leading-relaxed font-light mb-8">
-              "If you wake up at 3am worried about something in your inspection
-              report, you won't reach a call center.{" "}
-              <span className="font-bold text-accentBlue">
-                You'll reach me - Tim.
-              </span>
+              "{tapSubHeading}
             </p>
 
             <p className="text-xl opacity-90">
-              Because when you trust someone with your family's biggest
-              investment, that relationship doesn't end when the inspection
-              does."
+              {tapTxt}"
             </p>
           </div>
 
@@ -99,15 +119,13 @@ export default function ThreeAMPromise() {
             style={{ animationDelay: "600ms" }}
           >
             <h3 className="font-serif text-2xl font-bold mb-4">
-              The Corporate Alternative?
+              {csHeading}
             </h3>
             <p className="text-lg opacity-90 mb-4">
-              "Your call is important to us. Please leave a message and an
-              available representative will return your call within 2-3 business
-              days..."
+              "{csTxt}"
             </p>
             <p className="text-sm opacity-70 italic">
-              - Every franchise inspection company ever
+              - {csAuthorName}
             </p>
           </div>
 
@@ -121,12 +139,9 @@ export default function ThreeAMPromise() {
             </div>
             <div className="text-left max-w-xl">
               <p className="text-lg mb-2 font-light italic">
-                "My wife knows that when a client calls, I answer. My kids know
-                that helping families make safe decisions about their homes is
-                what Dad does. This isn't just a business - it's my family's
-                contribution to our Cedar Park community."
+                "{psTxt}"
               </p>
-              <p className="font-bold text-accentBlue">- Tim McCoy, Owner</p>
+              <p className="font-bold text-accentBlue">- {psAuthorName}</p>
             </div>
           </div>
 
@@ -136,15 +151,14 @@ export default function ThreeAMPromise() {
             style={{ animationDelay: "1000ms" }}
           >
             <p className="text-lg mb-6 opacity-90">
-              Don't settle for a corporate checklist when you can have a
-              lifetime advocate
+              {tapCtaTxt}
             </p>
             <a
-              href="tel:512-560-5670"
+              href={tapCtaBtn1Url}
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br  from-primaryBlue to-accentBlue text-white font-bold rounded-full shadow-2xl hover:shadow-yellow-500/30 transform hover:-translate-y-1 transition-all duration-300"
             >
               <Phone className="w-5 h-5" />
-              Save Tim's Direct Number: 512-560-5670
+              {tapCtaBtn1Txt}
             </a>
           </div>
         </div>
