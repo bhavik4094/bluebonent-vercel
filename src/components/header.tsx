@@ -68,8 +68,8 @@ export const Header = () => {
             <Image
               src="/logo2.png"
               alt="Bluebonnet Home Inspections"
-              width={200}
-              height={80}
+              width={170}
+              height={45}
             />
             {/* <div>
               <h1 className="font-serif text-xl font-bold text-charcoal">Bluebonnet</h1>
