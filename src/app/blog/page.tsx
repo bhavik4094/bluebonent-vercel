@@ -27,8 +27,11 @@ interface BlogPost {
   icon: React.ElementType;
   gradient: string;
   comingSoon?: boolean;
+  link?: string; // for external WP links
 }
 
+// Static seed used only to determine the single featured post card design.
+// The grid below will be populated dynamically from WordPress posts.
 const blogPosts: BlogPost[] = [
   {
     slug: "whos-really-inspecting-your-home",
@@ -124,9 +127,58 @@ const data = await fetchAPI("pages?slug=blog");
 const page = data?.[0];
 const blog = page?.acf || {};
 
+// Fetch dynamic posts from WordPress
+type WPPost = {
+  id: number;
+  slug: string;
+  link: string;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  date: string;
+  categories?: number[];
+};
+
+const wpPosts = (await fetchAPI("posts")) as WPPost[] | null;
+
+// Basic HTML stripper for WP excerpts/titles
+function stripHtml(html: string): string {
+  if (!html) return "";
+  return html
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .trim();
+}
+
+// Map WP posts → BlogPost for the grid (non-featured)
+// Fetch categories and build a lookup so we can show category names
+type WPCategory = { id: number; name: string };
+const wpCategories = (await fetchAPI("categories")) as WPCategory[] | null;
+const categoryIdToName = new Map<number, string>(
+  (wpCategories || []).map((c) => [c.id, c.name])
+);
+
+const dynamicOtherPosts: BlogPost[] = (wpPosts || []).map((p) => ({
+  slug: p.slug,
+  title: stripHtml(p.title?.rendered || ""),
+  excerpt: stripHtml(p.excerpt?.rendered || ""),
+  category:
+    categoryIdToName.get((p.categories && p.categories[0]) || -1) ||
+    "Uncategorized",
+  readTime: "5 min read", // placeholder; could be computed from content length
+  publishDate: new Date(p.date).toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  }),
+  featured: false,
+  icon: FileQuestion,
+  gradient: " bg-gradient-to-r from-primaryBlue to-accentBlue",
+  comingSoon: false,
+  link: p.link,
+}));
+
 export default function BlogPage() {
   const featuredPost = blogPosts.find((post) => post.featured);
-  const otherPosts = blogPosts.filter((post) => !post.featured);
+  const otherPosts = dynamicOtherPosts;
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-lightGray">
@@ -254,7 +306,6 @@ export default function BlogPage() {
               return (
                 <a
                   key={post.slug}
-                  href={post.comingSoon ? "#" : `/blog/${post.slug}`}
                   className={`group animate-fadeInUp ${post.comingSoon ? "cursor-not-allowed" : ""}`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -275,7 +326,7 @@ export default function BlogPage() {
                               {post.category}
                             </span>
                             {post.comingSoon && (
-                              <span className="text-xs px-2 py-0.5  bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold rounded-full">
+                              <span className="text-xs px-2 py-0.5  bg-gradient-to-r from-primaryBlue to-accentBlue text-black font-bold rounded-full">
                                 Soon
                               </span>
                             )}
