@@ -15,6 +15,7 @@ import {
   Users,
   FileQuestion,
 } from "lucide-react";
+import Link from "next/link";
 
 interface BlogPost {
   slug: string;
@@ -304,7 +305,8 @@ export default function BlogPage() {
             {otherPosts.map((post, index) => {
               const Icon = post.icon;
               return (
-                <a
+                <Link
+                  href={`/blog/${post.slug}`}
                   key={post.slug}
                   className={`group animate-fadeInUp ${post.comingSoon ? "cursor-not-allowed" : ""}`}
                   style={{ animationDelay: `${index * 100}ms` }}
@@ -312,35 +314,39 @@ export default function BlogPage() {
                   <div className="h-full bg-white rounded-xl shadow-elegant hover:shadow-3d-hover transition-all duration-500 overflow-hidden">
                     <div className={`h-2 bg-gradient-to-r ${post.gradient}`} />
 
-                    <div className="p-6">
-                      {/* Header with Icon */}
-                      <div className="flex items-start gap-4 mb-4">
-                        <div
-                          className={`p-3 rounded-lg bg-gradient-to-br ${post.gradient} bg-opacity-10`}
-                        >
-                          <Icon className="w-6 h-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            <span className="text-xs font-bold text-primaryBlue">
-                              {post.category}
-                            </span>
-                            {post.comingSoon && (
-                              <span className="text-xs px-2 py-0.5  bg-gradient-to-r from-primaryBlue to-accentBlue text-black font-bold rounded-full">
-                                Soon
-                              </span>
-                            )}
+                    <div className="p-6 d-flex flex-col justify-between h-full ">
+                      <div>
+                        {/* Header with Icon */}
+                        <div className="flex items-start gap-4 mb-4">
+                          <div
+                            className={`p-3 rounded-lg bg-gradient-to-br ${post.gradient} bg-opacity-10`}
+                          >
+                            <Icon className="w-6 h-6 text-white" />
                           </div>
-                          <h3 className="font-bold text-lg text-charcoal group-hover:text-primaryBlue transition-colors line-clamp-3">
-                            {post.title}
-                          </h3>
+                          <div className="flex-1">
+                            <div className="flex flex-wrap gap-2 mb-2">
+                              <span className="text-xs font-bold text-primaryBlue">
+                                {post.category}
+                              </span>
+                              {post.comingSoon && (
+                                <span className="text-xs px-2 py-0.5  bg-gradient-to-r from-primaryBlue to-accentBlue text-black font-bold rounded-full">
+                                  Soon
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="font-bold text-lg text-charcoal group-hover:text-primaryBlue transition-colors line-clamp-3">
+                              {post.title}
+                            </h3>
+                          </div>
+                        </div>
+
+                        <div>
+                          {/* Excerpt */}
+                          <p className="text-sm text-mediumGray mb-4 line-clamp-3">
+                            {post.excerpt}
+                          </p>
                         </div>
                       </div>
-
-                      {/* Excerpt */}
-                      <p className="text-sm text-mediumGray mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
 
                       {/* Footer */}
                       <div className="flex items-center justify-between pt-4 border-t border-gray-200">
@@ -360,7 +366,7 @@ export default function BlogPage() {
                       </div>
                     </div>
                   </div>
-                </a>
+                </Link>
               );
             })}
           </div>
