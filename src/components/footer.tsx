@@ -186,7 +186,7 @@ export const Footer = () => {
           {/* Certifications & Legal */}
           <div>
             <h3 className="font-serif text-xl mb-4">Certifications</h3>
-            <div className="space-y-3 text-accentBlue">
+            <div className="space-y-3 text-gray-300">
               <p className="font-semibold">TREC License #23059</p>
               <p>InterNACHI Certified</p>
               <p>Fully Insured & Bonded</p>

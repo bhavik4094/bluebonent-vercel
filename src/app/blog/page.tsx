@@ -328,11 +328,10 @@ export default function BlogPage() {
                               <span className="text-xs font-bold text-primaryBlue">
                                 {post.category}
                               </span>
-                              {post.comingSoon && (
-                                <span className="text-xs px-2 py-0.5  bg-gradient-to-r from-primaryBlue to-accentBlue text-black font-bold rounded-full">
-                                  Soon
-                                </span>
-                              )}
+
+                              <span className="text-xs px-2 py-0.5  bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold rounded-full">
+                                Soon
+                              </span>
                             </div>
                             <h3 className="font-bold text-lg text-charcoal group-hover:text-primaryBlue transition-colors line-clamp-3">
                               {post.title}
