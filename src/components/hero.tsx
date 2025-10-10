@@ -12,6 +12,11 @@ type HeroProps = {
   secondaryCtaUrl: string;
   enhancedIcon: string;
   completedCount: number;
+  trustbaritem: Array<{
+    trust_icon: string;
+    trust_title: string;
+    trust_feature: boolean;
+  }>;
 };
 
 export const Hero = ({
@@ -24,6 +29,7 @@ export const Hero = ({
   secondaryCtaUrl,
   enhancedIcon,
   completedCount,
+  trustbaritem,
 }: HeroProps) => {
   return (
     <section className="relative min-h-[75vh] flex items-center bg-gradient-to-br from-white via-primaryBlue/5 to-white overflow-hidden">
@@ -117,7 +123,7 @@ export const Hero = ({
         </div>
 
         {/* Trust bar */}
-        <TrustBar />
+        <TrustBar trustbaritem={trustbaritem} />
       </div>
     </section>
   );

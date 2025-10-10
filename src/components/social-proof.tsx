@@ -3,10 +3,18 @@
  * @description Displays customer testimonials and key business metrics with professional design
  */
 
+import Image from "next/image";
+
 /**
  * Star icon component for ratings
  * @returns {JSX.Element} Star icon
  */
+type MetricData = {
+  metric_value: string;
+  metric_label: string;
+  metric_trend: string;
+  metric_icon?: string;
+};
 
 type SocialProofProps = {
   title: string;
@@ -14,6 +22,7 @@ type SocialProofProps = {
   pointtext: string;
   reviewbtntext: string;
   reviewbtnurl: string;
+  metricsData: MetricData[];
 };
 const StarIcon = ({ filled = true }: { filled?: boolean }) => (
   <svg
@@ -174,9 +183,10 @@ export const SocialProof = ({
   subtitle,
   pointtext,
   reviewbtntext,
+  metricsData,
 }: SocialProofProps) => {
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-radial">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden bg-gradient-radial">
       {/* Enhanced background with mesh gradient */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-50"></div>
 
@@ -189,94 +199,103 @@ export const SocialProof = ({
           }}
         />
       </div>
-
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-3 sm:px-4 relative z-10">
         {/* Section header */}
-        <div className="text-center mb-16 animate-fadeInUp">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full mb-6">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 animate-fadeInUp">
+          <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500/10 rounded-full mb-4 sm:mb-6">
             <span className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
                 <StarIcon key={i} filled={true} />
               ))}
             </span>
-            <span className="text-sm font-medium text-charcoal">
+            <span className="text-xs sm:text-sm font-medium text-charcoal">
               {pointtext}
             </span>
           </div>
 
-          <h2 className="gradient-text font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6">
+          <h2 className="gradient-text font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-charcoal mb-4 sm:mb-6 px-2">
             {title}
           </h2>
 
-          <p className="text-lg md:text-xl text-mediumGray max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-mediumGray max-w-3xl mx-auto leading-relaxed px-2">
             {subtitle}
           </p>
         </div>
 
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 max-w-5xl mx-auto">
-          {metrics.map((metric, index) => (
+        {/* Metrics Grid - Mobile Optimized */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-12 sm:mb-16 md:mb-20 max-w-5xl mx-auto">
+          {metricsData?.map((metric, index) => (
             <div
               key={index}
               className="group relative animate-fadeIn"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="card-3d bg-white rounded-3xl p-6 text-center transition-all duration-300 shadow-lift hover:shadow-3d-hover hover:-translate-y-2 border border-gray-100/50">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primaryBlue/10 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                  <div className="text-primaryBlue">{metric.icon}</div>
+              <div className="card-3d bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-6 text-center transition-all duration-300 shadow-lift hover:shadow-3d-hover hover:-translate-y-1 sm:hover:-translate-y-2 border border-gray-100/50">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primaryBlue/10 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                  {metric.metric_icon ? (
+                    <Image
+                      className="text-primaryBlue text-lg sm:text-xl md:text-2xl"
+                      src={metric.metric_icon}
+                      alt={metric.metric_label}
+                      width={35}
+                      height={35}
+                    />
+                  ) : (
+                    <span className="text-xs text-gray-400">No Icon</span>
+                  )}
                 </div>
-                <div className="text-3xl font-bold text-charcoal mb-1">
-                  {metric.value}
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-charcoal mb-1">
+                  {metric.metric_value}
                 </div>
-                <div className="text-sm font-medium text-mediumGray mb-2">
-                  {metric.label}
+                <div className="text-xs sm:text-sm font-medium text-mediumGray mb-1 sm:mb-2 leading-tight">
+                  {metric.metric_label}
                 </div>
                 <div className="text-xs text-accentOrange font-semibold">
-                  {metric.trend}
+                  {metric.metric_trend}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Testimonials Carousel */}
+        {/* Testimonials Carousel - Mobile Optimized */}
         <div className="relative">
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
-            <div className="bg-white px-6 py-2 rounded-full shadow-lg border border-gray-100">
-              <p className="text-sm font-semibold text-charcoal">
+          <div className="absolute -top-4 sm:-top-6 md:-top-8 left-1/2 -translate-x-1/2 z-20">
+            <div className="bg-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full shadow-lg border border-gray-100">
+              <p className="text-xs sm:text-sm font-semibold text-charcoal">
                 Real Reviews from Real Customers
               </p>
             </div>
           </div>
 
-          {/* Reviews Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          {/* Reviews Grid - Mobile Optimized */}
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
             {reviews.slice(0, 6).map((review, index) => (
               <div
                 key={index}
                 className={`
-                  card-3d group relative bg-white rounded-3xl p-8 transition-all duration-500 shadow-lift
-                  hover:shadow-2xl hover:-translate-y-2 animate-fadeInUp
-                  ${review.highlight ? "ring-2 ring-accentOrange ring-offset-4" : "border border-gray-100"}
+                  card-3d group relative bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 transition-all duration-500 shadow-lift
+                  hover:shadow-2xl hover:-translate-y-1 sm:hover:-translate-y-2 animate-fadeInUp
+                  ${review.highlight ? "ring-2 ring-accentOrange ring-offset-2 sm:ring-offset-4" : "border border-gray-100"}
                 `}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Highlight badge */}
                 {review.highlight && (
-                  <div className="absolute -top-3 -right-3">
-                    <div className="bg-gradient-to-r from-accentBlue to-primaryBlue text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                  <div className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3">
+                    <div className="bg-gradient-to-r from-accentBlue to-primaryBlue text-white text-xs font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-lg">
                       FEATURED
                     </div>
                   </div>
                 )}
 
                 {/* Quote mark */}
-                <div className="absolute top-6 left-6 text-6xl text-primaryBlue/10 font-serif">
+                <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 text-4xl sm:text-5xl md:text-6xl text-primaryBlue/10 font-serif">
                   "
                 </div>
 
                 {/* Stars and verification */}
-                <div className="flex items-center justify-between mb-4 relative z-10">
+                <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
                   <div className="flex gap-0.5">
                     {[...Array(5)].map((_, i) => (
                       <StarIcon key={i} filled={i < review.stars} />
@@ -285,7 +304,7 @@ export const SocialProof = ({
                   {review.verified && (
                     <div className="flex items-center gap-1 text-xs text-accentBlue font-medium">
                       <svg
-                        className="w-4 h-4"
+                        className="w-3 h-3 sm:w-4 sm:h-4"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -301,18 +320,20 @@ export const SocialProof = ({
                 </div>
 
                 {/* Review text */}
-                <blockquote className="text-mediumGray mb-6 leading-relaxed relative z-10 line-clamp-4">
+                <blockquote className="text-mediumGray mb-4 sm:mb-6 leading-relaxed relative z-10 line-clamp-4 text-sm sm:text-base">
                   {review.quote}
                 </blockquote>
 
                 {/* Author info */}
-                <div className="border-t pt-4">
+                <div className="border-t pt-3 sm:pt-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-semibold text-charcoal">
+                      <p className="font-semibold text-charcoal text-sm sm:text-base">
                         {review.author}
                       </p>
-                      <p className="text-sm text-mediumGray">{review.role}</p>
+                      <p className="text-xs sm:text-sm text-mediumGray">
+                        {review.role}
+                      </p>
                     </div>
                     <p className="text-xs text-mediumGray">{review.date}</p>
                   </div>
@@ -321,15 +342,19 @@ export const SocialProof = ({
             ))}
           </div>
 
-          {/* View all reviews button */}
-          <div className="text-center mt-12">
+          {/* View all reviews button - Mobile Optimized */}
+          <div className="text-center mt-8 sm:mt-10 md:mt-12">
             <a
               href="{reviewbtnurl}"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-primaryBlue text-primaryBlue font-semibold rounded-full hover:bg-primaryBlue hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white border-2 border-primaryBlue text-primaryBlue font-semibold rounded-full hover:bg-primaryBlue hover:text-white transition-all duration-300 shadow-md hover:shadow-xl text-sm sm:text-base"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-4 h-4 sm:w-5 sm:h-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
@@ -340,12 +365,12 @@ export const SocialProof = ({
           </div>
         </div>
 
-        {/* Trust badges */}
-        <div className="mt-20 pt-12 border-t border-gray-200">
-          <div className="flex flex-wrap items-center justify-center gap-8">
+        {/* Trust badges - Mobile Optimized */}
+        <div className="mt-12 sm:mt-16 md:mt-20 pt-8 sm:pt-10 md:pt-12 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
             <div className="flex items-center gap-2 text-mediumGray">
               <svg
-                className="w-6 h-6 text-accentBlue"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-accentBlue"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -355,11 +380,13 @@ export const SocialProof = ({
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="font-medium">TREC License #23059</span>
+              <span className="font-medium text-sm sm:text-base">
+                TREC License #23059
+              </span>
             </div>
             <div className="flex items-center gap-2 text-mediumGray">
               <svg
-                className="w-6 h-6 text-accentBlue"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-accentBlue"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -369,17 +396,21 @@ export const SocialProof = ({
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="font-medium">Fully Insured & Bonded</span>
+              <span className="font-medium text-sm sm:text-base">
+                Fully Insured & Bonded
+              </span>
             </div>
             <div className="flex items-center gap-2 text-mediumGray">
               <svg
-                className="w-6 h-6 text-accentBlue"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-accentBlue"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <span className="font-medium">InterNACHI Certified</span>
+              <span className="font-medium text-sm sm:text-base">
+                InterNACHI Certified
+              </span>
             </div>
           </div>
         </div>
