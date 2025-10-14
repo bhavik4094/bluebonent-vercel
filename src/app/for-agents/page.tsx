@@ -18,6 +18,7 @@ import {
   Download,
   Handshake,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -91,6 +92,12 @@ type coreServicesIcon = {
     url: string;
   };
 };
+type agentCardIconImg = {
+  agent_resources_icon?: {
+    url: string;
+  };
+};
+
 const agentsChooseIcons = await Promise.all(
   (forAgents.agents_choose_repeater || []).map(async (n: coreServicesIcon) => ({
     ...n,
@@ -98,6 +105,16 @@ const agentsChooseIcons = await Promise.all(
       (await normalizeImage(n.agents_choose_card_icon)) || "",
   }))
 );
+const agentCardIcon = await Promise.all(
+  (forAgents.agent_resources_repeater || []).map(
+    async (n: agentCardIconImg) => ({
+      ...n,
+      agent_resources_icon:
+        (await normalizeImage(n.agent_resources_icon)) || "",
+    })
+  )
+);
+
 export default function ForAgentsPage() {
   return (
     <div className="min-h-screen">
@@ -212,7 +229,16 @@ export default function ForAgentsPage() {
                   className="bg-lightGray rounded-lg p-6 text-center"
                   key={idx}
                 >
-                  <Download className="w-12 h-12 text-primaryBlue mx-auto mb-4" />
+                  {/* <Download className="w-12 h-12 text-primaryBlue " /> */}
+
+                  <Image
+                    src={agentCardIcon[idx].agent_resources_icon}
+                    alt={benefit.name}
+                    width={45}
+                    height={45}
+                    className="rounded-full mx-auto mb-4"
+                  />
+
                   <h3 className="font-bold text-xl text-charcoal mb-2">
                     {benefit.agent_resources_card_title}
                   </h3>
