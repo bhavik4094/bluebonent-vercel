@@ -19,14 +19,13 @@ import {
   MapPin,
 } from "lucide-react";
 // import { TrustBar } from "@/components/trust-bar";
-import {OwnerOperatorComparison} from "@/components/owner-operator-comparison";
-import {FirstTimeBuyerStories} from "@/components/first-time-buyer-stories";
-import {ThreeAMPromise} from "@/components/three-am-promise";
-import {ThoroughInspectionProcess} from "@/components/thorough-inspection-process";
-import {OurNonNegotiables} from "@/components/our-non-negotiables";
+import { OwnerOperatorComparison } from "@/components/owner-operator-comparison";
+import { FirstTimeBuyerStories } from "@/components/first-time-buyer-stories";
+import { ThreeAMPromise } from "@/components/three-am-promise";
+import { ThoroughInspectionProcess } from "@/components/thorough-inspection-process";
+import { OurNonNegotiables } from "@/components/our-non-negotiables";
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
-
 
 /**
  * Renders the About page with powerful psychological anchors and trust-building elements
@@ -36,7 +35,7 @@ import { normalizeImage } from "@/lib/utils";
 
 const data = await fetchAPI("pages?slug=about-us");
 const page = data?.[0];
-const about  = page?.acf || {};
+const about = page?.acf || {};
 const ownerOperator = page?.acf || {};
 const thoroughInspection = page?.acf || {};
 const firstTimeBuyerStories = page?.acf || {};
@@ -44,7 +43,6 @@ const nonNegotiables = page?.acf || {};
 const threeAMPromise = page?.acf || {};
 
 const aboutstoryimg = await normalizeImage(about?.story_section_image);
-
 
 export default function AboutPage() {
   return (
@@ -72,7 +70,9 @@ export default function AboutPage() {
                   <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-2xl p-4 border-4 border-accentBlue">
                     <div className="text-center">
                       <Award className="w-10 h-10 text-primaryBlue mx-auto mb-2" />
-                      <p className="font-bold text-charcoal">{about?.credentials_badge?.badge_id}</p>
+                      <p className="font-bold text-charcoal">
+                        {about?.credentials_badge?.badge_id}
+                      </p>
                       <p className="text-xs text-mediumGray">
                         {about?.credentials_badge?.badge_text}
                       </p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 style={{ animationDelay: "200ms" }}
               >
                 <h2 className="gradient-text font-serif text-4xl lg:text-5xl font-bold text-charcoal mb-6">
-                 {about?.story_section_heading}
+                  {about?.story_section_heading}
                   <span className="text-primaryBlue">.</span>
                 </h2>
 
@@ -175,7 +175,7 @@ export default function AboutPage() {
       </section>
 
       {/* Owner-Operator Comparison - The Big Differentiator */}
-      <OwnerOperatorComparison 
+      <OwnerOperatorComparison
         badgeHeading={ownerOperator?.operator_comparison_heading}
         badgeSubHeading={ownerOperator?.operator_comparison_sub_heading}
         ownerOptbtn1txt={ownerOperator?.operator_comparison_btn1_text}
@@ -185,7 +185,7 @@ export default function AboutPage() {
       />
 
       {/* Thorough Inspection Process - What We Actually Do */}
-      <ThoroughInspectionProcess 
+      <ThoroughInspectionProcess
         tipHeading={thoroughInspection?.thorough_inspection_heading}
         tipSubHeading={thoroughInspection?.thorough_inspection_sub_heading}
         tiptxt={thoroughInspection?.thorough_inspection_text}
@@ -198,20 +198,36 @@ export default function AboutPage() {
       />
 
       {/* First-Time Buyer Stories - Social Proof */}
-      <FirstTimeBuyerStories 
-        testimonialSecHeading={firstTimeBuyerStories?.first_time_buyer_stories_heading}
-        testimonialSecSubHeading={firstTimeBuyerStories?.first_time_buyer_stories_sub_heading}
+      <FirstTimeBuyerStories
+        testimonialSecHeading={
+          firstTimeBuyerStories?.first_time_buyer_stories_heading
+        }
+        testimonialSecSubHeading={
+          firstTimeBuyerStories?.first_time_buyer_stories_sub_heading
+        }
         testimonialSectxt={firstTimeBuyerStories?.first_time_buyer_stories_text}
-        testimonialSecCtaHeading={firstTimeBuyerStories?.first_time_buyer_stories_cta_heading}
-        testimonialSecCtaTxt={firstTimeBuyerStories?.first_time_buyer_stories_cta_text}
-        testimonialSecCtaBtn1Txt={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn1_text}
-        testimonialSecCtaBtn1Url={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn1_url}
-        testimonialSecCtaBtn2Txt={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn2_text}
-        testimonialSecCtaBtn2Url={firstTimeBuyerStories?.first_time_buyer_stories_cta_btn2_url}
+        testimonialSecCtaHeading={
+          firstTimeBuyerStories?.first_time_buyer_stories_cta_heading
+        }
+        testimonialSecCtaTxt={
+          firstTimeBuyerStories?.first_time_buyer_stories_cta_text
+        }
+        testimonialSecCtaBtn1Txt={
+          firstTimeBuyerStories?.first_time_buyer_stories_cta_btn1_text
+        }
+        testimonialSecCtaBtn1Url={
+          firstTimeBuyerStories?.first_time_buyer_stories_cta_btn1_url
+        }
+        testimonialSecCtaBtn2Txt={
+          firstTimeBuyerStories?.first_time_buyer_stories_cta_btn2_text
+        }
+        testimonialSecCtaBtn2Url={
+          firstTimeBuyerStories?.first_time_buyer_stories_cta_btn2_url
+        }
       />
 
       {/* Our Non-Negotiables - Quality Promises */}
-      <OurNonNegotiables 
+      <OurNonNegotiables
         nHeading={nonNegotiables?.non_negotiables_heading}
         nSubHeading={nonNegotiables?.non_negotiables_sub_heading}
         ntxt={nonNegotiables?.non_negotiables_text}
@@ -226,7 +242,7 @@ export default function AboutPage() {
       />
 
       {/* The 3AM Promise - Memorable Emotional Anchor */}
-      <ThreeAMPromise 
+      <ThreeAMPromise
         tapHeading={threeAMPromise?.three_am_promise_heading}
         tapSubHeading={threeAMPromise?.three_am_promise_sub_heading}
         tapTxt={threeAMPromise?.three_am_promise_text}
