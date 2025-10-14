@@ -166,13 +166,15 @@ export default function SampleReportPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <ReportFeature
-              icon={<Smartphone className="w-8 h-8" />}
-              title="Modern & Digital"
-              description="Our reports are delivered in a modern HTML format, making them easy to navigate on any device—phone, tablet, or desktop."
-            />
-
-            <ReportFeature
+            {samplereport.inspection_repeater.map((benefit: any, idx: any) => (
+              <ReportFeature
+                key={idx}
+                icon={<Smartphone className="w-8 h-8" />}
+                title={benefit?.inspection_card_title}
+                description={benefit?.inspection_description}
+              />
+            ))}
+            {/* <ReportFeature
               icon={<Camera className="w-8 h-8" />}
               title="High-Resolution Photos & Video"
               description="We don't just tell you about a defect, we show you. Every significant finding is documented with clear photos and, where necessary, video clips."
@@ -200,7 +202,7 @@ export default function SampleReportPage() {
               icon={<Download className="w-8 h-8" />}
               title="Lifetime Access"
               description="Your report remains accessible online indefinitely. Download it, print it, or reference it years later for maintenance planning."
-            />
+            /> */}
           </div>
         </div>
       </section>
@@ -210,65 +212,25 @@ export default function SampleReportPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl font-bold text-charcoal mb-8 text-center">
-              {samplereport?.reports_stand_out_title}
+              {samplereport?.report_features_title}
             </h2>
 
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold text-xl text-charcoal mb-2">
-                    Written for Homeowners, Not Engineers
-                  </h3>
-                  <p className="text-mediumGray">
-                    Our reports use clear, everyday language. We explain not
-                    just what we found, but what it means for you and what you
-                    should do about it.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold text-xl text-charcoal mb-2">
-                    Organized for Easy Navigation
-                  </h3>
-                  <p className="text-mediumGray">
-                    Interactive table of contents, bookmarked sections, and a
-                    logical flow make it simple to find exactly what you're
-                    looking for.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold text-xl text-charcoal mb-2">
-                    Repair Cost Guidance
-                  </h3>
-                  <p className="text-mediumGray">
-                    While we don't quote exact prices, we help you understand
-                    whether an issue is a $100 fix or a $10,000 project, helping
-                    you budget and negotiate effectively.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-blue-500 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold text-xl text-charcoal mb-2">
-                    Maintenance Recommendations
-                  </h3>
-                  <p className="text-mediumGray">
-                    Beyond just problems, we provide a roadmap for maintaining
-                    your home, helping you protect your investment for years to
-                    come.
-                  </p>
-                </div>
-              </div>
+              {samplereport?.our_reports_standout?.map(
+                (benefit: any, idx: any) => (
+                  <div className="flex items-start gap-4" key={idx}>
+                    <CheckCircle className="w-6 h-6 text-accentBlue mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-bold text-xl text-charcoal mb-2">
+                        {benefit?.reports_stand_out_title}
+                      </h3>
+                      <p className="text-mediumGray">
+                        {benefit?.our_reports_description}
+                      </p>
+                    </div>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
