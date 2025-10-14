@@ -67,6 +67,7 @@ const FaqAccordion = ({
  * @param {string} props.buttonText - Download button text
  * @returns {JSX.Element} Resource card component
  */
+
 const ResourceCard = ({
   icon,
   title,
@@ -95,69 +96,69 @@ const faq = page?.acf || {};
 
 export default function FaqPage() {
   // FAQ data organized by category
-  const firstTimeBuyerFaqs = [
-    {
-      question: "Should I attend the inspection?",
-      answer:
-        "Yes, absolutely! We highly recommend you attend, especially for the final walkthrough portion. This is a valuable opportunity to see any issues firsthand, ask questions, and learn about your future home's systems and maintenance needs. You'll gain insights that a report alone cannot provide.",
-    },
-    {
-      question: "What if problems are found?",
-      answer:
-        "No house is perfect, not even new construction. Finding issues is actually the point of an inspection! The report becomes a powerful tool for negotiating repairs or price adjustments with the seller. Most findings are minor maintenance items, and we help you understand which issues are truly significant versus routine upkeep.",
-    },
-    {
-      question: "How long does a home inspection take?",
-      answer:
-        "A typical inspection takes 2-3 hours, depending on the home's size, age, and condition. Larger homes or those with additional structures (guest houses, pools) may take longer. We recommend allowing at least 30-45 minutes at the end for the verbal summary and Q&A session.",
-    },
-    {
-      question: "What's not included in a standard inspection?",
-      answer:
-        "A standard inspection is visual and non-invasive. We don't move furniture, look inside walls, or test every outlet. Specialized inspections like termite, mold, or sewer scopes are available as add-ons. We also don't inspect cosmetic issues unless they indicate a larger problem.",
-    },
-  ];
+  // const firstTimeBuyerFaqs = [
+  //   {
+  //     question: "Should I attend the inspection?",
+  //     answer:
+  //       "Yes, absolutely! We highly recommend you attend, especially for the final walkthrough portion. This is a valuable opportunity to see any issues firsthand, ask questions, and learn about your future home's systems and maintenance needs. You'll gain insights that a report alone cannot provide.",
+  //   },
+  //   {
+  //     question: "What if problems are found?",
+  //     answer:
+  //       "No house is perfect, not even new construction. Finding issues is actually the point of an inspection! The report becomes a powerful tool for negotiating repairs or price adjustments with the seller. Most findings are minor maintenance items, and we help you understand which issues are truly significant versus routine upkeep.",
+  //   },
+  //   {
+  //     question: "How long does a home inspection take?",
+  //     answer:
+  //       "A typical inspection takes 2-3 hours, depending on the home's size, age, and condition. Larger homes or those with additional structures (guest houses, pools) may take longer. We recommend allowing at least 30-45 minutes at the end for the verbal summary and Q&A session.",
+  //   },
+  //   {
+  //     question: "What's not included in a standard inspection?",
+  //     answer:
+  //       "A standard inspection is visual and non-invasive. We don't move furniture, look inside walls, or test every outlet. Specialized inspections like termite, mold, or sewer scopes are available as add-ons. We also don't inspect cosmetic issues unless they indicate a larger problem.",
+  //   },
+  // ];
 
-  const sellerFaqs = [
-    {
-      question: "Why get a pre-listing inspection?",
-      answer:
-        "A pre-listing inspection helps you identify and address issues on your own terms, before buyers discover them. This can lead to a faster sale, fewer negotiations, and often a higher final price. It also demonstrates transparency, making your home more attractive to serious buyers.",
-    },
-    {
-      question: "Do I have to fix everything found in the inspection?",
-      answer:
-        "No, you're not obligated to fix everything. The inspection gives you options: fix major issues, adjust your price accordingly, or offer credits to buyers. The key is having no surprises during the buyer's inspection that could derail your sale.",
-    },
-    {
-      question: "Will a pre-listing inspection hurt my sale?",
-      answer:
-        "Quite the opposite! Transparency builds trust with buyers. When you can show a professional inspection report upfront, buyers feel more confident making offers. It can actually speed up the sale process and reduce the likelihood of deals falling through.",
-    },
-  ];
+  // const sellerFaqs = [
+  //   {
+  //     question: "Why get a pre-listing inspection?",
+  //     answer:
+  //       "A pre-listing inspection helps you identify and address issues on your own terms, before buyers discover them. This can lead to a faster sale, fewer negotiations, and often a higher final price. It also demonstrates transparency, making your home more attractive to serious buyers.",
+  //   },
+  //   {
+  //     question: "Do I have to fix everything found in the inspection?",
+  //     answer:
+  //       "No, you're not obligated to fix everything. The inspection gives you options: fix major issues, adjust your price accordingly, or offer credits to buyers. The key is having no surprises during the buyer's inspection that could derail your sale.",
+  //   },
+  //   {
+  //     question: "Will a pre-listing inspection hurt my sale?",
+  //     answer:
+  //       "Quite the opposite! Transparency builds trust with buyers. When you can show a professional inspection report upfront, buyers feel more confident making offers. It can actually speed up the sale process and reduce the likelihood of deals falling through.",
+  //   },
+  // ];
 
-  const processFaqs = [
-    {
-      question: "How much does a home inspection cost?",
-      answer:
-        "Inspection costs vary based on the property's square footage, age, and foundation type. Our base rates range from $350 for homes under 1,500 sq ft to $650+ for larger homes. Additional services like pool inspections or thermal imaging have separate fees. Contact us for a precise quote based on your specific property.",
-    },
-    {
-      question: "When will I get the report?",
-      answer:
-        "You'll receive your comprehensive digital report within 24 hours of the inspection, often the same evening. The report includes 100+ photos, detailed findings, and clear recommendations. It's accessible on any device and can be easily shared with your agent or contractors.",
-    },
-    {
-      question: "What areas do you serve?",
-      answer:
-        "We proudly serve Cedar Park, Round Rock, Leander, Georgetown, Austin, Pflugerville, and surrounding Central Texas communities. We're familiar with the local construction styles, common issues, and soil conditions specific to our area.",
-    },
-    {
-      question: "Are you insured?",
-      answer:
-        "Yes, we carry comprehensive general liability insurance and errors & omissions (E&O) insurance. We're also fully licensed by the Texas Real Estate Commission (TREC License #23059) and certified by InterNACHI. Your protection is our priority.",
-    },
-  ];
+  // const processFaqs = [
+  //   {
+  //     question: "How much does a home inspection cost?",
+  //     answer:
+  //       "Inspection costs vary based on the property's square footage, age, and foundation type. Our base rates range from $350 for homes under 1,500 sq ft to $650+ for larger homes. Additional services like pool inspections or thermal imaging have separate fees. Contact us for a precise quote based on your specific property.",
+  //   },
+  //   {
+  //     question: "When will I get the report?",
+  //     answer:
+  //       "You'll receive your comprehensive digital report within 24 hours of the inspection, often the same evening. The report includes 100+ photos, detailed findings, and clear recommendations. It's accessible on any device and can be easily shared with your agent or contractors.",
+  //   },
+  //   {
+  //     question: "What areas do you serve?",
+  //     answer:
+  //       "We proudly serve Cedar Park, Round Rock, Leander, Georgetown, Austin, Pflugerville, and surrounding Central Texas communities. We're familiar with the local construction styles, common issues, and soil conditions specific to our area.",
+  //   },
+  //   {
+  //     question: "Are you insured?",
+  //     answer:
+  //       "Yes, we carry comprehensive general liability insurance and errors & omissions (E&O) insurance. We're also fully licensed by the Texas Real Estate Commission (TREC License #23059) and certified by InterNACHI. Your protection is our priority.",
+  //   },
+  // ];
 
   return (
     <div className="min-h-screen">
@@ -178,26 +179,30 @@ export default function FaqPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* First-Time Buyer Questions */}
-            <div className="mb-12">
-              <div className="flex items-center gap-3 mb-6">
-                <Home className="w-8 h-8 text-primaryBlue" />
-                <h2 className="font-serif text-2xl md:text-3xl font-bold text-charcoal">
-                  First-Time Buyer Questions
-                </h2>
-              </div>
-              <div className="bg-lightGray rounded-lg p-1">
-                {firstTimeBuyerFaqs.map((faq, index) => (
-                  <FaqAccordion
-                    key={index}
-                    question={faq.question}
-                    answer={faq.answer}
-                  />
-                ))}
-              </div>
-            </div>
+            {faq?.frequently_asked_questions_section?.map(
+              (section, sectionIndex) => (
+                <div className="mb-12" key={sectionIndex}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <Home className="w-8 h-8 text-primaryBlue" />
+                    <h2 className="font-serif text-2xl md:text-3xl font-bold text-charcoal">
+                      {section.faq_title}
+                    </h2>
+                  </div>
+                  <div className="bg-lightGray rounded-lg p-1">
+                    {section.faq?.map((faqItem, faqIndex) => (
+                      <FaqAccordion
+                        key={faqIndex}
+                        question={faqItem.faq_question}
+                        answer={faqItem.faq_answer}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            )}
 
             {/* Seller Questions */}
-            <div className="mb-12">
+            {/* <div className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <DollarSign className="w-8 h-8 text-primaryBlue" />
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-charcoal">
@@ -213,10 +218,10 @@ export default function FaqPage() {
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Process Questions */}
-            <div className="mb-12">
+            {/* <div className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <Clock className="w-8 h-8 text-primaryBlue" />
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-charcoal">
@@ -232,7 +237,7 @@ export default function FaqPage() {
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -250,7 +255,19 @@ export default function FaqPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <ResourceCard
+            {faq?.resource_card?.map((resources: any, idx: any) => {
+              return (
+                <ResourceCard
+                  key={idx}
+                  icon={<FileText className="w-12 h-12" />}
+                  title={resources?.resource_card_title}
+                  description={resources?.resource_card_description}
+                  buttonText={resources?.resource_card_buttontext}
+                />
+              );
+            })}
+
+            {/* <ResourceCard
               icon={<FileText className="w-12 h-12" />}
               title="Home Seller's Prep Checklist"
               description="Ensure a smooth inspection by preparing your home properly. This checklist covers everything from utilities to access points."
@@ -276,7 +293,7 @@ export default function FaqPage() {
               title="Common Issues in Texas Homes"
               description="Learn about foundation movement, HVAC demands, and other issues specific to Central Texas properties."
               buttonText="Download Texas Guide"
-            />
+            /> */}
           </div>
         </div>
       </section>
