@@ -5,6 +5,7 @@
  */
 
 import { fetchAPI } from "@/lib/api";
+import { normalizeImage } from "@/lib/utils";
 import {
   Shield,
   Clock,
@@ -27,6 +28,7 @@ import Link from "next/link";
  * @param {string} props.description - Benefit description
  * @returns {JSX.Element} Benefit card component
  */
+
 const AgentBenefit = ({
   icon,
   title,
@@ -57,6 +59,7 @@ const AgentBenefit = ({
  * @param {string} props.company - Real estate company
  * @returns {JSX.Element} Testimonial component
  */
+
 const AgentTestimonial = ({
   quote,
   author,
@@ -69,16 +72,10 @@ const AgentTestimonial = ({
   <div className="bg-white p-6 rounded-lg shadow-md">
     <div className="flex items-start gap-3 mb-4">
       {[...Array(5)].map((_, i) => (
-        <svg
-          key={i}
-          className="w-5 h-5 text-yellow-500 fill-current"
-          viewBox="0 0 20 20"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
+        <img key={i} src="/star.png" alt="Star" className="w-5 h-5" />
       ))}
     </div>
-    <p className="text-mediumGray mb-4 italic">"{quote}"</p>
+    <p className="text-mediumGray mb-4 italic">{quote}</p>
     <div>
       <p className="font-semibold text-charcoal">{author}</p>
       <p className="text-sm text-mediumGray">{company}</p>
@@ -89,7 +86,18 @@ const AgentTestimonial = ({
 const data = await fetchAPI("pages?slug=for-agents");
 const page = data?.[0];
 const forAgents = page?.acf || {};
-
+type coreServicesIcon = {
+  agents_choose_card_icon?: {
+    url: string;
+  };
+};
+const agentsChooseIcons = await Promise.all(
+  (forAgents.agents_choose_repeater || []).map(async (n: coreServicesIcon) => ({
+    ...n,
+    agents_choose_card_icon:
+      (await normalizeImage(n.agents_choose_card_icon)) || "",
+  }))
+);
 export default function ForAgentsPage() {
   return (
     <div className="min-h-screen">
@@ -134,29 +142,20 @@ export default function ForAgentsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <AgentBenefit
-              icon={<Shield className="w-8 h-8" />}
-              title="We Protect Your Clients (and Your Reputation)"
-              description="Our thorough, unbiased inspections provide your clients with a complete understanding of the property's condition, ensuring there are no costly surprises after closing. A happy client leads to future referrals for you."
-            />
-
-            <AgentBenefit
-              icon={<FileCheck className="w-8 h-8" />}
-              title="We Communicate, We Don't Alarm"
-              description="We are experts at providing context. We calmly and clearly explain our findings, distinguishing between major structural investments and minor handyman repairs. Our goal is to inform, not to alarm, allowing your clients to make rational decisions without derailing the transaction."
-            />
-
-            <AgentBenefit
-              icon={<Clock className="w-8 h-8" />}
-              title="Fast, Modern Reports Your Clients Will Love"
-              description="Our 24-hour, mobile-friendly reports are easy to read, understand, and share. This makes it simple for you and your clients to review findings, consult with contractors, and move forward with negotiations efficiently."
-            />
-
-            <AgentBenefit
-              icon={<Key className="w-8 h-8" />}
-              title="Easy Scheduling & Punctuality"
-              description="We respect your time and your clients' demanding schedules. Our online scheduling system is available 24/7, we're equipped with Supra lockbox access, and we pride ourselves on our punctuality and professionalism at every appointment."
-            />
+            {forAgents.agents_choose_repeater.map((benefit: any, idx: any) => (
+              <AgentBenefit
+                key={idx}
+                icon={
+                  <img
+                    src={agentsChooseIcons[idx].agents_choose_card_icon}
+                    alt={benefit.agents_choose_card_title}
+                    className="w-8 h-8 object-contain"
+                  />
+                }
+                title={benefit.agents_choose_card_title}
+                description={benefit.agents_choose_card_description}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -171,53 +170,23 @@ export default function ForAgentsPage() {
 
             <div className="bg-white rounded-lg shadow-lg p-8">
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-primaryBlue text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                    1
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-charcoal mb-2">
-                      To always act as a professional, courteous, and
-                      knowledgeable extension of your team
-                    </h3>
-                    <p className="text-mediumGray">
-                      We understand we're representing you. Every interaction
-                      reflects on your professionalism.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-primaryBlue text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-charcoal mb-2">
-                      To provide clear, objective, and timely information that
-                      empowers your clients
-                    </h3>
-                    <p className="text-mediumGray">
-                      No surprises, no confusion. Just the facts your clients
-                      need to make informed decisions.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-primaryBlue text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-charcoal mb-2">
-                      To be readily available for you and your clients to answer
-                      any questions after the inspection
-                    </h3>
-                    <p className="text-mediumGray">
-                      Our service doesn't end with the report. We're here
-                      through negotiations and closing.
-                    </p>
-                  </div>
-                </div>
+                {forAgents.our_promise_repeater?.map(
+                  (benefit: any, idx: any) => (
+                    <div className="flex items-start gap-4" key={idx}>
+                      <div className="w-8 h-8 bg-primaryBlue text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                        {idx + 1}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-xl text-charcoal mb-2">
+                          {benefit.our_promise_title}
+                        </h3>
+                        <p className="text-mediumGray">
+                          {benefit.agents_promise_description}
+                        </p>
+                      </div>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -237,44 +206,25 @@ export default function ForAgentsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="bg-lightGray rounded-lg p-6 text-center">
-              <Download className="w-12 h-12 text-primaryBlue mx-auto mb-4" />
-              <h3 className="font-bold text-xl text-charcoal mb-2">
-                Co-Branded Materials
-              </h3>
-              <p className="text-mediumGray mb-4">
-                Professional handouts with your branding to share with clients
-              </p>
-              <button className="text-primaryBlue font-semibold hover:underline">
-                Request Materials →
-              </button>
-            </div>
-
-            <div className="bg-lightGray rounded-lg p-6 text-center">
-              <FileCheck className="w-12 h-12 text-primaryBlue mx-auto mb-4" />
-              <h3 className="font-bold text-xl text-charcoal mb-2">
-                "What to Expect" Guide
-              </h3>
-              <p className="text-mediumGray mb-4">
-                Client handout explaining the inspection process
-              </p>
-              <button className="text-primaryBlue font-semibold hover:underline">
-                Download PDF →
-              </button>
-            </div>
-
-            <div className="bg-lightGray rounded-lg p-6 text-center">
-              <Users className="w-12 h-12 text-primaryBlue mx-auto mb-4" />
-              <h3 className="font-bold text-xl text-charcoal mb-2">
-                Preferred Agent Portal
-              </h3>
-              <p className="text-mediumGray mb-4">
-                Priority scheduling and special rates for your clients
-              </p>
-              <button className="text-primaryBlue font-semibold hover:underline">
-                Learn More →
-              </button>
-            </div>
+            {forAgents.agent_resources_repeater?.map(
+              (benefit: any, idx: any) => (
+                <div
+                  className="bg-lightGray rounded-lg p-6 text-center"
+                  key={idx}
+                >
+                  <Download className="w-12 h-12 text-primaryBlue mx-auto mb-4" />
+                  <h3 className="font-bold text-xl text-charcoal mb-2">
+                    {benefit.agent_resources_card_title}
+                  </h3>
+                  <p className="text-mediumGray mb-4">
+                    {benefit.agent_resources_card_description}
+                  </p>
+                  <button className="text-primaryBlue font-semibold hover:underline">
+                    {benefit.agent_resources_btn_title} →
+                  </button>
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>

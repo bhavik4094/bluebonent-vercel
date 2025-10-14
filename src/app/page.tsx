@@ -7,7 +7,7 @@ import { normalizeImage } from "@/lib/utils";
 
 type PathwayCard = {
   iconsvg?: string;
-  [key: string]: unknown; // keep flexibility for extra fields
+  [key: string]: unknown;
 };
 
 type MetricData = {

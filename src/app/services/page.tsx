@@ -23,6 +23,8 @@ import {
   StarIcon,
   ArrowRightIcon,
 } from "@/components/icons";
+import Image from "next/image";
+import { normalizeImage } from "@/lib/utils";
 
 // Core inspection services with detailed benefits
 const coreServices = [
@@ -167,7 +169,48 @@ const serviceTestimonials = [
 
 const data = await fetchAPI("pages?slug=services");
 const page = data?.[0];
-const services = page?.acf || {};
+const acf = page?.acf || {};
+const inspectionsitems = acf?.enhanced_trust_repeater || [];
+const familiesTrustItems = acf?.families_trust_repeater || [];
+const coreServicesData = acf?.choose_inspection_repeater || [];
+const ancillaryServicesData = acf?.add_on_card_repeater || [];
+
+type familiestrustcardicon = {
+  families_trust_card_icon?: {
+    url: string;
+  };
+};
+type coreServicesIcon = {
+  choose_inspection_card_icon?: {
+    url: string;
+  };
+};
+type ancillaryServicesIcon = {
+  add_on_card_icon?: {
+    url: string;
+  };
+};
+const familiestrustcard = await Promise.all(
+  (acf.families_trust_repeater || []).map(async (m: familiestrustcardicon) => ({
+    ...m,
+    families_trust_card_icon:
+      (await normalizeImage(m.families_trust_card_icon)) || "",
+  }))
+);
+
+const coreServicesIcons = await Promise.all(
+  (acf.choose_inspection_repeater || []).map(async (n: coreServicesIcon) => ({
+    ...n,
+    choose_inspection_card_icon:
+      (await normalizeImage(n.choose_inspection_card_icon)) || "",
+  }))
+);
+const ancillaryIcon = await Promise.all(
+  (acf.add_on_card_repeater || []).map(async (o: ancillaryServicesIcon) => ({
+    ...o,
+    add_on_card_icon: (await normalizeImage(o.add_on_card_icon)) || "",
+  }))
+);
 
 export default function ServicesPage() {
   return (
@@ -187,29 +230,22 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
-              {services?.services_hero_title}
+              {acf?.services_hero_title}
             </h1>
             <p className="text-xl md:text-2xl mb-10 text-blue-50 max-w-3xl mx-auto leading-relaxed">
-              {services?.services_hero_description}
+              {acf?.services_hero_description}
             </p>
 
             {/* Enhanced Trust Bar */}
+
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 inline-flex flex-wrap justify-center gap-8 text-sm md:text-base">
-              <span className="flex items-center gap-2">
-                <CheckIcon className="text-white" size={20} /> TREC Licensed
-                #23059
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckIcon className="text-white" size={20} /> InterNACHI
-                Certified
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckIcon className="text-white" size={20} /> 1,500+
-                Inspections
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckIcon className="text-white" size={20} /> 200% Guarantee
-              </span>
+              {Array.isArray(inspectionsitems) &&
+                inspectionsitems.map((item, index) => (
+                  <span className="flex items-center gap-2" key={index}>
+                    <CheckIcon className="text-white" size={20} />
+                    {item?.enhanced_trust_title}
+                  </span>
+                ))}
             </div>
           </div>
         </div>
@@ -220,47 +256,36 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="gradient-text font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4">
-              {services?.families_trust_title}
+              {acf?.families_trust_title}
             </h2>
             <p className="text-lg text-mediumGray mb-12 max-w-2xl mx-auto">
-              {services?.families_trust_description}
+              {acf?.families_trust_description}
             </p>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center text-primaryBlue">
-                  <FamilyIcon size={40} />
-                </div>
-                <h3 className="font-bold text-xl mb-3 text-charcoal">
-                  Owner-Operated
-                </h3>
-                <p className="text-mediumGray leading-relaxed">
-                  Tim personally performs every inspection—no rookies learning
-                  on your dime
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center text-primaryBlue">
-                  <ClipboardIcon size={40} />
-                </div>
-                <h3 className="font-bold text-xl mb-3 text-charcoal">
-                  400-Point Inspection
-                </h3>
-                <p className="text-mediumGray leading-relaxed">
-                  Thorough evaluation from foundation to roof, missing nothing
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center text-primaryBlue">
-                  <PhoneIcon size={40} />
-                </div>
-                <h3 className="font-bold text-xl mb-3 text-charcoal">
-                  Direct Communication
-                </h3>
-                <p className="text-mediumGray leading-relaxed">
-                  Tim's personal cell phone—questions answered before, during,
-                  and after
-                </p>
-              </div>
+              {Array.isArray(familiesTrustItems) &&
+                familiesTrustItems.map((item, index) => (
+                  <div
+                    className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                    key={index}
+                  >
+                    <div className="w-20 h-20 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center text-primaryBlue">
+                      {/* <FamilyIcon size={40} /> */}
+                      <Image
+                        src={familiestrustcard[index]?.families_trust_card_icon}
+                        alt={item?.title}
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                      />
+                    </div>
+                    <h3 className="font-bold text-xl mb-3 text-charcoal">
+                      {item?.families_trust_card_title}
+                    </h3>
+                    <p className="text-mediumGray leading-relaxed">
+                      {item?.families_trust_card_description}
+                    </p>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -280,86 +305,100 @@ export default function ServicesPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-center text-charcoal mb-4">
-            {services?.choose_inspection_text}
+            {acf?.choose_inspection_text}
           </h2>
           <p className="text-center text-mediumGray text-lg mb-16 max-w-2xl mx-auto">
-            {services?.choose_inspection_description}
+            {acf?.choose_inspection_description}
           </p>
 
           <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-            {coreServices.map((service, index) => (
-              <div
-                key={index}
-                className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="p-8 lg:p-10">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-start">
-                      <div className="mr-4 group-hover:scale-110 transition-transform text-primaryBlue">
-                        <service.icon size={48} />
+            {Array.isArray(coreServicesData) &&
+              coreServicesData.map((service, index) => (
+                <div
+                  key={index}
+                  className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+                >
+                  <div className="p-8 lg:p-10">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex items-start">
+                        <div className="mr-4 group-hover:scale-110 transition-transform text-primaryBlue">
+                          {/* <service.icon size={48} /> */}
+
+                          <Image
+                            src={
+                              coreServicesIcons[index]
+                                ?.choose_inspection_card_icon
+                            }
+                            alt={service.name}
+                            width={48}
+                            height={48}
+                            className="rounded-full"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-serif text-2xl lg:text-3xl font-bold text-charcoal mb-1">
+                            {service.choose_inspection_card_title}
+                          </h3>
+                          <span className="inline-block text-xs  bg-gradient-to-r from-primaryBlue to-accentBlue text-white px-3 py-1 rounded-full font-medium">
+                            {service.choose_inspection_card_subtitle}
+                          </span>
+                        </div>
                       </div>
+                    </div>
+
+                    <p className="text-xl font-bold bg-gradient-to-r from-primaryBlue to-accentBlue bg-clip-text text-transparent mb-4">
+                      {service.choose_inspection_card_tagline}
+                    </p>
+
+                    <p className="text-mediumGray mb-6 leading-relaxed">
+                      {service.choose_inspection_card_description}
+                    </p>
+
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl p-4 mb-6">
+                      <ul className="space-y-3">
+                        {service.choose_inspection_points_repeater.map(
+                          (benefit: any, idx: number) => (
+                            <li key={idx} className="flex items-start">
+                              <CheckIcon
+                                className="text-accentBlue mr-3 mt-0.5 flex-shrink-0"
+                                size={18}
+                              />
+                              <span className="text-sm text-charcoal leading-relaxed">
+                                {benefit.choose_inspection_points_title}
+                              </span>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+
+                    <p className="text-sm text-mediumGray italic mb-6 border-l-4 border-blue-200 pl-4">
+                      {service.targetaudience_title}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                       <div>
-                        <h3 className="font-serif text-2xl lg:text-3xl font-bold text-charcoal mb-1">
-                          {service.name}
-                        </h3>
-                        <span className="inline-block text-xs  bg-gradient-to-r from-primaryBlue to-accentBlue text-white px-3 py-1 rounded-full font-medium">
-                          {service.urgency}
+                        <span className="text-2xl font-bold text-charcoal">
+                          {service.choose_inspection_card_price}
+                        </span>
+                        <span className="text-xs text-mediumGray block">
+                          Plus applicable fees
                         </span>
                       </div>
+                      <a
+                        href={service.choose_inspection_card_btn_url}
+                        className="bg-gradient-to-r from-primaryBlue to-accentBlue text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all group-hover:scale-105"
+                      >
+                        {service.choose_inspection_card_btn_title}
+                        <ArrowRightIcon
+                          className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
+                          size={16}
+                        />
+                      </a>
                     </div>
-                  </div>
-
-                  <p className="text-xl font-bold bg-gradient-to-r from-primaryBlue to-accentBlue bg-clip-text text-transparent mb-4">
-                    {service.tagline}
-                  </p>
-
-                  <p className="text-mediumGray mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-
-                  <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl p-4 mb-6">
-                    <ul className="space-y-3">
-                      {service.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <CheckIcon
-                            className="text-accentBlue mr-3 mt-0.5 flex-shrink-0"
-                            size={18}
-                          />
-                          <span className="text-sm text-charcoal leading-relaxed">
-                            {benefit}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <p className="text-sm text-mediumGray italic mb-6 border-l-4 border-blue-200 pl-4">
-                    {service.targetAudience}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                    <div>
-                      <span className="text-2xl font-bold text-charcoal">
-                        {service.price}
-                      </span>
-                      <span className="text-xs text-mediumGray block">
-                        Plus applicable fees
-                      </span>
-                    </div>
-                    <Link
-                      href={service.href}
-                      className="bg-gradient-to-r from-primaryBlue to-accentBlue text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all group-hover:scale-105"
-                    >
-                      {service.cta}
-                      <ArrowRightIcon
-                        className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
-                        size={16}
-                      />
-                    </Link>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </section>
@@ -368,46 +407,54 @@ export default function ServicesPage() {
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-center text-charcoal mb-4">
-            {services?.add_on_services_text}
+            {acf?.add_on_services_text}
           </h2>
           <p className="text-center text-mediumGray text-lg mb-16 max-w-2xl mx-auto">
-            {services?.add_on_services_description}
+            {acf?.add_on_services_description}
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {ancillaryServices.map((service, index) => (
-              <div
-                key={index}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform text-primaryBlue">
-                  <service.icon size={32} />
-                </div>
-                <h3 className="font-bold text-xl text-charcoal mb-3">
-                  {service.name}
-                </h3>
-                <p className="text-sm text-mediumGray mb-4 leading-relaxed">
-                  {service.description}
-                </p>
-                <div className="bg-blue-50 rounded-lg px-3 py-2 mb-4">
-                  <p className="text-xs text-accentBlue font-medium">
-                    {service.value}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <span className="font-bold text-xl text-primaryBlue">
-                    {service.price}
-                  </span>
-                  <button className="text-sm text-primaryBlue hover:text-blue-700 font-medium group">
-                    Learn More
-                    <ArrowRightIcon
-                      className="inline-block ml-1 group-hover:translate-x-1 transition-transform"
-                      size={14}
+            {Array.isArray(ancillaryServicesData) &&
+              ancillaryServicesData.map((service, index) => (
+                <div
+                  key={index}
+                  className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform text-primaryBlue">
+                    {/* <service.icon size={32} /> */}
+                    <Image
+                      src={ancillaryIcon[index].add_on_card_icon}
+                      alt={service.name}
+                      width={32}
+                      height={32}
+                      className="rounded-full"
                     />
-                  </button>
+                  </div>
+                  <h3 className="font-bold text-xl text-charcoal mb-3">
+                    {service.add_on_card_title}
+                  </h3>
+                  <p className="text-sm text-mediumGray mb-4 leading-relaxed">
+                    {service.add_on_card_description}
+                  </p>
+                  <div className="bg-blue-50 rounded-lg px-3 py-2 mb-4">
+                    <p className="text-xs text-accentBlue font-medium">
+                      {service.add_on_card_highlight}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span className="font-bold text-xl text-primaryBlue">
+                      {service.add_on_card_price}
+                    </span>
+                    <button className="text-sm text-primaryBlue hover:text-blue-700 font-medium group">
+                      {service.add_on_learn_more_title}
+                      <ArrowRightIcon
+                        className="inline-block ml-1 group-hover:translate-x-1 transition-transform"
+                        size={14}
+                      />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </section>
@@ -416,10 +463,10 @@ export default function ServicesPage() {
       <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="gradient-text font-serif text-4xl md:text-5xl font-bold text-center text-charcoal mb-4">
-            {services?.cedar_park_families_text}
+            {acf?.cedar_park_families_text}
           </h2>
           <p className="text-center text-mediumGray text-lg mb-16 max-w-2xl mx-auto">
-            {services?.cedar_park_families_description}
+            {acf?.cedar_park_families_description}
           </p>
 
           <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
@@ -454,55 +501,22 @@ export default function ServicesPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="gradient-text font-serif text-4xl font-bold text-center text-charcoal mb-12">
-            {services?.common_service_questions_text}
+            {acf?.common_service_questions_text}
           </h2>
 
           <div className="space-y-6">
-            <details className="border-b border-gray-200 pb-6">
-              <summary className="font-bold text-lg text-charcoal cursor-pointer hover:text-primaryBlue">
-                What's included in the standard inspection?
-              </summary>
-              <p className="mt-4 text-mediumGray">
-                Every inspection covers 400+ points including foundation, roof,
-                structure, HVAC, electrical, plumbing, interior, exterior, and
-                built-in appliances. We also include thermal imaging at no extra
-                charge to detect hidden moisture and electrical issues.
-              </p>
-            </details>
-
-            <details className="border-b border-gray-200 pb-6">
-              <summary className="font-bold text-lg text-charcoal cursor-pointer hover:text-primaryBlue">
-                How long does an inspection take?
-              </summary>
-              <p className="mt-4 text-mediumGray">
-                Typically 2-3 hours depending on the home's size and condition.
-                You're welcome to attend and ask questions throughout. Tim
-                provides an on-site summary at the end, with the full digital
-                report delivered within 24 hours.
-              </p>
-            </details>
-
-            <details className="border-b border-gray-200 pb-6">
-              <summary className="font-bold text-lg text-charcoal cursor-pointer hover:text-primaryBlue">
-                Do I need an inspection on a new home?
-              </summary>
-              <p className="mt-4 text-mediumGray">
-                Absolutely. We find issues in 89% of new construction homes.
-                Even the best builders make mistakes, and it's much easier to
-                have them fixed before closing while they're still responsible.
-              </p>
-            </details>
-
-            <details className="border-b border-gray-200 pb-6">
-              <summary className="font-bold text-lg text-charcoal cursor-pointer hover:text-primaryBlue">
-                What areas do you serve?
-              </summary>
-              <p className="mt-4 text-mediumGray">
-                We serve Cedar Park, Round Rock, Leander, Georgetown,
-                Pflugerville, and the greater Austin area. Tim is available 7
-                days a week with flexible scheduling to meet your timeline.
-              </p>
-            </details>
+            {acf.common_service_questions_repeater?.map(
+              (faq: any, idx: any) => (
+                <details key={idx} className="border-b border-gray-200 pb-6">
+                  <summary className="font-bold text-lg text-charcoal cursor-pointer hover:text-primaryBlue">
+                    {faq.common_service_questions_title}
+                  </summary>
+                  <p className="mt-4 text-mediumGray">
+                    {faq.common_service_ans_title}
+                  </p>
+                </details>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -523,28 +537,28 @@ export default function ServicesPage() {
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            {services?.ready_to_protect_title}
+            {acf?.ready_to_protect_title}
           </h2>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-blue-50 leading-relaxed">
-            {services?.ready_to_protect_description}
+            {acf?.ready_to_protect_description}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
-              href={services?.schedule_your_inspection_button_url}
+              href={acf?.schedule_your_inspection_button_url}
               className="group bg-white text-primaryBlue px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105"
             >
-              {services?.schedule_your_inspection_button_title}
+              {acf?.schedule_your_inspection_button_title}
               <ArrowRightIcon
                 className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
                 size={20}
               />
             </Link>
             <a
-              href={services?.call_tim_url}
+              href={acf?.call_tim_url}
               className="group bg-transparent border-2 border-white text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white hover:text-primaryBlue transition-all hover:scale-105 flex items-center justify-center"
             >
               <PhoneIcon className="mr-2" size={20} />
-              {services?.call_tim_title}
+              {acf?.call_tim_title}
             </a>
           </div>
         </div>
