@@ -5,6 +5,7 @@
  */
 
 import { fetchAPI } from "@/lib/api";
+import { normalizeImage } from "@/lib/utils";
 import {
   Calendar,
   Home,
@@ -71,6 +72,21 @@ const data = await fetchAPI("pages?slug=process");
 const page = data?.[0];
 const ourprocess = page?.acf || {};
 
+type ProcessIcon = {
+  bluebonnet_process_icon?: {
+    url: string;
+  };
+};
+const processIconImg = await Promise.all(
+  (ourprocess.bluebonnet_process_repeater || []).map(
+    async (m: ProcessIcon) => ({
+      ...m,
+      bluebonnet_process_icon:
+        (await normalizeImage(m.bluebonnet_process_icon)) || "",
+    })
+  )
+);
+
 export default function ProcessPage() {
   return (
     <div className="bg-lightGray min-h-screen py-12">
@@ -87,57 +103,30 @@ export default function ProcessPage() {
 
         {/* Process Timeline */}
         <div className="max-w-4xl mx-auto">
-          <ProcessStep
-            step={1}
-            title="Easy Scheduling"
-            description="Getting started is simple and convenient"
-            icon={<Calendar className="w-8 h-8" />}
-            details={[
-              "Book online 24/7 or call us directly at 512-560-5670",
-              "Confirmation within 1 hour during business hours",
-              "Receive pre-inspection agreement and preparation checklist",
-              "Choose from flexible scheduling including weekends",
-            ]}
-          />
-
-          <ProcessStep
-            step={2}
-            title="Day of Inspection"
-            description="Thorough examination of your future home"
-            icon={<Home className="w-8 h-8" />}
-            details={[
-              "2-3 hours thorough examination of all accessible areas",
-              "You're welcome to attend and ask questions throughout",
-              "On-site summary of major findings at completion",
-              "Tim personally performs every inspection - no junior inspectors",
-            ]}
-          />
-
-          <ProcessStep
-            step={3}
-            title="Same-Day Report"
-            description="Comprehensive documentation delivered promptly"
-            icon={<FileText className="w-8 h-8" />}
-            details={[
-              "Detailed digital report within 24 hours of inspection",
-              "100+ photos documenting all findings",
-              "Clear, actionable recommendations for each issue",
-              "Easy-to-read format accessible on any device",
-            ]}
-          />
-
-          <ProcessStep
-            step={4}
-            title="Ongoing Support"
-            description="We're here for you beyond the inspection"
-            icon={<HeartHandshake className="w-8 h-8" />}
-            details={[
-              "Questions? Call Tim directly anytime",
-              "Repair vendor recommendations available",
-              "Re-inspection services for completed repairs",
-              "Support through negotiations and closing",
-            ]}
-          />
+          {ourprocess?.bluebonnet_process_repeater?.map(
+            (benefit: any, idx: any) => (
+              <ProcessStep
+                key={idx}
+                step={idx + 1}
+                title={benefit.bluebonnet_process_title}
+                description={benefit.bluebonnet_process_description}
+                icon={
+                  processIconImg[idx].bluebonnet_process_icon ? (
+                    <img
+                      src={processIconImg[idx].bluebonnet_process_icon}
+                      alt={benefit.bluebonnet_process_title}
+                      className="w-8 h-8 mx-auto"
+                    />
+                  ) : null
+                }
+                details={
+                  benefit.bluebonnet_process_points_repeater?.map(
+                    (point: any) => point.bluebonnet_process_points_title
+                  ) || []
+                }
+              />
+            )
+          )}
         </div>
 
         {/* CTA Section */}
