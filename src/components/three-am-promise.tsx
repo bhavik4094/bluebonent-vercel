@@ -5,6 +5,7 @@
  */
 
 import { Moon, Phone, Clock, Heart } from "lucide-react";
+import { fetchAPI } from "@/lib/api";
 
 type ThreeAMPromiseProps = {
   tapHeading?: string;
@@ -25,6 +26,11 @@ type ThreeAMPromiseProps = {
  * lifetime support and direct access, differentiating from corporate call centers.
  * @returns 3AM Promise component with strong psychological impact
  */
+
+const data = await fetchAPI("pages?slug=about-us");
+const page = data?.[0];
+const threeAMPromise = page?.acf || {};
+
 export const ThreeAMPromise = ({
   tapHeading,
   tapSubHeading,
@@ -78,9 +84,7 @@ export const ThreeAMPromise = ({
               "{tapSubHeading}
             </p>
 
-            <p className="text-xl opacity-90">
-              {tapTxt}"
-            </p>
+            <p className="text-xl opacity-90">{tapTxt}"</p>
           </div>
 
           {/* Support Features */}
@@ -88,14 +92,25 @@ export const ThreeAMPromise = ({
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fadeInUp"
             style={{ animationDelay: "400ms" }}
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Phone className="w-10 h-10 text-accentBlue mx-auto mb-4" />
-              <h3 className="font-bold text-lg mb-2">Direct Cell Access</h3>
-              <p className="text-sm opacity-80">
-                My personal number, not a corporate hotline
-              </p>
-            </div>
-
+            {threeAMPromise?.three_am_promise_section?.map(
+              (item: any, idx: any) => {
+                return (
+                  <div
+                    key={idx}
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+                  >
+                    <Phone className="w-10 h-10 text-accentBlue mx-auto mb-4" />
+                    <h3 className="font-bold text-lg mb-2">
+                      {item?.three_am_promise_section_title}
+                    </h3>
+                    <p className="text-sm opacity-80">
+                      {item?.three_am_promise_section_description}
+                    </p>
+                  </div>
+                );
+              }
+            )}
+            {/* 
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
               <Clock className="w-10 h-10 text-accentBlue mx-auto mb-4" />
               <h3 className="font-bold text-lg mb-2">Lifetime Support</h3>
@@ -110,7 +125,7 @@ export const ThreeAMPromise = ({
               <p className="text-sm opacity-80">
                 I remember your home and your family's needs
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Comparison Statement */}
@@ -118,15 +133,9 @@ export const ThreeAMPromise = ({
             className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-2xl p-8 border border-yellow-300/20 mb-12 animate-fadeInUp"
             style={{ animationDelay: "600ms" }}
           >
-            <h3 className="font-serif text-2xl font-bold mb-4">
-              {csHeading}
-            </h3>
-            <p className="text-lg opacity-90 mb-4">
-              "{csTxt}"
-            </p>
-            <p className="text-sm opacity-70 italic">
-              - {csAuthorName}
-            </p>
+            <h3 className="font-serif text-2xl font-bold mb-4">{csHeading}</h3>
+            <p className="text-lg opacity-90 mb-4">"{csTxt}"</p>
+            <p className="text-sm opacity-70 italic">- {csAuthorName}</p>
           </div>
 
           {/* Personal Statement */}
@@ -138,9 +147,7 @@ export const ThreeAMPromise = ({
               <span className="text-4xl font-bold">TM</span>
             </div>
             <div className="text-left max-w-xl">
-              <p className="text-lg mb-2 font-light italic">
-                "{psTxt}"
-              </p>
+              <p className="text-lg mb-2 font-light italic">"{psTxt}"</p>
               <p className="font-bold text-accentBlue">- {psAuthorName}</p>
             </div>
           </div>
@@ -150,9 +157,7 @@ export const ThreeAMPromise = ({
             className="mt-12 animate-fadeInUp"
             style={{ animationDelay: "1000ms" }}
           >
-            <p className="text-lg mb-6 opacity-90">
-              {tapCtaTxt}
-            </p>
+            <p className="text-lg mb-6 opacity-90">{tapCtaTxt}</p>
             <a
               href={tapCtaBtn1Url}
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br  from-primaryBlue to-accentBlue text-white font-bold rounded-full shadow-2xl hover:shadow-yellow-500/30 transform hover:-translate-y-1 transition-all duration-300"
@@ -165,4 +170,4 @@ export const ThreeAMPromise = ({
       </div>
     </section>
   );
-}
+};

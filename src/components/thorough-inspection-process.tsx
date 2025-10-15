@@ -14,6 +14,11 @@ import {
   Users,
   CheckCircle2,
 } from "lucide-react";
+import { fetchAPI } from "@/lib/api";
+
+const data = await fetchAPI("pages?slug=about-us");
+const page = data?.[0];
+const thoroughInspection = page?.acf || {};
 
 interface InspectionStep {
   title: string;
@@ -115,7 +120,6 @@ type thoroughInspectionProps = {
   tipCtaBtn1Url: string;
   tipCtaBtn2Txt: string;
   tipCtaBtn2Url: string;
-  
 };
 
 /**
@@ -151,104 +155,104 @@ export const ThoroughInspectionProcess = ({
           <h2 className="gradient-text font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
             {tipHeading}
           </h2>
-          <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            {tiptxt}
-          </p>
+          <p className="text-xl text-mediumGray max-w-3xl mx-auto">{tiptxt}</p>
         </div>
 
         {/* Process Timeline */}
         <div className="max-w-6xl mx-auto">
-          {inspectionSteps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={index}
-                className="animate-fadeInUp"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <div className="flex flex-col lg:flex-row gap-8 mb-8">
-                  {/* Timeline connector */}
-                  <div className="hidden lg:flex flex-col items-center">
-                    <div
-                      className={`w-16 h-16 rounded-full bg-gradient-to-br ${
-                        index % 2 === 0
-                          ? "from-primaryBlue to-accentBlue"
-                          : "from-accentBlue to-primaryBlue"
-                      } flex items-center justify-center text-white font-bold text-xl`}
-                    >
-                      {index + 1}
+          {thoroughInspection?.thorough_inspection_repeater?.map(
+            (step, index) => {
+              // const Icon = step.icon;
+              return (
+                <div
+                  key={index}
+                  className="animate-fadeInUp"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <div className="flex flex-col lg:flex-row gap-8 mb-8">
+                    {/* Timeline connector */}
+                    <div className="hidden lg:flex flex-col items-center">
+                      <div
+                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${
+                          index % 2 === 0
+                            ? "from-primaryBlue to-accentBlue"
+                            : "from-accentBlue to-primaryBlue"
+                        } flex items-center justify-center text-white font-bold text-xl`}
+                      >
+                        {index + 1}
+                      </div>
+                      {index < inspectionSteps.length - 1 && (
+                        <div className="w-1 h-32 bg-gradient-to-b from-gray-300 to-transparent mt-4" />
+                      )}
                     </div>
-                    {index < inspectionSteps.length - 1 && (
-                      <div className="w-1 h-32 bg-gradient-to-b from-gray-300 to-transparent mt-4" />
-                    )}
-                  </div>
 
-                  {/* Content Card */}
-                  <div className="flex-1">
-                    <div className="bg-white rounded-2xl shadow-elegant hover:shadow-3d-hover transition-all duration-500 p-8 group">
-                      <div className="flex flex-col lg:flex-row gap-6">
-                        {/* Icon and Header */}
-                        <div className="lg:w-1/3">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div
-                              className={`p-3 rounded-xl bg-gradient-to-br ${
-                                index % 2 === 0
-                                  ? "from-primaryBlue/10 to-blue-600/10"
-                                  : "from-accentBlue/10 to-primaryBlue/10"
-                              }`}
-                            >
-                              <Icon
-                                className={`w-8 h-8 ${
+                    {/* Content Card */}
+                    <div className="flex-1">
+                      <div className="bg-white rounded-2xl shadow-elegant hover:shadow-3d-hover transition-all duration-500 p-8 group">
+                        <div className="flex flex-col lg:flex-row gap-6">
+                          {/* Icon and Header */}
+                          <div className="lg:w-1/3">
+                            <div className="flex items-start gap-4 mb-4">
+                              <div
+                                className={`p-3 rounded-xl bg-gradient-to-br ${
                                   index % 2 === 0
-                                    ? "text-primaryBlue"
-                                    : "text-accentOrange"
+                                    ? "from-primaryBlue/10 to-blue-600/10"
+                                    : "from-accentBlue/10 to-primaryBlue/10"
                                 }`}
-                              />
+                              >
+                                {/* <Icon
+                                  className={`w-8 h-8 ${
+                                    index % 2 === 0
+                                      ? "text-primaryBlue"
+                                      : "text-accentOrange"
+                                  }`}
+                                /> */}
+                              </div>
+                              <div>
+                                <h3 className="font-bold text-xl text-charcoal">
+                                  {step.thorough_inspection_title}
+                                </h3>
+                                <p className="text-sm text-mediumGray">
+                                  {step.thorough_inspection_sub_heading}
+                                </p>
+                              </div>
                             </div>
-                            <div>
-                              <h3 className="font-bold text-xl text-charcoal">
-                                {step.title}
-                              </h3>
-                              <p className="text-sm text-mediumGray">
-                                {step.duration}
+                            <p className="text-charcoal font-medium mb-4">
+                              {step.thorough_inspection_text}
+                            </p>
+                          </div>
+
+                          {/* Details */}
+                          <div className="lg:w-2/3">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                              {step.through_inspection.map((detail, i) => (
+                                <div key={i} className="flex items-start gap-2">
+                                  <CheckCircle2 className="w-5 h-5 text-accentBlue flex-shrink-0 mt-0.5" />
+                                  <span className="text-sm text-charcoal">
+                                    {detail.through_inspection_txt}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* What others skip */}
+                            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                              <p className="text-sm text-red-800">
+                                <span className="font-bold">
+                                  Industry Shortcut:
+                                </span>{" "}
+                                {step.thorough_inspection_warning_text}
                               </p>
                             </div>
-                          </div>
-                          <p className="text-charcoal font-medium mb-4">
-                            {step.description}
-                          </p>
-                        </div>
-
-                        {/* Details */}
-                        <div className="lg:w-2/3">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                            {step.details.map((detail, i) => (
-                              <div key={i} className="flex items-start gap-2">
-                                <CheckCircle2 className="w-5 h-5 text-accentBlue flex-shrink-0 mt-0.5" />
-                                <span className="text-sm text-charcoal">
-                                  {detail}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* What others skip */}
-                          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                            <p className="text-sm text-red-800">
-                              <span className="font-bold">
-                                Industry Shortcut:
-                              </span>{" "}
-                              {step.notUsual}
-                            </p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
         </div>
 
         {/* Summary Box */}
@@ -258,9 +262,7 @@ export const ThoroughInspectionProcess = ({
             <h3 className="font-serif text-3xl font-bold mb-4">
               {tipCtaHeading}
             </h3>
-            <p className="text-lg mb-8 opacity-95">
-              {tipCtaTxt}
-            </p>
+            <p className="text-lg mb-8 opacity-95">{tipCtaTxt}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={tipCtaBtn1Url}

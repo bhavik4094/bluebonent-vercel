@@ -14,6 +14,12 @@ import {
   Shield,
   Home,
 } from "lucide-react";
+import { fetchAPI } from "@/lib/api";
+
+const data = await fetchAPI("pages?slug=about-us");
+const page = data?.[0];
+const about = page?.acf || {};
+const ownerOperator = page?.acf || {};
 
 interface ComparisonRow {
   category: string;
@@ -24,7 +30,7 @@ interface ComparisonRow {
 
 const comparisonData: ComparisonRow[] = [
   {
-    category: "Your Inspector",
+    category: "Your",
     corporate: "Random inspector from rotating roster - could be anyone",
     bluebonnet: "Tim McCoy personally - the owner, every single time",
     icon: User,
@@ -65,6 +71,7 @@ const comparisonData: ComparisonRow[] = [
 type ownerOptProps = {
   badgeHeading: string;
   badgeSubHeading: string;
+  ownerOptsubText: String;
   ownerOptbtn1txt: string;
   ownerOptbtn1url: string;
   ownerOptbtn2txt: string;
@@ -79,11 +86,13 @@ type ownerOptProps = {
 export const OwnerOperatorComparison = ({
   badgeHeading,
   badgeSubHeading,
+  ownerOptsubText,
   ownerOptbtn1txt,
   ownerOptbtn1url,
   ownerOptbtn2txt,
   ownerOptbtn2url,
 }: ownerOptProps) => {
+  console.log(ownerOperator.owner_operator_comparison_repeater);
   return (
     <section className="py-24 bg-gradient-to-b from-white to-lightGray relative overflow-hidden">
       {/* Background accent */}
@@ -100,7 +109,7 @@ export const OwnerOperatorComparison = ({
             </span>
           </h2>
           <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-           {badgeSubHeading}
+            {badgeSubHeading}
           </p>
         </div>
 
@@ -127,44 +136,46 @@ export const OwnerOperatorComparison = ({
             </div>
 
             {/* Comparison Rows */}
-            {comparisonData.map((row, index) => {
-              const Icon = row.icon;
-              return (
-                <div
-                  key={index}
-                  className={`grid grid-cols-1 lg:grid-cols-3 gap-0 ${
-                    index % 2 === 0 ? "bg-white" : "bg-lightGray/30"
-                  } hover:bg-primaryBlue/5 transition-colors duration-300`}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {/* Category */}
-                  <div className="p-6 lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-200">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primaryBlue/10 rounded-lg">
-                        <Icon className="w-5 h-5 text-primaryBlue" />
+            {ownerOperator?.owner_operator_comparison_repeater?.map(
+              (row, index) => {
+                // const Icon = row.icon;
+                return (
+                  <div
+                    key={index}
+                    className={`grid grid-cols-1 lg:grid-cols-3 gap-0 ${
+                      index % 2 === 0 ? "bg-white" : "bg-lightGray/30"
+                    } hover:bg-primaryBlue/5 transition-colors duration-300`}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    {/* Category */}
+                    <div className="p-6 lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-200">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-primaryBlue/10 rounded-lg">
+                          {/* <Icon className="w-5 h-5 text-primaryBlue" /> */}
+                        </div>
+                        <h4 className="font-bold text-charcoal">
+                          {row.big_corporate_franchises_titles}
+                        </h4>
                       </div>
-                      <h4 className="font-bold text-charcoal">
-                        {row.category}
-                      </h4>
+                    </div>
+
+                    {/* Corporate */}
+                    <div className="p-6 lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-200">
+                      <p className="text-mediumGray text-sm leading-relaxed">
+                        {row.big_corporate_franchises_titles_copy}
+                      </p>
+                    </div>
+
+                    {/* Bluebonnet */}
+                    <div className="p-6 lg:col-span-1">
+                      <p className="text-charcoal text-sm leading-relaxed font-medium">
+                        {row.owner_operator_what_matters_infos}
+                      </p>
                     </div>
                   </div>
-
-                  {/* Corporate */}
-                  <div className="p-6 lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-200">
-                    <p className="text-mediumGray text-sm leading-relaxed">
-                      {row.corporate}
-                    </p>
-                  </div>
-
-                  {/* Bluebonnet */}
-                  <div className="p-6 lg:col-span-1">
-                    <p className="text-charcoal text-sm leading-relaxed font-medium">
-                      {row.bluebonnet}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         </div>
 
@@ -174,7 +185,7 @@ export const OwnerOperatorComparison = ({
           style={{ animationDelay: "800ms" }}
         >
           <p className="text-lg text-charcoal font-medium mb-6">
-            Don't gamble with your family's biggest investment
+            {ownerOptsubText}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

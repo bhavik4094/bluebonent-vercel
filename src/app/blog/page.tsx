@@ -28,7 +28,7 @@ interface BlogPost {
   icon: React.ElementType;
   gradient: string;
   comingSoon?: boolean;
-  link?: string; // for external WP links
+  link?: string;
 }
 
 // Static seed used only to determine the single featured post card design.
@@ -150,8 +150,6 @@ function stripHtml(html: string): string {
     .trim();
 }
 
-// Map WP posts → BlogPost for the grid (non-featured)
-// Fetch categories and build a lookup so we can show category names
 type WPCategory = { id: number; name: string };
 const wpCategories = (await fetchAPI("categories")) as WPCategory[] | null;
 const categoryIdToName = new Map<number, string>(
@@ -165,7 +163,7 @@ const dynamicOtherPosts: BlogPost[] = (wpPosts || []).map((p) => ({
   category:
     categoryIdToName.get((p.categories && p.categories[0]) || -1) ||
     "Uncategorized",
-  readTime: "5 min read", // placeholder; could be computed from content length
+  readTime: "5 min read",
   publishDate: new Date(p.date).toLocaleString("en-US", {
     month: "long",
     year: "numeric",
@@ -198,18 +196,22 @@ export default function BlogPage() {
               {blog.blog_hero_description}
             </p>
             <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-blue-400" />
-                <span>Consumer Advocate</span>
-              </div>
-              <div className="flex items-center gap-2">
+              {blog?.blog_hero_repeater?.map((item: any, idx: any) => {
+                return (
+                  <div className="flex items-center gap-2" key={idx}>
+                    <Shield className="w-5 h-5 text-blue-400" />
+                    <span>{item.blog_hero_txt}</span>
+                  </div>
+                );
+              })}
+              {/* <div className="flex items-center gap-2">
                 <Users className="w-5 h-5 text-blue-400" />
                 <span>500+ Families Protected</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-blue-400" />
                 <span>$2M+ in Repairs Found</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

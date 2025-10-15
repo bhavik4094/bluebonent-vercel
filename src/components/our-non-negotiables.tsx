@@ -4,6 +4,7 @@
  */
 
 import { Shield, XCircle, Zap, Home, Clock, Users } from "lucide-react";
+import { fetchAPI } from "@/lib/api";
 
 interface NonNegotiable {
   promise: string;
@@ -13,46 +14,46 @@ interface NonNegotiable {
   industryFail: string;
 }
 
-const nonNegotiables: NonNegotiable[] = [
-  {
-    promise: "We check every accessible space",
-    detail: "Attic, crawlspace, roof - if it's safe to enter, we're going in",
-    icon: Home,
-    gradient: "from-primaryBlue to-accentBlue",
-    industryFail: "70% of inspectors never enter crawlspaces",
-  },
-  {
-    promise: "We test, not glance",
-    detail:
-      "Fixtures run long enough to reveal slow drains, intermittent leaks, and cycling issues",
-    icon: Zap,
-    gradient: "from-primaryBlue to-accentBlue",
-    industryFail: "Quick on/off checks miss 40% of issues",
-  },
-  {
-    promise: "We teach, not just list",
-    detail:
-      "Plain-English priorities, no confusing jargon, real education about your home",
-    icon: Users,
-    gradient: "from-primaryBlue to-accentBlue",
-    industryFail: "Most reports are filled with CYA language",
-  },
-  {
-    promise: "We deliver fast",
-    detail:
-      "Comprehensive report within 24 hours - protecting your option period",
-    icon: Clock,
-    gradient: "from-primaryBlue to-accentBlue",
-    industryFail: "Average delivery is 48-72 hours",
-  },
-  {
-    promise: "We stand by you after",
-    detail: "Questions answered for as long as you own the home - guaranteed",
-    icon: Shield,
-    gradient: "from-primaryBlue to-accentBlue",
-    industryFail: "Most inspectors ghost after payment",
-  },
-];
+// const nonNegotiables: NonNegotiable[] = [
+//   {
+//     promise: "We check every accessible space",
+//     detail: "Attic, crawlspace, roof - if it's safe to enter, we're going in",
+//     icon: Home,
+//     gradient: "from-primaryBlue to-accentBlue",
+//     industryFail: "70% of inspectors never enter crawlspaces",
+//   },
+//   {
+//     promise: "We test, not glance",
+//     detail:
+//       "Fixtures run long enough to reveal slow drains, intermittent leaks, and cycling issues",
+//     icon: Zap,
+//     gradient: "from-primaryBlue to-accentBlue",
+//     industryFail: "Quick on/off checks miss 40% of issues",
+//   },
+//   {
+//     promise: "We teach, not just list",
+//     detail:
+//       "Plain-English priorities, no confusing jargon, real education about your home",
+//     icon: Users,
+//     gradient: "from-primaryBlue to-accentBlue",
+//     industryFail: "Most reports are filled with CYA language",
+//   },
+//   {
+//     promise: "We deliver fast",
+//     detail:
+//       "Comprehensive report within 24 hours - protecting your option period",
+//     icon: Clock,
+//     gradient: "from-primaryBlue to-accentBlue",
+//     industryFail: "Average delivery is 48-72 hours",
+//   },
+//   {
+//     promise: "We stand by you after",
+//     detail: "Questions answered for as long as you own the home - guaranteed",
+//     icon: Shield,
+//     gradient: "from-primaryBlue to-accentBlue",
+//     industryFail: "Most inspectors ghost after payment",
+//   },
+// ];
 
 type nonNegotiablesProps = {
   nHeading: string;
@@ -66,8 +67,11 @@ type nonNegotiablesProps = {
   nCtaBtn1Url: string;
   nCtaBtn2Txt: string;
   nCtaBtn2Url: string;
-  
 };
+
+const data = await fetchAPI("pages?slug=about-us");
+const page = data?.[0];
+const nonNegotiables = page?.acf || {};
 
 /**
  * Renders the Non-Negotiables section that reframes industry complaints
@@ -105,58 +109,60 @@ export const OurNonNegotiables = ({
           <h2 className="gradient-text font-serif text-5xl lg:text-6xl font-bold text-charcoal mb-6">
             {nHeading}
           </h2>
-          <p className="text-xl text-mediumGray max-w-3xl mx-auto">
-            {ntxt}
-          </p>
+          <p className="text-xl text-mediumGray max-w-3xl mx-auto">{ntxt}</p>
         </div>
 
         {/* Non-Negotiables Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {nonNegotiables.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={index}
-                className="animate-fadeInUp"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="h-full bg-white rounded-xl shadow-elegant hover:shadow-3d-hover transition-all duration-500 overflow-hidden group">
-                  {/* Gradient header */}
-                  <div className={`h-2 bg-gradient-to-r ${item.gradient}`} />
+          {nonNegotiables?.our_non_negotiables_repeater_card?.map(
+            (item, index) => {
+              // const Icon = item.icon;
+              return (
+                <div
+                  key={index}
+                  className="animate-fadeInUp"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="h-full bg-white rounded-xl shadow-elegant hover:shadow-3d-hover transition-all duration-500 overflow-hidden group">
+                    {/* Gradient header */}
+                    <div className={`h-2 bg-gradient-to-r ${item?.gradient}`} />
 
-                  <div className="p-6">
-                    {/* Icon and Promise */}
-                    <div className="flex items-start gap-4 mb-4">
-                      <div
-                        className={`p-3 rounded-lg bg-gradient-to-br ${item.gradient} bg-opacity-10`}
-                      >
-                        <Icon className="w-6 h-6 text-white" />
+                    <div className="p-6">
+                      {/* Icon and Promise */}
+                      <div className="flex items-start gap-4 mb-4">
+                        <div
+                          className={`p-3 rounded-lg bg-gradient-to-br ${item?.gradient} bg-opacity-10`}
+                        >
+                          {/* <Icon className="w-6 h-6 text-white" /> */}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-lg text-charcoal mb-2">
+                            {item?.our_non_negotiables_card_title}
+                          </h3>
+                          <p className="text-sm text-mediumGray">
+                            {item?.our_non_negotiables_card_description}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-lg text-charcoal mb-2">
-                          {item.promise}
-                        </h3>
-                        <p className="text-sm text-mediumGray">{item.detail}</p>
-                      </div>
-                    </div>
 
-                    {/* Industry Comparison */}
-                    <div className="pt-4 border-t border-gray-200">
-                      <div className="flex items-start gap-2">
-                        <XCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-xs text-red-700">
-                          <span className="font-semibold">
-                            Industry Reality:
-                          </span>{" "}
-                          {item.industryFail}
-                        </p>
+                      {/* Industry Comparison */}
+                      <div className="pt-4 border-t border-gray-200">
+                        <div className="flex items-start gap-2">
+                          <XCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                          <p className="text-xs text-red-700">
+                            <span className="font-semibold">
+                              Industry Reality:
+                            </span>{" "}
+                            {item?.our_non_negotiables_card_message}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
         </div>
 
         {/* Promise Statement */}
@@ -180,12 +186,8 @@ export const OurNonNegotiables = ({
                 <h3 className="font-serif text-3xl font-bold text-charcoal mb-4">
                   {npcHeading}
                 </h3>
-                <p className="text-lg text-charcoal mb-4">
-                  "{npcTxt}"
-                </p>
-                <p className="font-bold text-primaryBlue">
-                  - {npcAuthorName}
-                </p>
+                <p className="text-lg text-charcoal mb-4">"{npcTxt}"</p>
+                <p className="font-bold text-primaryBlue">- {npcAuthorName}</p>
               </div>
             </div>
           </div>
@@ -193,9 +195,7 @@ export const OurNonNegotiables = ({
 
         {/* Bottom CTA */}
         <div className="text-center mt-12">
-          <p className="text-lg text-charcoal mb-6">
-            {nCtaTxt}
-          </p>
+          <p className="text-lg text-charcoal mb-6">{nCtaTxt}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={nCtaBtn1Url}
@@ -214,4 +214,4 @@ export const OurNonNegotiables = ({
       </div>
     </section>
   );
-}
+};

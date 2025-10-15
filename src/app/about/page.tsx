@@ -26,6 +26,7 @@ import { ThoroughInspectionProcess } from "@/components/thorough-inspection-proc
 import { OurNonNegotiables } from "@/components/our-non-negotiables";
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
+import ReactHtmlParser from "html-react-parser";
 
 /**
  * Renders the About page with powerful psychological anchors and trust-building elements
@@ -81,8 +82,12 @@ export default function AboutPage() {
 
                   {/* Years Badge */}
                   <div className="absolute -top-6 -left-6 bg-accentBlue text-white rounded-full w-24 h-24 flex flex-col items-center justify-center shadow-2xl">
-                    <span className="text-2xl font-bold">10+</span>
-                    <span className="text-xs">Years</span>
+                    <span className="text-2xl font-bold">
+                      {about?.years_badge?.years_number}
+                    </span>
+                    <span className="text-xs">
+                      {about?.years_badge?.years_text}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -98,7 +103,11 @@ export default function AboutPage() {
                 </h2>
 
                 <div className="space-y-4 text-mediumGray text-lg leading-relaxed">
-                  <p>
+                  {/* {about?.about_section_text} */}
+                  {about?.about_section_text &&
+                    ReactHtmlParser(about.about_section_text)}
+
+                  {/* <p>
                     <span className="font-bold text-charcoal">
                       As a father of seven and Cedar Park resident,
                     </span>{" "}
@@ -125,7 +134,7 @@ export default function AboutPage() {
                       When you hire me, you're not customer #847. You're my
                       neighbor.
                     </span>
-                  </p>
+                  </p> */}
 
                   <p className="italic text-primaryBlue font-semibold">
                     "{about?.story_section_quote_text}"
@@ -136,36 +145,17 @@ export default function AboutPage() {
                 <div className="mt-8 p-6 bg-lightGray rounded-xl">
                   <h3 className="font-bold text-charcoal mb-4 flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-accentOrange" />
-                    Deep Local Knowledge
+                    {about?.deep_local_knowledge_title}
                   </h3>
                   <ul className="space-y-2 text-sm text-mediumGray">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
-                      <span>
-                        Cedar Park resident since 2008 - I know our soil,
-                        weather, and builders
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
-                      <span>
-                        My kids attend local schools - I have skin in the game
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
-                      <span>
-                        Active in YMCA and local church - you'll see me around
-                        town
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
-                      <span>
-                        I inspect for your neighbors - ask around about
-                        Bluebonnet
-                      </span>
-                    </li>
+                    {about?.deep_local_knowledge?.map((item: any, idx: any) => {
+                      return (
+                        <li className="flex items-start gap-2" key={idx}>
+                          <CheckCircle className="w-4 h-4 text-accentBlue flex-shrink-0 mt-0.5" />
+                          <span>{item?.deep_local_knowledge_text}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -178,6 +168,7 @@ export default function AboutPage() {
       <OwnerOperatorComparison
         badgeHeading={ownerOperator?.operator_comparison_heading}
         badgeSubHeading={ownerOperator?.operator_comparison_sub_heading}
+        ownerOptsubText={ownerOperator?.owneroptsubtext}
         ownerOptbtn1txt={ownerOperator?.operator_comparison_btn1_text}
         ownerOptbtn1url={ownerOperator?.operator_comparison_btn1_url}
         ownerOptbtn2txt={ownerOperator?.operator_comparison_btn2_text}

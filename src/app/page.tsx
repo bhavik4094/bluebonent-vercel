@@ -93,6 +93,7 @@ export default async function HomePage() {
         pointtext={acf.audience_pathways_point_text}
         pathways={pathways}
       />
+
       <SocialProof
         title={acf.social_proof_title}
         subtitle={acf.social_proof_subtitle}
@@ -101,6 +102,7 @@ export default async function HomePage() {
         reviewbtntext={acf.review_all_btn}
         reviewbtnurl={acf.review_all_btn_url}
       />
+
       <WhatWeInspect
         title={acf.what_we_inspect_title}
         subtitle={acf.what_we_inspect_description}

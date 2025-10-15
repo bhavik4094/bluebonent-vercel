@@ -6,11 +6,11 @@
 
 export const theme = {
   colors: {
-    primaryBlue: '#1C3046', // For trust and professionalism
-    charcoal: '#1A1A1A', // For body text
-    mediumGray: '#666666', // For secondary text
-    lightGray: '#F1F1F1', // For section backgrounds
-    white: '#FFFFFF', // For primary backgrounds
-    accentBlue: '#397DBB', // For primary CTA buttons
+    primaryBlue: "#1C3046", // For trust and professionalism
+    charcoal: "#1A1A1A", // For body text
+    mediumGray: "#666666", // For secondary text
+    lightGray: "#F1F1F1", // For section backgrounds
+    white: "#FFFFFF", // For primary backgrounds
+    accentBlue: "#397DBB", // For primary CTA buttons
   },
 };
