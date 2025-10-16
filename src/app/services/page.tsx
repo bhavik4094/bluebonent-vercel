@@ -10,15 +10,15 @@ import {
   DollarIcon,
   HammerIcon,
   ChartIcon,
-  FamilyIcon,
-  ClipboardIcon,
+  // FamilyIcon,
+  // ClipboardIcon,
   PhoneIcon,
-  ThermalIcon,
-  PipeIcon,
-  PoolIcon,
-  BugIcon,
-  BeakerIcon,
-  RadiationIcon,
+  // ThermalIcon,
+  // PipeIcon,
+  // PoolIcon,
+  // BugIcon,
+  // BeakerIcon,
+  // RadiationIcon,
   CheckIcon,
   StarIcon,
   ArrowRightIcon,
@@ -97,50 +97,50 @@ const coreServices = [
 ];
 
 // Ancillary services that add value
-const ancillaryServices = [
-  {
-    name: "Thermal Imaging",
-    icon: ThermalIcon,
-    description: "Find hidden moisture and electrical issues",
-    price: "+$75",
-    value: "Can save thousands in water damage",
-  },
-  {
-    name: "Sewer Scope",
-    icon: PipeIcon,
-    description: "Avoid $10,000+ sewer line surprises",
-    price: "+$195",
-    value: "Essential for older homes",
-  },
-  {
-    name: "Pool & Spa",
-    icon: PoolIcon,
-    description: "Complete pool system inspection",
-    price: "+$125",
-    value: "Protect your backyard investment",
-  },
-  {
-    name: "Termite/WDO",
-    icon: BugIcon,
-    description: "Wood destroying organism inspection",
-    price: "+$75",
-    value: "Required by many lenders",
-  },
-  {
-    name: "Mold Testing",
-    icon: BeakerIcon,
-    description: "Air quality and mold assessment",
-    price: "Quote",
-    value: "Protect your family's health",
-  },
-  {
-    name: "Radon Testing",
-    icon: RadiationIcon,
-    description: "EPA-recommended radon levels check",
-    price: "+$125",
-    value: "Invisible danger detection",
-  },
-];
+// const ancillaryServices = [
+//   {
+//     name: "Thermal Imaging",
+//     icon: ThermalIcon,
+//     description: "Find hidden moisture and electrical issues",
+//     price: "+$75",
+//     value: "Can save thousands in water damage",
+//   },
+//   {
+//     name: "Sewer Scope",
+//     icon: PipeIcon,
+//     description: "Avoid $10,000+ sewer line surprises",
+//     price: "+$195",
+//     value: "Essential for older homes",
+//   },
+//   {
+//     name: "Pool & Spa",
+//     icon: PoolIcon,
+//     description: "Complete pool system inspection",
+//     price: "+$125",
+//     value: "Protect your backyard investment",
+//   },
+//   {
+//     name: "Termite/WDO",
+//     icon: BugIcon,
+//     description: "Wood destroying organism inspection",
+//     price: "+$75",
+//     value: "Required by many lenders",
+//   },
+//   {
+//     name: "Mold Testing",
+//     icon: BeakerIcon,
+//     description: "Air quality and mold assessment",
+//     price: "Quote",
+//     value: "Protect your family's health",
+//   },
+//   {
+//     name: "Radon Testing",
+//     icon: RadiationIcon,
+//     description: "EPA-recommended radon levels check",
+//     price: "+$125",
+//     value: "Invisible danger detection",
+//   },
+// ];
 
 // Testimonials specific to services
 const serviceTestimonials = [

@@ -71,7 +71,7 @@ const comparisonData: ComparisonRow[] = [
 type ownerOptProps = {
   badgeHeading: string;
   badgeSubHeading: string;
-  ownerOptsubText: String;
+  ownerOptsubText: string;
   ownerOptbtn1txt: string;
   ownerOptbtn1url: string;
   ownerOptbtn2txt: string;
