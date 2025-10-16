@@ -115,7 +115,7 @@ export const OurNonNegotiables = ({
         {/* Non-Negotiables Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {nonNegotiables?.our_non_negotiables_repeater_card?.map(
-            (item, index) => {
+            (item: any, index: number) => {
               // const Icon = item.icon;
               return (
                 <div
