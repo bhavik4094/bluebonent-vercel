@@ -161,7 +161,7 @@ export const ThoroughInspectionProcess = ({
         {/* Process Timeline */}
         <div className="max-w-6xl mx-auto">
           {thoroughInspection?.thorough_inspection_repeater?.map(
-            (step, index) => {
+            (step: any, index: number) => {
               // const Icon = step.icon;
               return (
                 <div
@@ -225,14 +225,19 @@ export const ThoroughInspectionProcess = ({
                           {/* Details */}
                           <div className="lg:w-2/3">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                              {step.through_inspection.map((detail, i) => (
-                                <div key={i} className="flex items-start gap-2">
-                                  <CheckCircle2 className="w-5 h-5 text-accentBlue flex-shrink-0 mt-0.5" />
-                                  <span className="text-sm text-charcoal">
-                                    {detail.through_inspection_txt}
-                                  </span>
-                                </div>
-                              ))}
+                              {step.through_inspection.map(
+                                (detail: any, i: number) => (
+                                  <div
+                                    key={i}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <CheckCircle2 className="w-5 h-5 text-accentBlue flex-shrink-0 mt-0.5" />
+                                    <span className="text-sm text-charcoal">
+                                      {detail.through_inspection_txt}
+                                    </span>
+                                  </div>
+                                )
+                              )}
                             </div>
 
                             {/* What others skip */}
