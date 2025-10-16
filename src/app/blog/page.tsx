@@ -9,7 +9,7 @@ import {
   Calendar,
   Clock,
   ChevronRight,
-  TrendingUp,
+  // TrendingUp,
   Shield,
   AlertTriangle,
   Users,

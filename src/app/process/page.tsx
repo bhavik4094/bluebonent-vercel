@@ -7,12 +7,13 @@
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
 import {
-  Calendar,
-  Home,
-  FileText,
-  HeartHandshake,
+  // Calendar,
+  // Home,
+  // FileText,
+  // HeartHandshake,
   CheckCircle,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -112,12 +113,17 @@ export default function ProcessPage() {
                 description={benefit.bluebonnet_process_description}
                 icon={
                   processIconImg[idx].bluebonnet_process_icon ? (
-                    <img
+                    <Image
                       src={processIconImg[idx].bluebonnet_process_icon}
                       alt={benefit.bluebonnet_process_title}
                       className="w-8 h-8 mx-auto"
                     />
-                  ) : null
+                  ) : // <img
+                  //   src={processIconImg[idx].bluebonnet_process_icon}
+                  //   alt={benefit.bluebonnet_process_title}
+                  //   className="w-8 h-8 mx-auto"
+                  // />
+                  null
                 }
                 details={
                   benefit.bluebonnet_process_points_repeater?.map(

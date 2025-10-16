@@ -8,6 +8,7 @@
  * @returns {JSX.Element} The trust bar component
  *
  */
+import Image from "next/image";
 import React from "react";
 
 type TrustItem = {
@@ -36,12 +37,17 @@ export const TrustBar = ({
             }
           >
             {item.trust_icon ? (
-              <img
+              <Image
                 src={item.trust_icon}
                 alt={item.trust_title}
                 className="w-4 h-4"
               />
-            ) : null}
+            ) : // <img
+            //   src={item.trust_icon}
+            //   alt={item.trust_title}
+            //   className="w-4 h-4"
+            // />
+            null}
           </span>
           <span>{item.trust_title}</span>
           {index < trustbaritem.length - 1 && (

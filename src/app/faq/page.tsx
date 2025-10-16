@@ -7,16 +7,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  ChevronDown,
-  Download,
-  FileText,
-  Home,
-  DollarSign,
-  Clock,
-  Shield,
-  CheckCircle,
-} from "lucide-react";
+import { ChevronDown, Download, FileText, Home } from "lucide-react";
 import Link from "next/link";
 import { fetchAPI } from "@/lib/api";
 

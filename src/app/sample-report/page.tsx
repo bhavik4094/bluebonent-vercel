@@ -7,13 +7,13 @@
 import { fetchAPI } from "@/lib/api";
 import {
   FileText,
-  Camera,
+  // Camera,
   CheckCircle,
-  Share2,
-  Clock,
-  AlertCircle,
+  // Share2,
+  // Clock,
+  // AlertCircle,
   Smartphone,
-  Download,
+  // Download,
 } from "lucide-react";
 import Link from "next/link";
 

@@ -4,7 +4,7 @@
  * being ghosted after the inspection.
  */
 
-import { Moon, Phone, Clock, Heart } from "lucide-react";
+import { Moon, Phone } from "lucide-react";
 import { fetchAPI } from "@/lib/api";
 
 type ThreeAMPromiseProps = {

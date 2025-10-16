@@ -116,12 +116,17 @@ export const WhatWeInspect = ({
                   }
                 >
                   {item.card_inspect_icon ? (
-                    <img
+                    <Image
                       src={item.card_inspect_icon}
                       alt={item.card_inspect_title}
                       className="w-8 h-8"
                     />
-                  ) : null}
+                  ) : // <img
+                  //   src={item.card_inspect_icon}
+                  //   alt={item.card_inspect_title}
+                  //   className="w-8 h-8"
+                  // />
+                  null}
                 </div>
               </div>
 

@@ -7,15 +7,15 @@
 import { fetchAPI } from "@/lib/api";
 import { normalizeImage } from "@/lib/utils";
 import {
-  Shield,
-  Clock,
+  // Shield,
+  // Clock,
   // Phone,
-  Key,
-  FileCheck,
-  Users,
+  // Key,
+  // FileCheck,
+  // Users,
   // TrendingUp,
   // Award,
-  Download,
+  // Download,
   Handshake,
 } from "lucide-react";
 import Image from "next/image";
@@ -73,7 +73,8 @@ const AgentTestimonial = ({
   <div className="bg-white p-6 rounded-lg shadow-md">
     <div className="flex items-start gap-3 mb-4">
       {[...Array(5)].map((_, i) => (
-        <img key={i} src="/star.png" alt="Star" className="w-5 h-5" />
+        // <img key={i} src="/star.png" alt="Star" className="w-5 h-5" />
+        <Image key={i} src="/star.png" alt="Star" className="w-5 h-5" />
       ))}
     </div>
     <p className="text-mediumGray mb-4 italic">{quote}</p>
@@ -163,7 +164,12 @@ export default function ForAgentsPage() {
               <AgentBenefit
                 key={idx}
                 icon={
-                  <img
+                  // <img
+                  //   src={agentsChooseIcons[idx].agents_choose_card_icon}
+                  //   alt={benefit.agents_choose_card_title}
+                  //   className="w-8 h-8 object-contain"
+                  // />
+                  <Image
                     src={agentsChooseIcons[idx].agents_choose_card_icon}
                     alt={benefit.agents_choose_card_title}
                     className="w-8 h-8 object-contain"
