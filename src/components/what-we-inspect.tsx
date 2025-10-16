@@ -120,6 +120,8 @@ export const WhatWeInspect = ({
                       src={item.card_inspect_icon}
                       alt={item.card_inspect_title}
                       className="w-8 h-8"
+                      width={32}
+                      height={32}
                     />
                   ) : // <img
                   //   src={item.card_inspect_icon}

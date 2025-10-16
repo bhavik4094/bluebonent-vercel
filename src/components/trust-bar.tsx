@@ -41,6 +41,8 @@ export const TrustBar = ({
                 src={item.trust_icon}
                 alt={item.trust_title}
                 className="w-4 h-4"
+                width={16}
+                height={16}
               />
             ) : // <img
             //   src={item.trust_icon}

@@ -18,6 +18,23 @@ import { fetchAPI } from "@/lib/api";
  * @param {string} props.answer - The FAQ answer
  * @returns {JSX.Element} Accordion component
  */
+
+interface FaqItem {
+  faq_question: string;
+  faq_answer: string;
+}
+
+interface FaqSection {
+  faq_title: string;
+  faq: FaqItem[];
+}
+
+interface ResourceCardType {
+  resource_card_title: string;
+  resource_card_description: string;
+  resource_card_buttontext: string;
+}
+
 const FaqAccordion = ({
   question,
   answer,
@@ -171,7 +188,7 @@ export default function FaqPage() {
           <div className="max-w-4xl mx-auto">
             {/* First-Time Buyer Questions */}
             {faq?.frequently_asked_questions_section?.map(
-              (section, sectionIndex) => (
+              (section: FaqSection, sectionIndex: number) => (
                 <div className="mb-12" key={sectionIndex}>
                   <div className="flex items-center gap-3 mb-6">
                     <Home className="w-8 h-8 text-primaryBlue" />
@@ -180,7 +197,7 @@ export default function FaqPage() {
                     </h2>
                   </div>
                   <div className="bg-lightGray rounded-lg p-1">
-                    {section.faq?.map((faqItem, faqIndex) => (
+                    {section.faq?.map((faqItem: FaqItem, faqIndex: number) => (
                       <FaqAccordion
                         key={faqIndex}
                         question={faqItem.faq_question}
