@@ -137,7 +137,7 @@ export const OwnerOperatorComparison = ({
 
             {/* Comparison Rows */}
             {ownerOperator?.owner_operator_comparison_repeater?.map(
-              (row, index) => {
+              (row: any, index: number) => {
                 // const Icon = row.icon;
                 return (
                   <div
