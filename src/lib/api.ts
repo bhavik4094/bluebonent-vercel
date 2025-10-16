@@ -1,18 +1,34 @@
+// lib/api.ts
 export async function fetchAPI(endpoint: string) {
   try {
-    const baseUrl =
+    let baseUrl =
       process.env.WORDPRESS_API_URL ||
-      "https://home-inspections.codersh.com/wp-json/wp/v2/";
+      "https://home-inspections.codersh.com/wp-json/";
 
-    const res = await fetch(`${baseUrl}${endpoint}`, {
-      next: { revalidate: 60 },
+    // ✅ Smart handling for different endpoint types
+    if (endpoint.startsWith("http")) {
+      baseUrl = ""; // full URL passed
+    } else if (endpoint.startsWith("custom/")) {
+      // custom endpoints (like menus)
+      baseUrl += "";
+    } else if (!endpoint.startsWith("wp/v2/")) {
+      // default WordPress REST endpoints
+      baseUrl += "wp/v2/";
+    }
+
+    const url = `${baseUrl}${endpoint}`;
+    console.log("Fetching:", url);
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 }, // revalidate every 60s (ISR)
     });
 
     if (!res.ok) {
       throw new Error(`Failed to fetch API: ${endpoint}`);
     }
 
-    return res.json();
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error("API fetch error:", error);
     return null;
