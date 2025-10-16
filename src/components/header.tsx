@@ -21,7 +21,7 @@ export const Header = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch menu items dynamically from WP custom endpoint
+  //  Fetch menu items dynamically from WP custom endpoint
   useEffect(() => {
     const loadMenu = async () => {
       try {
@@ -77,7 +77,7 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* 🟨 Main Navigation */}
+      {/*  Main Navigation */}
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -91,7 +91,7 @@ export const Header = () => {
             />
           </Link>
 
-          {/* 🖥️ Desktop Navigation */}
+          {/*  Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {loading ? (
               <span className="text-gray-400">Loading...</span>
@@ -108,7 +108,7 @@ export const Header = () => {
             )}
           </div>
 
-          {/* ☎️ CTA Section */}
+          {/* CTA Section */}
           <div className="flex items-center gap-4">
             <a
               href="tel:512-560-5670"
@@ -124,7 +124,7 @@ export const Header = () => {
               Schedule Now
             </Link>
 
-            {/* 📱 Mobile Menu Button */}
+            {/*  Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
               className="lg:hidden p-2 text-charcoal hover:text-primaryBlue transition-colors"
@@ -139,7 +139,7 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* 📱 Mobile Dropdown Menu */}
+        {/*  Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200">
             <nav className="container mx-auto px-4 py-4">
