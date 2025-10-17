@@ -75,11 +75,84 @@ export default function SchedulePage() {
             <h2 className="font-serif text-3xl font-bold text-charcoal mb-4">
               Or, Fill Out This Form
             </h2>
-            {formHtml ? (
-              <div dangerouslySetInnerHTML={{ __html: formHtml }} />
-            ) : (
-              <p>Loading form...</p>
-            )}
+            <form>
+              <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-charcoal font-bold mb-2"
+                >
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full p-2 border border-mediumGray rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-charcoal font-bold mb-2"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full p-2 border border-mediumGray rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="phone"
+                  className="block text-charcoal font-bold mb-2"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  className="w-full p-2 border border-mediumGray rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="address"
+                  className="block text-charcoal font-bold mb-2"
+                >
+                  Property Address
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  className="w-full p-2 border border-mediumGray rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="message"
+                  className="block text-charcoal font-bold mb-2"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className="w-full p-2 border border-mediumGray rounded"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold py-3 px-6 rounded-full w-full  hover:from-accentBlue hover:to-primaryBlue transition-all"
+              >
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </section>
