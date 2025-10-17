@@ -6,14 +6,20 @@
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { fetchAPI } from "@/lib/api";
 
 /**
  * Footer component with NAP, service areas, and important links
  * @returns {JSX.Element} The site footer with comprehensive information
  */
-export const Footer = () => {
+export const Footer = async () => {
   const currentYear = new Date().getFullYear();
-
+  // let footer = {};
+  const res = await fetch("https://home-inspections.codersh.com/wp-json/acf/v3/options/options", {
+  next: { revalidate: 3600 }, // optional cache revalidation
+  });
+  const data = await res.json();
+  const footer = data.acf;
   return (
     <footer className="bg-charcoal text-white">
       <div className="container mx-auto px-4 py-12">
@@ -21,38 +27,36 @@ export const Footer = () => {
           {/* Company Information */}
           <div>
             <h3 className="font-serif text-xl mb-4">
-              Bluebonnet Home Inspections
+              {footer?.company_name}
             </h3>
             <div className="space-y-3 text-gray-300">
               <p className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <span>
-                  Cedar Park, TX 78613
-                  <br />
-                  Serving Central Texas
+                  {footer?.address}
                 </span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-5 h-5 flex-shrink-0" />
                 <a
-                  href="tel:512-560-5670"
+                  href={`tel:${footer?.phone}`}
                   className="hover:text-white transition-colors"
                 >
-                  512-560-5670
+                  {footer?.phone}
                 </a>
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="w-5 h-5 flex-shrink-0" />
                 <a
-                  href="mailto:tim@bluebonnetinspections.com"
+                  href={`mailto:${footer?.email}`}
                   className="hover:text-white transition-colors"
                 >
-                  tim@bluebonnetinspections.com
+                  {footer?.email}
                 </a>
               </p>
               <p className="flex items-center gap-2">
                 <Clock className="w-5 h-5 flex-shrink-0" />
-                <span>7 Days a Week</span>
+                <span>{footer?.license}</span>
               </p>
             </div>
           </div>
@@ -187,10 +191,10 @@ export const Footer = () => {
           <div>
             <h3 className="font-serif text-xl mb-4">Certifications</h3>
             <div className="space-y-3 text-gray-300">
-              <p className="font-semibold">TREC License #23059</p>
-              <p>InterNACHI Certified</p>
-              <p>Fully Insured & Bonded</p>
-              <p>200% Satisfaction Guarantee</p>
+              <p className="font-semibold">{footer?.certification_1}</p>
+              <p>{footer?.certification_2}</p>
+              <p>{footer?.certification_3_}</p>
+              <p>{footer?.guarantee}</p>
 
               <div className="pt-4 space-y-2">
                 <Link

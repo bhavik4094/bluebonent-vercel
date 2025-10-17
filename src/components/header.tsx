@@ -21,6 +21,12 @@ export const Header = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // const res = await fetch("https://home-inspections.codersh.com/wp-json/acf/v3/options/options", {
+  // next: { revalidate: 3600 }, // optional cache revalidation
+  // });
+  // const data = await res.json();
+  // const header = data.acf;
+
   //  Fetch menu items dynamically from WP custom endpoint
   useEffect(() => {
     const loadMenu = async () => {
