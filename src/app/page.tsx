@@ -15,16 +15,19 @@ type MetricData = {
     url: string;
   };
 };
+
 type InspectionData = {
   card_inspect_icon?: {
     url: string;
   };
 };
+
 type FeatureIcon = {
   additional_features_card_icon?: {
     url: string;
   };
 };
+
 type TrustIcon = {
   trust_icon?: {
     url: string;
@@ -35,6 +38,23 @@ export default async function HomePage() {
   const data = await fetchAPI("pages?slug=home-page");
   const page = data?.[0];
   const acf = page?.acf || {};
+
+  // Fetch testimonials dynamically
+  const testimonials = await fetchAPI("testimonial");
+
+  const reviews =
+    testimonials?.map((t: any) => ({
+      stars: 5,
+      quote: t.content.rendered.replace(/<\/?[^>]+(>|$)/g, ""), // strip HTML
+      author: t.title.rendered,
+      role: t.acf?.testimonial_sub_title || "",
+      date: new Date(t.date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }),
+      verified: true,
+      highlight: false,
+    })) || [];
 
   const enhancedIconUrl = await normalizeImage(acf.enhanced_icon);
 
@@ -58,12 +78,14 @@ export default async function HomePage() {
       metric_icon: (await normalizeImage(m.metric_icon)) || "",
     }))
   );
+
   const inspectionsitems = await Promise.all(
     (acf.what_we_inspect_card || []).map(async (m: InspectionData) => ({
       ...m,
       card_inspect_icon: (await normalizeImage(m.card_inspect_icon)) || "",
     }))
   );
+
   const additionalfeatures = await Promise.all(
     (acf.additional_features_repeater || []).map(async (m: FeatureIcon) => ({
       ...m,
@@ -101,6 +123,7 @@ export default async function HomePage() {
         metricsData={metricsData}
         reviewbtntext={acf.review_all_btn}
         reviewbtnurl={acf.review_all_btn_url}
+        reviews={reviews} // 👈 Dynamic testimonials
       />
 
       <WhatWeInspect
@@ -114,6 +137,5 @@ export default async function HomePage() {
         footertext={acf.additional_features_footer_title}
       />
     </main>
-    // 123546897
   );
 }
