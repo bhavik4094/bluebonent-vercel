@@ -15,6 +15,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { fetchAPI } from "@/lib/api";
+import { normalizeImage } from "@/lib/utils";
+import Image from "next/image";
 
 const data = await fetchAPI("pages?slug=about-us");
 const page = data?.[0];
@@ -110,6 +112,23 @@ const inspectionSteps: InspectionStep[] = [
   },
 ];
 
+// about table images added here
+type comprehensiveInspectionImg = {
+  thorough_inspection_image?: {
+    url: string;
+  };
+};
+
+const comprehensiveInspectionIcon = await Promise.all(
+  (thoroughInspection.thorough_inspection_repeater || []).map(
+    async (m: comprehensiveInspectionImg) => ({
+      ...m,
+      thorough_inspection_image:
+        (await normalizeImage(m.thorough_inspection_image)) || "",
+    })
+  )
+);
+
 type thoroughInspectionProps = {
   tipHeading: string;
   tipSubHeading: string;
@@ -127,6 +146,7 @@ type thoroughInspectionProps = {
  * specific, observable behaviors that buyers can visualize and verify.
  * @returns Inspection process timeline component
  */
+
 export const ThoroughInspectionProcess = ({
   tipHeading,
   tipSubHeading,
@@ -207,6 +227,16 @@ export const ThoroughInspectionProcess = ({
                                       : "text-accentOrange"
                                   }`}
                                 /> */}
+                                <Image
+                                  className="w-5 h-5 text-primaryBlue"
+                                  src={
+                                    comprehensiveInspectionIcon[index]
+                                      ?.thorough_inspection_image
+                                  }
+                                  alt={thoroughInspection.title}
+                                  width={20}
+                                  height={20}
+                                />
                               </div>
                               <div>
                                 <h3 className="font-bold text-xl text-charcoal">
@@ -289,3 +319,5 @@ export const ThoroughInspectionProcess = ({
     </section>
   );
 };
+
+// throguh inspection process.tsx

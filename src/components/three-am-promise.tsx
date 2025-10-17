@@ -6,6 +6,8 @@
 
 import { Moon, Phone } from "lucide-react";
 import { fetchAPI } from "@/lib/api";
+import { normalizeImage } from "@/lib/utils";
+import Image from "next/image";
 
 type ThreeAMPromiseProps = {
   tapHeading?: string;
@@ -30,6 +32,23 @@ type ThreeAMPromiseProps = {
 const data = await fetchAPI("pages?slug=about-us");
 const page = data?.[0];
 const threeAMPromise = page?.acf || {};
+
+// about table images added here
+type threeAmPromiseImg = {
+  three_am_promise_section_image?: {
+    url: string;
+  };
+};
+
+const threeAmPromiseIcon = await Promise.all(
+  (threeAMPromise.three_am_promise_section || []).map(
+    async (m: threeAmPromiseImg) => ({
+      ...m,
+      three_am_promise_section_image:
+        (await normalizeImage(m.three_am_promise_section_image)) || "",
+    })
+  )
+);
 
 export const ThreeAMPromise = ({
   tapHeading,
@@ -99,7 +118,17 @@ export const ThreeAMPromise = ({
                     key={idx}
                     className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
                   >
-                    <Phone className="w-10 h-10 text-accentBlue mx-auto mb-4" />
+                    {/* <Phone className="w-10 h-10 text-accentBlue mx-auto mb-4" /> */}
+                    <Image
+                      className="w-10 h-10 text-accentBlue mx-auto mb-4"
+                      src={
+                        threeAmPromiseIcon[idx]?.three_am_promise_section_image
+                      }
+                      alt={threeAMPromise.title}
+                      width={20}
+                      height={20}
+                    />
+
                     <h3 className="font-bold text-lg mb-2">
                       {item?.three_am_promise_section_title}
                     </h3>
@@ -171,3 +200,5 @@ export const ThreeAMPromise = ({
     </section>
   );
 };
+
+// three-am-promise.tsx

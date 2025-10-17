@@ -5,6 +5,8 @@
 
 import { Shield, XCircle } from "lucide-react";
 import { fetchAPI } from "@/lib/api";
+import { normalizeImage } from "@/lib/utils";
+import Image from "next/image";
 
 interface NonNegotiable {
   promise: string;
@@ -73,11 +75,29 @@ const data = await fetchAPI("pages?slug=about-us");
 const page = data?.[0];
 const nonNegotiables = page?.acf || {};
 
+// about table images added here
+type nonNegotiableCardsImg = {
+  our_non_negotiables_card_image?: {
+    url: string;
+  };
+};
+
+const nonNegotiableCardsIcon = await Promise.all(
+  (nonNegotiables.our_non_negotiables_repeater_card || []).map(
+    async (m: nonNegotiableCardsImg) => ({
+      ...m,
+      our_non_negotiables_card_image:
+        (await normalizeImage(m.our_non_negotiables_card_image)) || "",
+    })
+  )
+);
+
 /**
  * Renders the Non-Negotiables section that reframes industry complaints
  * into concrete quality guarantees, building trust through specificity.
  * @returns Non-negotiables promise component
  */
+
 export const OurNonNegotiables = ({
   nHeading,
   nSubHeading,
@@ -134,6 +154,16 @@ export const OurNonNegotiables = ({
                           className={`p-3 rounded-lg bg-gradient-to-br ${item?.gradient} bg-opacity-10`}
                         >
                           {/* <Icon className="w-6 h-6 text-white" /> */}
+                          <Image
+                            className="w-5 h-5 text-primaryBlue"
+                            src={
+                              nonNegotiableCardsIcon[index]
+                                ?.our_non_negotiables_card_image
+                            }
+                            alt={nonNegotiables.title}
+                            width={20}
+                            height={20}
+                          />
                         </div>
                         <div className="flex-1">
                           <h3 className="font-bold text-lg text-charcoal mb-2">
@@ -215,3 +245,5 @@ export const OurNonNegotiables = ({
     </section>
   );
 };
+
+// owner-operator-comparison.tsx

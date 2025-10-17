@@ -41,15 +41,15 @@ const ownerOperatorIcon = await Promise.all(
 );
 
 // // about table images added here
-// type ownerOperatorImage = {
+// type comprehensiveInspectionImg = {
 //   owner_operator_what_matters_images?: {
 //     url: string;
 //   };
 // };
 
-// const ownerOperatorIcon = await Promise.all(
+// const comprehensiveInspectionIcon = await Promise.all(
 //   (about.owner_operator_comparison_repeater || []).map(
-//     async (m: ownerOperatorImage) => ({
+//     async (m: comprehensiveInspectionImg) => ({
 //       ...m,
 //       owner_operator_what_matters_images:
 //         (await normalizeImage(m.owner_operator_what_matters_images)) || "",
@@ -253,3 +253,5 @@ export const OwnerOperatorComparison = ({
     </section>
   );
 };
+
+// owner-operator-comparison.tsx
