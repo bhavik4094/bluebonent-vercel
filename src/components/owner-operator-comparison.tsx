@@ -15,11 +15,47 @@ import {
   Home,
 } from "lucide-react";
 import { fetchAPI } from "@/lib/api";
+import Image from "next/image";
+import { normalizeImage } from "@/lib/utils";
 
 const data = await fetchAPI("pages?slug=about-us");
 const page = data?.[0];
 const about = page?.acf || {};
 const ownerOperator = page?.acf || {};
+
+// about table images added here
+type ownerOperatorImage = {
+  owner_operator_what_matters_images?: {
+    url: string;
+  };
+};
+
+const ownerOperatorIcon = await Promise.all(
+  (about.owner_operator_comparison_repeater || []).map(
+    async (m: ownerOperatorImage) => ({
+      ...m,
+      owner_operator_what_matters_images:
+        (await normalizeImage(m.owner_operator_what_matters_images)) || "",
+    })
+  )
+);
+
+// // about table images added here
+// type ownerOperatorImage = {
+//   owner_operator_what_matters_images?: {
+//     url: string;
+//   };
+// };
+
+// const ownerOperatorIcon = await Promise.all(
+//   (about.owner_operator_comparison_repeater || []).map(
+//     async (m: ownerOperatorImage) => ({
+//       ...m,
+//       owner_operator_what_matters_images:
+//         (await normalizeImage(m.owner_operator_what_matters_images)) || "",
+//     })
+//   )
+// );
 
 interface ComparisonRow {
   category: string;
@@ -152,6 +188,16 @@ export const OwnerOperatorComparison = ({
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-primaryBlue/10 rounded-lg">
                           {/* <Icon className="w-5 h-5 text-primaryBlue" /> */}
+                          <Image
+                            className="w-5 h-5 text-primaryBlue"
+                            src={
+                              ownerOperatorIcon[index]
+                                ?.owner_operator_what_matters_images
+                            }
+                            alt={about.title}
+                            width={20}
+                            height={20}
+                          />
                         </div>
                         <h4 className="font-bold text-charcoal">
                           {row.big_corporate_franchises_titles}
