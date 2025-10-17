@@ -139,7 +139,7 @@ export default function SchedulePage() {
               </div>
               <button
                 type="submit"
-                className="bg-accentOrange text-white font-bold py-3 px-6 rounded-full w-full"
+                className="bg-gradient-to-r from-primaryBlue to-accentBlue text-white font-bold py-3 px-6 rounded-full w-full  hover:from-accentBlue hover:to-primaryBlue transition-all"
               >
                 Send Message
               </button>
