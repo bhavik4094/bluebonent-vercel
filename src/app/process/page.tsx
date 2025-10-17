@@ -117,6 +117,8 @@ export default function ProcessPage() {
                       src={processIconImg[idx].bluebonnet_process_icon}
                       alt={benefit.bluebonnet_process_title}
                       className="w-8 h-8 mx-auto"
+                      width={32}
+                      height={32}
                     />
                   ) : // <img
                   //   src={processIconImg[idx].bluebonnet_process_icon}

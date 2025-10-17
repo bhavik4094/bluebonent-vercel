@@ -74,7 +74,14 @@ const AgentTestimonial = ({
     <div className="flex items-start gap-3 mb-4">
       {[...Array(5)].map((_, i) => (
         // <img key={i} src="/star.png" alt="Star" className="w-5 h-5" />
-        <Image key={i} src="/star.png" alt="Star" className="w-5 h-5" />
+        <Image
+          key={i}
+          src="/star.png"
+          alt="Star"
+          className="w-5 h-5"
+          width={20}
+          height={20}
+        />
       ))}
     </div>
     <p className="text-mediumGray mb-4 italic">{quote}</p>
@@ -173,6 +180,8 @@ export default function ForAgentsPage() {
                     src={agentsChooseIcons[idx].agents_choose_card_icon}
                     alt={benefit.agents_choose_card_title}
                     className="w-8 h-8 object-contain"
+                    width={32}
+                    height={32}
                   />
                 }
                 title={benefit.agents_choose_card_title}
