@@ -275,7 +275,6 @@ export default function ServicesPage() {
                         alt={item?.title}
                         width={40}
                         height={40}
-                        className="rounded-full"
                       />
                     </div>
                     <h3 className="font-bold text-xl mb-3 text-charcoal">
@@ -332,7 +331,6 @@ export default function ServicesPage() {
                             alt={service.name}
                             width={48}
                             height={48}
-                            className="rounded-full"
                           />
                         </div>
                         <div>
