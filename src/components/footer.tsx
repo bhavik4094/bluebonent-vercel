@@ -1,40 +1,75 @@
-/**
- * @fileoverview Footer component for Bluebonnet Home Inspections website.
- * @description This component displays company information, service areas, links, and legal requirements
- * following the implementation checklist requirements for trust signals and compliance.
- */
+"use client";
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 import { fetchAPI } from "@/lib/api";
 
-/**
- * Footer component with NAP, service areas, and important links
- * @returns {JSX.Element} The site footer with comprehensive information
- */
-export const Footer = async () => {
+interface MenuItem {
+  ID: number;
+  title: string;
+  url: string;
+  order: number;
+}
+
+export const Footer = () => {
   const currentYear = new Date().getFullYear();
-  // let footer = {};
-  const res = await fetch("https://home-inspections.codersh.com/wp-json/acf/v3/options/options", {
-  next: { revalidate: 3600 }, // optional cache revalidation
-  });
-  const data = await res.json();
-  const footer = data.acf;
+  const [footer, setFooter] = useState<any>({});
+  const [leftMenu, setLeftMenu] = useState<MenuItem[]>([]);
+  const [rightMenu, setRightMenu] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadFooterData = async () => {
+      try {
+        // 🔹 Fetch ACF footer fields
+        const res = await fetch(
+          "https://home-inspections.codersh.com/wp-json/acf/v3/options/options",
+          { next: { revalidate: 3600 } }
+        );
+        const data = await res.json();
+        setFooter(data.acf);
+
+        // 🔹 Fetch Footer Menus (left & right)
+        const [left, right] = await Promise.all([
+          fetchAPI("custom/v1/menu/footer-menu-left"),
+          fetchAPI("custom/v1/menu/footer-menu-right"),
+        ]);
+
+        if (left?.items) {
+          const sorted = left.items.sort(
+            (a: MenuItem, b: MenuItem) => a.order - b.order
+          );
+          setLeftMenu(sorted);
+        }
+
+        if (right?.items) {
+          const sorted = right.items.sort(
+            (a: MenuItem, b: MenuItem) => a.order - b.order
+          );
+          setRightMenu(sorted);
+        }
+      } catch (error) {
+        console.error("Footer fetch error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadFooterData();
+  }, []);
+
   return (
     <footer className="bg-charcoal text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Information */}
           <div>
-            <h3 className="font-serif text-xl mb-4">
-              {footer?.company_name}
-            </h3>
+            <h3 className="font-serif text-xl mb-4">{footer?.company_name}</h3>
             <div className="space-y-3 text-gray-300">
               <p className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <span>
-                  {footer?.address}
-                </span>
+                <span>{footer?.address}</span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-5 h-5 flex-shrink-0" />
@@ -61,129 +96,45 @@ export const Footer = async () => {
             </div>
           </div>
 
-          {/* Service Areas */}
+          {/* Service Areas (Dynamic Left Menu) */}
           <div>
             <h3 className="font-serif text-xl mb-4">Service Areas</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>
-                <Link
-                  href="/cedar-park-home-inspector"
-                  className="hover:text-white transition-colors"
-                >
-                  Cedar Park
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/round-rock-home-inspector"
-                  className="hover:text-white transition-colors"
-                >
-                  Round Rock
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/leander-home-inspector"
-                  className="hover:text-white transition-colors"
-                >
-                  Leander
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/georgetown-home-inspector"
-                  className="hover:text-white transition-colors"
-                >
-                  Georgetown
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/austin-home-inspector"
-                  className="hover:text-white transition-colors"
-                >
-                  Austin
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/pflugerville-home-inspector"
-                  className="hover:text-white transition-colors"
-                >
-                  Pflugerville
-                </Link>
-              </li>
+              {loading ? (
+                <li>Loading...</li>
+              ) : (
+                leftMenu.map((item) => (
+                  <li key={item.ID}>
+                    <Link
+                      href={item.url || "#"}
+                      className="hover:text-white transition-colors"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links (Dynamic Right Menu) */}
           <div>
             <h3 className="font-serif text-xl mb-4">Quick Links</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>
-                <Link
-                  href="/services"
-                  className="hover:text-white transition-colors"
-                >
-                  Our Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:text-white transition-colors"
-                >
-                  About Tim McCoy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/process"
-                  className="hover:text-white transition-colors"
-                >
-                  Inspection Process
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sample-report"
-                  className="hover:text-white transition-colors"
-                >
-                  Sample Report
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="hover:text-white transition-colors"
-                >
-                  Industry Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/for-agents"
-                  className="hover:text-white transition-colors"
-                >
-                  For Real Estate Agents
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/reviews"
-                  className="hover:text-white transition-colors"
-                >
-                  Client Reviews
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="hover:text-white transition-colors"
-                >
-                  FAQ
-                </Link>
-              </li>
+              {loading ? (
+                <li>Loading...</li>
+              ) : (
+                rightMenu.map((item) => (
+                  <li key={item.ID}>
+                    <Link
+                      href={item.url || "#"}
+                      className="hover:text-white transition-colors"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
 
